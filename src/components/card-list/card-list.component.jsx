@@ -1,17 +1,23 @@
 import React from 'react';
-import Card from '../card/card.component';
+import CardHeader from '../card-header/card-header.component'
+
 
 import './card-list.styles.scss';
 
+
 const CardList = ({ transfers }) => {
+    const states = new Set([]);
+    transfers.map(transfer => states.add(transfer.state))
+
     return <div className='card-list'>
         {
-            transfers.map(transfer => (
+            [...states].map(state => (
 
-                <Card key={transfer.id} course={transfer}></Card>
+                <CardHeader key={state} state={state} courses={transfers.filter(transfer => transfer.state.includes(state))}></CardHeader>
             ))
         }
-    </div>
+    </div >
 }
 
 export default CardList;
+

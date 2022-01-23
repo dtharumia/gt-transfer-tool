@@ -1,0 +1,9 @@
+.state {
+    cursor: pointer;
+}
+
+.cards {
+    &.hidden{
+        display: none;
+    }
+}
