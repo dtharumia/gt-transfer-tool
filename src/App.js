@@ -4,13 +4,13 @@ import './App.css';
 
 import SearchBox from './components/search-box/search-box.component';
 import CardList from './components/card-list/card-list.component';
-
-import TRANSFER_DATA from './data/transfer';
+// import TRANSFER_DATA from './data/transfer';
 
 
 class App extends React.Component {
 
   constructor() {
+    console.log(process.env.DB_HOST)
     super();
     this.state = {
       transfers: [],

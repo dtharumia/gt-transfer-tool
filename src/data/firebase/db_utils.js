@@ -7,18 +7,9 @@ import { doc, setDoc } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyA-VUTou05DhrHMaf_BePaCEbTjvFBj4hI",
-  authDomain: "gt-transfer-tool.firebaseapp.com",
-  projectId: "gt-transfer-tool",
-  storageBucket: "gt-transfer-tool.appspot.com",
-  messagingSenderId: "492205881594",
-  appId: "1:492205881594:web:6823ac5613c2b52714f143",
-  measurementId: "G-ZX1QY641M2"
-};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-
 await setDoc(doc(db, ))
+
