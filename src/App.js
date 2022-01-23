@@ -7,15 +7,23 @@ import CardList from './components/card-list/card-list.component';
 
 import TRANSFER_DATA from './data/transfer';
 
+
 class App extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      transfers: TRANSFER_DATA,
+      transfers: [],
       searchField: ""
     }
   }
+
+  componentDidMount() {
+    fetch("http://localhost:3001/api")
+    .then((response) => response.json())
+    .then(response => console.log(response))
+  }
+
 
   onSearchChange = event => {
     this.setState({ searchField: event.target.value });
