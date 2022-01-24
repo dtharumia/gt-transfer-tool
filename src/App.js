@@ -6,22 +6,22 @@ import SearchBox from './components/search-box/search-box.component';
 import CardList from './components/card-list/card-list.component';
 // import TRANSFER_DATA from './data/transfer';
 
+import { readCoursesfromDatabase } from './firebase/firebase_utils';
 
 class App extends React.Component {
 
   constructor() {
-    console.log(process.env.DB_HOST)
     super();
     this.state = {
       transfers: [],
+      transferCourses: [],
       searchField: ""
     }
   }
 
   componentDidMount() {
-    fetch("http://localhost:3001/api")
-    .then((response) => response.json())
-    .then(response => console.log(response))
+    readCoursesfromDatabase()
+      .then((e) => this.setState({ transferCourses: Object.keys(e) }))
   }
 
 
@@ -30,17 +30,23 @@ class App extends React.Component {
   }
   render() {
 
-    const { transfers, searchField } = this.state;
+    const { transfers, transferCourses, searchField } = this.state;
 
-    const filteredTransfers = transfers.filter(transfer =>
-      transfer.gt_class.toUpperCase().includes(searchField.toUpperCase())
+    // const filteredTransfers = transfers.filter(transfer =>
+    //   transfer.gt_class.toUpperCase().includes(searchField.toUpperCase())
+    // )
+
+    const filteredTransfers = transferCourses.filter(transfer =>
+      transfer.toUpperCase().includes(searchField.toUpperCase())
     )
+
+    console.log(filteredTransfers)
 
     return (
       <div className="App" >
         <h1>Georgia Tech Transfer Tool</h1>
         <SearchBox onSearchChange={this.onSearchChange} />
-        <CardList transfers={this.state.searchField ? filteredTransfers : []} />
+        {/* <CardList transfers={this.state.searchField ? filteredTransfers : []} /> */}
       </div>
     )
   }
