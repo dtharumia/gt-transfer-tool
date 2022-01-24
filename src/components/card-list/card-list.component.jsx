@@ -1,22 +1,36 @@
 import React from 'react';
 import CardHeader from '../card-header/card-header.component'
+import { readCourseFromDatabase } from '../../firebase/firebase_utils';
 
 
 import './card-list.styles.scss';
 
 
-const CardList = ({ transfers }) => {
-    const states = new Set([]);
-    transfers.map(transfer => states.add(transfer.state))
+class CardList extends React.Component {
 
-    return <div className='card-list'>
-        {
-            [...states].map(state => (
-
-                <CardHeader key={state} state={state} courses={transfers.filter(transfer => transfer.state.includes(state))}></CardHeader>
-            ))
+    constructor() {
+        super()
+        this.state = {
+            states: new Set([]),
+            transferCourses: []
         }
-    </div >
+    }
+    componentDidMount() {
+        readCourseFromDatabase(this.props.courseName)
+            .then((e) => this.setState({ transferCourses: Object.values(e) }))
+
+        // this.props.transferCourses.map(transfer => this.state.states.add(transfer.state))
+    }
+    render() {
+        return <div className='card-list'>
+            {
+                [...this.state.states].map(state => (
+
+                    <CardHeader key={state} state={state} courses={this.props.transferCourses.filter(transfer => transfer.state.includes(state))}></CardHeader>
+                ))
+            }
+        </div >
+    }
 }
 
 export default CardList;

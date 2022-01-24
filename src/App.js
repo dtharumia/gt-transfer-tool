@@ -32,10 +32,6 @@ class App extends React.Component {
 
     const { transfers, transferCourses, searchField } = this.state;
 
-    // const filteredTransfers = transfers.filter(transfer =>
-    //   transfer.gt_class.toUpperCase().includes(searchField.toUpperCase())
-    // )
-
     const filteredTransfers = transferCourses.filter(transfer =>
       transfer.toUpperCase().includes(searchField.toUpperCase())
     )
@@ -46,7 +42,7 @@ class App extends React.Component {
       <div className="App" >
         <h1>Georgia Tech Transfer Tool</h1>
         <SearchBox onSearchChange={this.onSearchChange} />
-        {/* <CardList transfers={this.state.searchField ? filteredTransfers : []} /> */}
+        <CardList courseName={this.state.searchField ? this.state.searchField : ""} />
       </div>
     )
   }
