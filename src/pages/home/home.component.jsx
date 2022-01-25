@@ -39,7 +39,7 @@ class Home extends React.Component {
         return <div className='home'>
             <Header />
             <SearchBox onSearchChange={this.onSearchChange} />
-            <CardList gtCourses={filteredGTCourses} />
+            <CardList courses={filteredGTCourses} />
         </div>
     }
 

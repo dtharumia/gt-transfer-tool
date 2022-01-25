@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import './card.styles.scss';
 
-const Card = ({ gtCourse }) => {
+const Card = ({ course }) => {
     const navigate = useNavigate();
 
     const CourseSelect = (e) => {
@@ -18,7 +18,7 @@ const Card = ({ gtCourse }) => {
 
     return (
         <div className='card' onClick={CourseSelect}>
-            <span className='gt-course'>{gtCourse}</span>
+            <span className='course'>{course}</span>
         </div>
     )
 }
