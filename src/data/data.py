@@ -9,19 +9,21 @@ for i in range(0, len(df)):
         resultDict[df.iloc[i]['gt_class']]
     except:
         resultDict[df.iloc[i]['gt_class']] = {
-            
         }
-for i in range(0, len(df)):
     try:
         resultDict[df.iloc[i]['gt_class']][int(df.iloc[i]['id'])]
     except:
         resultDict[df.iloc[i]['gt_class']][int(df.iloc[i]['id'])] = {
-            
         }
+    try:
+        resultDict["all_gt_courses"]
+    except:
+        resultDict["all_gt_courses"] = {}
+    try:
+        resultDict["all_gt_courses"][df.iloc[i]['gt_class']]
+    except:
+        resultDict["all_gt_courses"][df.iloc[i]['gt_class']] = df.iloc[i]['gt_title']
 
-
-
-for i in range(0, len(df)):
     resultDict[df.iloc[i]['gt_class']][int(df.iloc[i]['id'])] = {
         "id": int(df.iloc[i]['id']),
         "state": df.iloc[i]['state'],
@@ -34,6 +36,7 @@ for i in range(0, len(df)):
         "gt_title": df.iloc[i]['gt_title'],
         "gt_ch": str(df.iloc[i]['gt_ch']),
     }
+
     print(i)
 
 with open('data.json', 'w', encoding='utf-8') as f:

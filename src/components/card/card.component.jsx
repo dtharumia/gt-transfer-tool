@@ -17,10 +17,10 @@ const Card = ({ course, type }) => {
     }
 
     return (
-        <div className='card'>
+        <div className='card' onClick={CourseSelect}>
             {
                 type == 'gt' ?
-                    (<div className='gt-card' onClick={CourseSelect}>
+                    (<div className='gt-card'>
                         <span className='course'>{course}</span>
                     </div>)
                     :
