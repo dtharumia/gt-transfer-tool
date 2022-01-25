@@ -6,14 +6,14 @@ df = pd.read_csv('data.csv')
 resultDict = {}
 for i in range(0, len(df)):
     try:
-        resultDict[df.iloc[i]['gt_class']]
+        resultDict[df.iloc[i]['gt_class'].replace(' ', '_')]
     except:
-        resultDict[df.iloc[i]['gt_class']] = {
+        resultDict[df.iloc[i]['gt_class'].replace(' ', '_')] = {
         }
     try:
-        resultDict[df.iloc[i]['gt_class']][int(df.iloc[i]['id'])]
+        resultDict[df.iloc[i]['gt_class'].replace(' ', '_')][int(df.iloc[i]['id'])]
     except:
-        resultDict[df.iloc[i]['gt_class']][int(df.iloc[i]['id'])] = {
+        resultDict[df.iloc[i]['gt_class'].replace(' ', '_')][int(df.iloc[i]['id'])] = {
         }
     try:
         resultDict["all_gt_courses"]
@@ -22,9 +22,10 @@ for i in range(0, len(df)):
     try:
         resultDict["all_gt_courses"][df.iloc[i]['gt_class']]
     except:
-        resultDict["all_gt_courses"][df.iloc[i]['gt_class']] = df.iloc[i]['gt_title']
+        resultDict["all_gt_courses"][df.iloc[i]
+                                     ['gt_class']] = df.iloc[i]['gt_title']
 
-    resultDict[df.iloc[i]['gt_class']][int(df.iloc[i]['id'])] = {
+    resultDict[df.iloc[i]['gt_class'].replace(' ', '_')][int(df.iloc[i]['id'])] = {
         "id": int(df.iloc[i]['id']),
         "state": df.iloc[i]['state'],
         "term": df.iloc[i]['term'],
@@ -33,6 +34,7 @@ for i in range(0, len(df)):
         "t_title": df.iloc[i]['t_title'],
         "t_level": df.iloc[i]['t_level'],
         "t_mingrade": df.iloc[i]['t_mingrade'],
+        "gt_class": df.iloc[i]['gt_class'],
         "gt_title": df.iloc[i]['gt_title'],
         "gt_ch": str(df.iloc[i]['gt_ch']),
     }

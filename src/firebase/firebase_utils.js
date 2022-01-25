@@ -1,7 +1,6 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
 import 'firebase/compat/auth';
-import { getDatabase, ref, child, get } from "firebase/database";
 
 export const readCoursesfromDatabase = async () => {
   let courseData = await fetch(`https://gt-transfer-tool-default-rtdb.firebaseio.com/all_gt_courses.json`)

@@ -7,19 +7,21 @@ import Header from '../../components/header/header.component';
 import SearchBox from '../../components/search-box/search-box.component'
 import CardList from '../../components/card-list/card-list.component'
 
+let GTCourses = React.createContext({})
+
 class Home extends React.Component {
 
     constructor() {
         super()
         this.state = {
-            gtCourses: [],
+            gtCourses: {},
             searchField: ""
         }
     }
 
     componentDidMount() {
         readCoursesfromDatabase()
-            .then((e) => this.setState({ gtCourses: Object.keys(e) }))
+            .then((gtCourses) => this.setState({ gtCourses: gtCourses }))
     }
 
     onSearchChange = event => {
@@ -27,14 +29,17 @@ class Home extends React.Component {
     }
 
 
-
     render() {
 
         const { gtCourses, searchField } = this.state
 
-        const filteredGTCourses = gtCourses.filter(gtCourse =>
-            gtCourse.toUpperCase().includes(searchField.toUpperCase())
-        )
+        // const filteredGTCourses = gtCourses.filter(gtCourse =>
+        //     gtCourse.toUpperCase().includes(searchField.toUpperCase())
+        // )
+
+        const filteredGTCourses = Object.keys(gtCourses)
+        .filter((gtCourse) => gtCourse.toUpperCase().includes(searchField.toUpperCase()))
+        .reduce((gtClass, gtTitle) => { return Object.assign(gtClass, { [gtTitle]: gtCourses[gtTitle] }) }, {});
 
         return <div className='home'>
             <Header />
