@@ -11,9 +11,14 @@ export const readCoursesfromDatabase = async () => {
 
 
 export const readCourseFromDatabase = async (courseName) => {
-  let courseData = await fetch(`https://gt-transfer-tool-default-rtdb.firebaseio.com/${courseName}.json`)
-  let courseDataJSON = await courseData.json();
-  return courseDataJSON;
+
+  if (courseName) {
+    let courseData = await fetch(`https://gt-transfer-tool-default-rtdb.firebaseio.com/${courseName}.json`)
+    let courseDataJSON = await courseData.json();
+    return courseDataJSON;
+  }
+
+  return { "test": courseName }
 
 }
 
