@@ -24,7 +24,7 @@ const Course = () => {
             {/* <h2>{getTransferCourses[0].gt_class} - {getTransferCourses[0].gt_title}</h2> */}
             <h2>
                 {
-                    getTransferCourses.length == 0 ? "" : `${getTransferCourses[0].gt_class} - ${getTransferCourses[0].gt_title}`
+                    getTransferCourses.length === 0 ? "" : `${getTransferCourses[0].gt_class} - ${getTransferCourses[0].gt_title}`
                 }
             </h2>
 
