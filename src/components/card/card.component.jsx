@@ -7,9 +7,14 @@ const Card = ({ gtCourse }) => {
     const navigate = useNavigate();
 
     const CourseSelect = (e) => {
+        const course = e.target.textContent;
 
-        navigate(`course/${e.target.textContent.replace(" ","")}`)
-    };
+        navigate(`course/${course.replace(" ", "")}`, {
+            state: {
+                course: course
+            }
+        })
+    }
 
     return (
         <div className='card' onClick={CourseSelect}>
