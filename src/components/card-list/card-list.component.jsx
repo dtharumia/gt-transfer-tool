@@ -6,6 +6,8 @@ import './card-list.styles.scss';
 
 
 const CardList = ({ courses, type }) => {
+
+    
     return <div className='card-list'>
         {
             type === "gt" ? (Object.keys(courses).map((course, index) => (
@@ -21,7 +23,7 @@ const CardList = ({ courses, type }) => {
             type === "school" ? (Object.values(courses).map((course, index) => (
                 <SchoolCard key={index} course={course} />
             ))) : ""
-        }
+        } 
     </div>
 }
 

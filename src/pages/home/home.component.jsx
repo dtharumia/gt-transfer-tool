@@ -1,48 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './home.styles.scss'
-import { getGTCourses } from '../../firebase/firebase_utils';
+import { filterGTCourses } from '../../firebase/firebase_utils';
 
 import Header from '../../components/header/header.component';
 import SearchBox from '../../components/search-box/search-box.component'
 import CardList from '../../components/card-list/card-list.component'
 
 
-class Home extends React.Component {
+const Home = () => {
+    const [getGTCourses, setGTCourses] = useState("");
 
-    constructor() {
-        super()
-        this.state = {
-            gtCourses: {},
-            searchField: ""
-        }
+    const onSearchChange = async event => {
+        setGTCourses(await filterGTCourses(event.target.value.toUpperCase()))
     }
 
-    componentDidMount() {
-        getGTCourses()
-            .then((gtCourses) => this.setState({ gtCourses: gtCourses }))
-        
-    }
-
-    onSearchChange = event => {
-        this.setState({ searchField: event.target.value });
-    }
-
-
-    render() {
-
-        const { gtCourses, searchField } = this.state
-
-        const filteredGTCourses = Object.keys(gtCourses)
-            .filter((gtCourse) => gtCourse.toUpperCase().includes(searchField.toUpperCase()))
-            .reduce((gtClass, gtTitle) => { return Object.assign(gtClass, { [gtTitle]: gtCourses[gtTitle] }) }, {});
-
-        return <div className='home'>
+    return (
+        <div className='home'>
             <Header />
-            <SearchBox onSearchChange={this.onSearchChange} />
-            <CardList courses={filteredGTCourses} type="gt" />
+            <SearchBox onSearchChange={onSearchChange} />
+            <CardList courses={getGTCourses} type="gt" />
         </div>
-    }
+    )
 
 }
 
