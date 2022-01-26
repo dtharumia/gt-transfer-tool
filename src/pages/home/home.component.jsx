@@ -1,13 +1,12 @@
 import React from 'react';
 
 import './home.styles.scss'
-import { readCoursesfromDatabase } from '../../firebase/firebase_utils';
+import { filterGTCourses, getGTCourses, getTransferCourses } from '../../firebase/firebase_utils';
 
 import Header from '../../components/header/header.component';
 import SearchBox from '../../components/search-box/search-box.component'
 import CardList from '../../components/card-list/card-list.component'
 
-let GTCourses = React.createContext({})
 
 class Home extends React.Component {
 
@@ -20,26 +19,25 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        readCoursesfromDatabase()
+        getGTCourses()
             .then((gtCourses) => this.setState({ gtCourses: gtCourses }))
+        
     }
 
     onSearchChange = event => {
         this.setState({ searchField: event.target.value });
     }
 
+    filteredGTCourses = () => getTransferCourses("CS 4400")
+        .then((transferCourses) => transferCourses)
 
     render() {
 
         const { gtCourses, searchField } = this.state
 
-        // const filteredGTCourses = gtCourses.filter(gtCourse =>
-        //     gtCourse.toUpperCase().includes(searchField.toUpperCase())
-        // )
-
         const filteredGTCourses = Object.keys(gtCourses)
-        .filter((gtCourse) => gtCourse.toUpperCase().includes(searchField.toUpperCase()))
-        .reduce((gtClass, gtTitle) => { return Object.assign(gtClass, { [gtTitle]: gtCourses[gtTitle] }) }, {});
+            .filter((gtCourse) => gtCourse.toUpperCase().includes(searchField.toUpperCase()))
+            .reduce((gtClass, gtTitle) => { return Object.assign(gtClass, { [gtTitle]: gtCourses[gtTitle] }) }, {});
 
         return <div className='home'>
             <Header />
