@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './home.styles.scss'
-import { filterGTCourses, getGTCourses, getTransferCourses } from '../../firebase/firebase_utils';
+import { getGTCourses } from '../../firebase/firebase_utils';
 
 import Header from '../../components/header/header.component';
 import SearchBox from '../../components/search-box/search-box.component'
@@ -28,8 +28,6 @@ class Home extends React.Component {
         this.setState({ searchField: event.target.value });
     }
 
-    filteredGTCourses = () => getTransferCourses("CS 4400")
-        .then((transferCourses) => transferCourses)
 
     render() {
 

@@ -8,7 +8,7 @@ const GTCard = ({ gt_class, gt_title }) => {
 
     const CourseSelect = () => {
 
-        navigate(`course/${gt_class.replace(" ", "_")}`, {
+        navigate(`course/${gt_class.replaceAll(" ", "_")}`, {
             state: {
                 gt_class: gt_class,
                 gt_title: gt_title
