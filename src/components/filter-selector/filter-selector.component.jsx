@@ -12,6 +12,7 @@ import {
 
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { useState } from 'react';
+import React from 'react'
 
 const FilterSelector = () => {
 
