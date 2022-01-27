@@ -1,10 +1,8 @@
 import React from 'react';
-import './header.styles.scss';
+import { Heading } from '@chakra-ui/react'
 
 const Header = () => (
-    <div className='header'>
-        <h1>Georgia Tech Transfer Tool</h1>
-    </div>
+    <Heading>Georgia Tech Transfer Tool</Heading>
 )
 
 export default Header;

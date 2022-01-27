@@ -8,6 +8,7 @@ import School from './pages/school/school.component';
 import { Routes, Route } from 'react-router-dom';
 
 
+
 const App = () => (
   <div className="App" >
     <Routes>
