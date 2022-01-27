@@ -4,45 +4,44 @@ import {
     FormControl,
     Input,
     Select,
+    Stack,
     HStack,
-    FormHelperText,
-    FormErrorMessage,
-    VStack, Text
+    Flex
 } from '@chakra-ui/react'
 
-import { ChevronDownIcon } from '@chakra-ui/icons'
-
-import GTCard from '../gt-card/gt-card.component';
-import CardList from '../card-list/card-list.component';
 import { filterGTCourses } from '../../firebase/firebase_utils';
-
-
+import Card from '../card/card.component';
 
 const Filter = () => {
     const [getFilterOption, setFilterOption] = useState("");
     const [getFilterSearch, setFilterSearch] = useState("");
-    const [getFilterError, setFilterError] = useState(false);
+    const [getFilterCourses, setFilterCourses] = useState({});
 
     const onFilterSelect = (event) => {
         setFilterOption(event.target.value)
-        if (event.target.value) {
-            setFilterError(false)
+        if (event.target.value && getFilterSearch) {
+            filterGTCourses(getFilterSearch).then((data) => setFilterCourses(data))
+            console.log('runningfilter')
+        } else {
+            setFilterCourses({})
         }
     }
 
     const onSearchChange = (event) => {
         event.target.value = event.target.value.toUpperCase()
-
-        if (event.target.value != "" && !getFilterOption) {
-            setFilterError(true)
-        }
-
         setFilterSearch(event.target.value)
+
+        if (event.target.value && getFilterOption) {
+            filterGTCourses(event.target.value).then((data) => setFilterCourses(data))
+            console.log('runningsearch')
+        } else {
+            setFilterCourses({})
+        }
 
     }
 
     return (
-        <VStack>
+        <Stack>
             <FormControl>
                 <HStack shouldWrapChildren>
                     <Input
@@ -51,16 +50,21 @@ const Filter = () => {
                         placeholder='Select a category and type to search'
                         w="sm"
                         onChange={onSearchChange} />
-                    <Select id="filter-option" placeholder='Category' onChange={onFilterSelect} isInvalid={getFilterError} >
+                    <Select id="filter-option" placeholder='Category' onChange={onFilterSelect} isInvalid={getFilterSearch && !getFilterOption} >
                         <option>Course</option>
                         <option>School</option>
                     </Select>
                 </HStack>
             </FormControl>
-            {!getFilterError && getFilterSearch ? <CardList search={getFilterSearch} type={getFilterOption} /> : null}
-
-
-        </VStack >
+            <Flex flexDir={"column"} >
+                {(() => {
+                    return Object.entries(getFilterCourses).map(
+                        (course, index) =>
+                            <Card key={index} number={course[0]} title={course[1]} />
+                    )
+                })()}
+            </Flex>
+        </Stack >
     )
 }
 
