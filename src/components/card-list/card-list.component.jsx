@@ -1,30 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import GTCard from '../gt-card/gt-card.component';
 import TransferCard from '../transfer-card/transfer-card.component';
 import SchoolCard from '../school-card/school-card.component';
-import './card-list.styles.scss';
+import { VStack } from '@chakra-ui/react';
+import { filterGTCourses } from '../../firebase/firebase_utils';
 
 
-const CardList = ({ courses, type }) => {
+class CardList extends React.Component {
 
-    
-    return <div className='card-list'>
-        {
-            type === "gt" ? (Object.keys(courses).map((course, index) => (
-                <GTCard key={index} gt_class={course} gt_title={courses[course]} />
-            ))) : ""
+
+    constructor() {
+        super()
+        this.state = {
+            courses: {}
         }
-        {
-            type === "transfer" ? (Object.values(courses).map((transfer, index) => (
-                <TransferCard key={index} transfer={transfer} />
-            ))) : ""
+    }
+
+
+    componentDidUpdate(prevProps) {
+        if (this.props.search != prevProps.search) {
+            console.log('running')
+            filterGTCourses(this.props.search)
+                .then(data => this.setState({ courses: data }))
         }
-        {
-            type === "school" ? (Object.values(courses).map((course, index) => (
-                <SchoolCard key={index} course={course} />
-            ))) : ""
-        } 
-    </div>
+    }
+
+
+    render() {
+        return (
+            <div className='card-list'>
+                {Object.entries(this.state.courses).map((course, index) => {
+                    return <GTCard key={index} gt_class={course} gt_title={this.state.courses[course]} />
+                })}
+            </div>
+        )
+    }
 }
 
 export default CardList;

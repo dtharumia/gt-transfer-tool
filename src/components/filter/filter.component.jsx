@@ -6,10 +6,17 @@ import {
     Select,
     HStack,
     FormHelperText,
-    FormErrorMessage
+    FormErrorMessage,
+    VStack, Text
 } from '@chakra-ui/react'
 
 import { ChevronDownIcon } from '@chakra-ui/icons'
+
+import GTCard from '../gt-card/gt-card.component';
+import CardList from '../card-list/card-list.component';
+import { filterGTCourses } from '../../firebase/firebase_utils';
+
+
 
 const Filter = () => {
     const [getFilterOption, setFilterOption] = useState("");
@@ -18,12 +25,13 @@ const Filter = () => {
 
     const onFilterSelect = (event) => {
         setFilterOption(event.target.value)
-        if(event.target.value) {
+        if (event.target.value) {
             setFilterError(false)
         }
     }
 
     const onSearchChange = (event) => {
+        event.target.value = event.target.value.toUpperCase()
 
         if (event.target.value != "" && !getFilterOption) {
             setFilterError(true)
@@ -33,20 +41,27 @@ const Filter = () => {
 
     }
 
-    return <FormControl>
-        <HStack shouldWrapChildren>
-            <Input
-                id='filter-search'
-                type='text'
-                placeholder='Select a filter and type to search'
-                w="sm"
-                onChange={onSearchChange} />
-            <Select id="filter-option" placeholder='Filter By' onChange={onFilterSelect} isInvalid={getFilterError} >
-                <option>Course</option>
-                <option>School</option>
-            </Select>
-        </HStack>
-    </FormControl>
+    return (
+        <VStack>
+            <FormControl>
+                <HStack shouldWrapChildren>
+                    <Input
+                        id='filter-search'
+                        type='text'
+                        placeholder='Select a category and type to search'
+                        w="sm"
+                        onChange={onSearchChange} />
+                    <Select id="filter-option" placeholder='Category' onChange={onFilterSelect} isInvalid={getFilterError} >
+                        <option>Course</option>
+                        <option>School</option>
+                    </Select>
+                </HStack>
+            </FormControl>
+            {!getFilterError && getFilterSearch ? <CardList search={getFilterSearch} type={getFilterOption} /> : null}
+
+
+        </VStack >
+    )
 }
 
 export default Filter;
