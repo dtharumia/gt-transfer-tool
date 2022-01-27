@@ -9,33 +9,37 @@ import {
     Flex
 } from '@chakra-ui/react'
 
-import { filterGTCourses } from '../../firebase/firebase_utils';
+import { filterCategory } from '../../firebase/firebase_utils';
 import Card from '../card/card.component';
 
 const Filter = () => {
     const [getFilterOption, setFilterOption] = useState("");
     const [getFilterSearch, setFilterSearch] = useState("");
-    const [getFilterCourses, setFilterCourses] = useState({});
+    const [getFilterData, setFilterData] = useState({});
 
     const onFilterSelect = (event) => {
         setFilterOption(event.target.value)
         if (event.target.value && getFilterSearch) {
-            filterGTCourses(getFilterSearch).then((data) => setFilterCourses(data))
+            filterCategory(event.target.value, getFilterSearch).then((data) => setFilterData(data))
             console.log('runningfilter')
         } else {
-            setFilterCourses({})
+            setFilterData({})
         }
     }
 
     const onSearchChange = (event) => {
-        event.target.value = event.target.value.toUpperCase()
-        setFilterSearch(event.target.value)
-
+        if (getFilterOption === "Course") {
+            event.target.value = event.target.value.toUpperCase()
+            setFilterSearch(event.target.value)
+        } else if (getFilterOption === "School") {
+            event.target.value = event.target.value.toLowerCase()
+            setFilterSearch(event.target.value)
+        }
         if (event.target.value && getFilterOption) {
-            filterGTCourses(event.target.value).then((data) => setFilterCourses(data))
+            filterCategory(getFilterOption, event.target.value).then((data) => setFilterData(data))
             console.log('runningsearch')
         } else {
-            setFilterCourses({})
+            setFilterData({})
         }
 
     }
@@ -58,9 +62,9 @@ const Filter = () => {
             </FormControl>
             <Flex flexDir={"column"} >
                 {(() => {
-                    return Object.entries(getFilterCourses).map(
-                        (course, index) =>
-                            <Card key={index} number={course[0]} title={course[1]} />
+                    return Object.entries(getFilterData).map(
+                        (data, index) =>
+                            <Card key={index} left={data[0]} right={data[1]} />
                     )
                 })()}
             </Flex>
