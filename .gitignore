@@ -26,3 +26,5 @@ yarn-error.log*
 
 src/firebase/
 src/data/
+scripts/data
+typesense-server-data/
