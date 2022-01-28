@@ -20,11 +20,14 @@ export const typesenseAdapter = new TypesenseInstantsearchAdapter({
     typoTokensThreshold: 1,
   },
   collectionSpecificSearchParameters:{
-    transfers: {
-      queryBy: "gt_number,gt_course"
-    },
+    // transfers: {
+    //   queryBy: "gt_number,gt_course",
+    // },
     schools: {
       queryBy: "school, state"
+    },
+    courses: {
+      queryBy:"number"
     }
   }
 });

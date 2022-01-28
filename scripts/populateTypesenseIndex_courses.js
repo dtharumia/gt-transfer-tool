@@ -28,11 +28,6 @@ module.exports = (async () => {
         type: "string",
         facet: false,
       },
-      {
-        name: "course",
-        type: "string",
-        facet: false,
-      }
     ]
   };
 

@@ -34,7 +34,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start-typesense-server": "node scripts/startTypesenseServer.js",
-    "populate": "node scripts/populateTypesenseIndex_courses.js && node scripts/populateTypesenseIndex_states.js  && node scripts/populateTypesenseIndex_schools.js"
+    "populate": "node scripts/populateTypesenseIndex"
   },
   "eslintConfig": {
     "extends": [

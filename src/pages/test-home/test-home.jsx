@@ -8,7 +8,7 @@ import TransferHits from './transfer-hits';
 const TestHome = () => (
   <div className="TestHome" >
     
-    <InstantSearch indexName="schools"  searchClient={searchClient}>
+    <InstantSearch indexName={schools}  searchClient={searchClient}>
     <h4>Search Transfer Courses</h4>
     <SearchBox/>
     <TransferHits/>
