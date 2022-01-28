@@ -16,10 +16,17 @@ let TYPESENSE_SERVER_CONFIG = {
 export const typesenseAdapter = new TypesenseInstantsearchAdapter({
   server: TYPESENSE_SERVER_CONFIG,
   additionalSearchParameters: {
-    queryBy: "gt_number,gt_course,state,transfer_school",
     numTypos: 3,
     typoTokensThreshold: 1,
   },
+  collectionSpecificSearchParameters:{
+    transfers: {
+      queryBy: "gt_number,gt_course"
+    },
+    schools: {
+      queryBy: "school, state"
+    }
+  }
 });
 
 export const searchClient = typesenseAdapter.searchClient;
