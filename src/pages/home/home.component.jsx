@@ -16,7 +16,7 @@ const Home = () => {
                     spacing={10}
                     alignItems="flex-start"
                 >
-                    <Header />
+                    <Header primary={"Georgia Tech Transfer Tool"}/>
                     <Filter />
                 </Stack>
                 <Stack

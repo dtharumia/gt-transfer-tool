@@ -17,12 +17,17 @@ module.exports = (async () => {
     console.log("Config: ", TYPESENSE_CONFIG);
 
     const typesense = new Typesense.Client(TYPESENSE_CONFIG);
-
+    typesense.collections("searches").delete()
 
     const searchSchema = {
         name: "searches",
         num_documents: 0,
         fields: [
+            {
+                name: "type",
+                type: "string",
+                facet: true
+            },
             {
                 name: "primary",
                 type: "string",

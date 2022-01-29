@@ -1,30 +1,32 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
+import CourseTable from '../../components/course-table/course-table.component';
 import Header from '../../components/header/header.component';
-
-import CourseHits from "../../components/course-hits/course-hits.component"
-import { TYPESENSE_SERVER_CONFIG } from '../../typesenseAdapter';
-import { InstantSearch } from 'react-instantsearch-dom';
-
-import Typesense from 'typesense';
-
+import { Container, Flex, Stack } from '@chakra-ui/react';
 
 const Course = () => {
-    const typesense = new Typesense.SearchClient(TYPESENSE_SERVER_CONFIG)
-    const params = useParams()
 
-    typesense.collections('transfers').documents().search({
-        'q': `${params.course.replaceAll("_", " ")}`,
-        'query_by': 'gt_number',
-        'per_page': 250
-    }).then(e => console.log(e.hits))
-
+    const { course } = useParams();
 
     return (
-        ""
+        <Container maxWidth="container.xl" padding={0}>
+
+            <Flex h="100vh" py={5}>
+                <Stack
+                    w="full"
+                    h="full"
+                    p={5}
+                    spacing={10}
+                    alignItems="center"
+                >
+                    <Header primary={course.replaceAll("_", " ")} />
+                    <CourseTable course={course.replaceAll("_", " ")} />
+                </Stack>
+            </Flex>
+        </Container>
+
     )
 }
 
 
 export default Course;
-!

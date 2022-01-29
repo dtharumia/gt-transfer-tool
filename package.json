@@ -33,7 +33,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start-typesense-server": "node scripts/startTypesenseServer.js",
+    "start-typesense": "node scripts/startTypesenseServer.js",
     "populate": "node scripts/populateTypesenseIndex"
   },
   "eslintConfig": {
