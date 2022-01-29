@@ -19,17 +19,34 @@ export const typesenseAdapter = new TypesenseInstantsearchAdapter({
     numTypos: 3,
     typoTokensThreshold: 1,
   },
-  collectionSpecificSearchParameters:{
-    // transfers: {
-    //   queryBy: "gt_number,gt_course",
-    // },
+  collectionSpecificSearchParameters: {
+    transfers: {
+      queryBy: "gt_number, school",
+    },
     schools: {
       queryBy: "school, state"
     },
     courses: {
-      queryBy:"number"
+      queryBy: "number"
     }
-  }
+  },
 });
 
-export const searchClient = typesenseAdapter.searchClient;
+export const searchClient = {
+  ...typesenseAdapter.searchClient,
+  search(requests) {
+    if (requests.every(({ params }) => !params.query)) {
+      return Promise.resolve({
+        results: requests.map(() => ({
+          hits: [],
+          nbHits: 0,
+          nbPages: 0,
+          page: 0,
+          processingTimeMS: 0,
+        })),
+      });
+    }
+
+    return typesenseAdapter.searchClient.search(requests);
+  },
+};

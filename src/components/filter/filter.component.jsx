@@ -12,31 +12,25 @@ import {
     Flex
 } from '@chakra-ui/react'
 
-import 'instantsearch.css/themes/satellite.css';
-import './filter.styles.scss'
+import CustomSearchBox from '../custom-search-box/custom-search-box.component';
 
 const Filter = () => {
-    const [getFilterOption, setFilterOption] = useState("courses");
     const [getFilterData, setFilterData] = useState({});
+    const [getSearchStatus, setSearchStatus] = useState(false)
 
     const onFilterSelect = (event) => {
-        setFilterOption(event.target.value.toLowerCase() + "s")
+        // setFilterOption(event.target.value.toLowerCase() + "s")
     }
 
 
     return (
-
-        <InstantSearch indexName={`${getFilterOption}`} searchClient={searchClient}>
-            <HStack shouldWrapChildren>
-            <SearchBox />
-            <Select id="filter-option" onChange={onFilterSelect}>
-                <option>Course</option>
-                <option>School</option>
-            </Select>
-            </HStack>
+        <InstantSearch indexName={"courses"} searchClient={searchClient}>
+            <CustomSearchBox />
             <FilterHits />
         </InstantSearch>
     )
+
+
 }
 
 export default Filter;
