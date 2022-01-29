@@ -28,16 +28,16 @@ const CourseTable = ({course}) => {
     return <Table>
         <Thead>
             <Tr>
-                <Th>School</Th>
                 <Th>State</Th>
+                <Th>School</Th>
                 <Th>Transfer Class</Th>
             </Tr>
         </Thead>
         <Tbody>
             {Object.entries(getCourseData).map(course => {
                 return <Tr key={course[0]}>
-                    <Td>{course[1]["transfer_school"]}</Td>
                     <Td>{course[1]["state"]}</Td>
+                    <Td>{course[1]["transfer_school"]}</Td>
                     <Td>{course[1]["transfer_class"]}</Td>
                 </Tr>
             })}
