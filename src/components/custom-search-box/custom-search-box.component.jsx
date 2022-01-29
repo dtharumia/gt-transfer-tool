@@ -8,7 +8,7 @@ const CustomSearchBox = ({ refine }) => (
             id='filter-search'
             type='search'
             placeholder='Type to search'
-            w="sm"
+            w="md"
             onChange={event => refine(event.currentTarget.value)} />
     </form>
 );

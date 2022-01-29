@@ -4,19 +4,20 @@ import { Flex, Text, Spacer } from "@chakra-ui/react";
 
 
 
-const FilterHit = ({ hit: { number, school, state } }) => {
+const FilterHit = ({ hit: { type, primary, secondary } }) => {
     const navigate = useNavigate();
     const filterSelect = (e) => {
-        if(number) navigate(`course/${e.target.innerText.replaceAll(" ", "_")}`)
-        if(school) navigate(`school/${e.target.innerText.replaceAll(" ", "_")}`)
-        console.log(e.target.innerText)
+        if (type == "GTCourse") navigate(`course/${primary.replaceAll(" ", "_")}`)
+        if (type == "TransferSchool") navigate(`school/${primary.replaceAll(" ", "_")}`)
     }
 
     return (
-        <Flex w="sm">
-            <Text onClick={filterSelect}>{number || school}</Text>
+        <Flex w="md" onClick={filterSelect}>
+            {console.log(type, primary, secondary)}
+            <Text >{primary}</Text>
             <Spacer></Spacer>
-            <Text>{state}</Text>
+            {secondary != "null" ? <Text>{secondary}</Text> : null}
+
         </Flex>
     )
 }

@@ -1,65 +1,30 @@
-import React, { useEffect, useState } from 'react';
-
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header.component';
 
-import { useParams } from 'react-router-dom';
-import { filterTransferCourses } from '../../firebase/firebase_utils';
+import CourseHits from "../../components/course-hits/course-hits.component"
+import { TYPESENSE_SERVER_CONFIG } from '../../typesenseAdapter';
+import { InstantSearch } from 'react-instantsearch-dom';
 
-import CardList from '../../components/card-list/card-list.component';
-import { searchClient } from '../../typesenseAdapter';
+import Typesense from 'typesense';
+
+
 const Course = () => {
-    const Typesense = require('typesense')
+    const typesense = new Typesense.SearchClient(TYPESENSE_SERVER_CONFIG)
+    const params = useParams()
 
-    let client = new Typesense.Client({
-        'nodes': [{
-            'host': 'localhost', // For Typesense Cloud use xxx.a1.typesense.net
-            'port': '8108',      // For Typesense Cloud use 443
-            'protocol': 'http'   // For Typesense Cloud use https
-        }],
-        'apiKey': 'xyz',
-        'connectionTimeoutSeconds': 2
-    })
-    let searchParameters = {
-        'q': 'ISYE 3770',
-        "query_by": "gt_number"
-    }
+    typesense.collections('transfers').documents().search({
+        'q': `${params.course.replaceAll("_", " ")}`,
+        'query_by': 'gt_number',
+        'per_page': 250
+    }).then(e => console.log(e.hits))
 
-    client.collections('transfers')
-        .documents()
-        .search(searchParameters)
-        .then(function (searchResults) {
-            console.log(searchResults)
-        })
 
     return (
-        <div>
-            COURSE
-        </div>
+        ""
     )
-
-    // const param = useParams();
-    // const { course } = param
-    // const [getTransfer, setTransfer] = useState([]);
-
-    // useEffect(() => {
-    //     filterTransferCourses("gt_class", course.replaceAll("_", " "))
-    //         .then(transfers => Object.values(transfers))
-    //         .then(data => setTransfer(Object.values(data)))
-    // }, [])
-
-    // return (
-    //     <div className='course'>
-    //         <Header />
-    //         <h2>
-    //             {
-    //                 getTransfer.length === 0 ? "" : `${getTransfer[0].gt_class} - ${getTransfer[0].gt_title}`
-    //             }
-    //         </h2>
-
-    //         <CardList courses={getTransfer} type="transfer" />
-    //     </div>
-    // )
 }
 
 
 export default Course;
+!

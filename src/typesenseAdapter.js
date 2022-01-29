@@ -1,6 +1,6 @@
 import TypesenseInstantsearchAdapter from "typesense-instantsearch-adapter";
 
-let TYPESENSE_SERVER_CONFIG = {
+export const TYPESENSE_SERVER_CONFIG = {
   apiKey: process.env.REACT_APP_TYPESENSE_SEARCH_ONLY_API_KEY, // Be sure to use an API key that only allows searches, in production
   nodes: [
     {
@@ -21,13 +21,16 @@ export const typesenseAdapter = new TypesenseInstantsearchAdapter({
   },
   collectionSpecificSearchParameters: {
     transfers: {
-      queryBy: "gt_number, school",
+      queryBy: "gt_number, transfer_school, state",
     },
     schools: {
       queryBy: "school, state"
     },
     courses: {
       queryBy: "number"
+    },
+    searches: {
+      queryBy: "primary,secondary"
     }
   },
 });

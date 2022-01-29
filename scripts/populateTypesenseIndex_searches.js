@@ -33,11 +33,7 @@ module.exports = (async () => {
                 type: "string",
                 facet: false,
             },
-            {
-                name: "tertiary",
-                type: "string",
-                facet: false,
-            },
+           
         ]
     };
 
