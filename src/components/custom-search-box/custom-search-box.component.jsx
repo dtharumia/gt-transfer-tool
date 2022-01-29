@@ -7,7 +7,7 @@ const CustomSearchBox = ({ refine }) => (
         <Input
             id='filter-search'
             type='search'
-            placeholder='Type to search'
+            placeholder='Search for GT Courses or Transfer Schools'
             w="md"
             onChange={event => refine(event.currentTarget.value)} />
     </form>

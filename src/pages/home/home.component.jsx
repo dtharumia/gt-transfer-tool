@@ -3,12 +3,13 @@ import { Container, Flex, VStack, Stack } from '@chakra-ui/react';
 
 import Header from '../../components/header/header.component';
 import Filter from '../../components/filter/filter.component';
+import { Image } from '@chakra-ui/react';
 
 const Home = () => {
 
     return (
         <Container maxWidth="container.xl" padding={0}>
-            <Flex h="100vh" py={20}>
+            <Flex h="75vh" py={20}>
                 <Stack
                     w="full"
                     h="full"
@@ -25,7 +26,9 @@ const Home = () => {
                     p={10}
                     spacing={10}
                     bg="gray.50"
-                ></Stack>
+                >
+                    <Image src="/home/arrow.png"></Image>
+                </Stack>
             </Flex>
         </Container>
 
