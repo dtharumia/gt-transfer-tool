@@ -2,7 +2,9 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import CourseTable from '../../components/course-table/course-table.component';
 import Header from '../../components/header/header.component';
-import { Container, Flex, Stack } from '@chakra-ui/react';
+import { Container, Flex, Stack, VStack } from '@chakra-ui/react';
+
+import Filter from '../../components/filter/filter.component';
 
 const Course = () => {
 
@@ -10,7 +12,9 @@ const Course = () => {
 
     return (
         <Container maxWidth="container.xl" padding={0}>
-
+            <VStack>
+                <Filter />
+            </VStack>
             <Flex h="100vh" py={5}>
                 <Stack
                     w="full"

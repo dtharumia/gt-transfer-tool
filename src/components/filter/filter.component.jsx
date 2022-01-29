@@ -8,7 +8,7 @@ import CustomSearchBox from '../custom-search-box/custom-search-box.component';
 
 const Filter = () => {
     return (
-        <InstantSearch indexName={"searches"} searchClient={searchClient}>
+        <InstantSearch indexName={"searches"} searchClient={searchClient} key={window.location.pathname}>
             <CustomSearchBox />
             <FilterHits />
         </InstantSearch>
