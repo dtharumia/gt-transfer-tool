@@ -11,7 +11,7 @@ const Course = () => {
     const { course } = useParams();
 
     return (
-        <Container maxWidth="container.xl" padding={0}>
+        <Container maxWidth="container.xl" h="75vh" py={20}>
             <VStack>
                 <Filter />
             </VStack>

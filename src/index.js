@@ -7,10 +7,13 @@ import { BrowserRouter } from "react-router-dom";
 
 import { ChakraProvider } from '@chakra-ui/react'
 
+import theme from "./theme.js"
+
+
 ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <App />
       </ChakraProvider>
     </React.StrictMode>

@@ -1,9 +1,13 @@
 import React from 'react';
-import { Container, Flex, VStack, Stack } from '@chakra-ui/react';
+import { Container, Flex, Text, Stack } from '@chakra-ui/react';
 
 import Header from '../../components/header/header.component';
 import Filter from '../../components/filter/filter.component';
+
+import HomeHeader from '../../components/home-header/home-header.component';
 import { Image } from '@chakra-ui/react';
+
+import ExampleSearches from '../../components/example-searches/example-searches.component';
 
 const Home = () => {
 
@@ -17,20 +21,21 @@ const Home = () => {
                     spacing={10}
                     alignItems="flex-start"
                 >
-                    <Header primary={"Georgia Tech Transfer Tool"}/>
+                    <HomeHeader />
                     <Filter />
-                </Stack>
-                <Stack
-                    w="full"
-                    h="full"
-                    p={10}
-                    spacing={10}
-                    bg="gray.50"
-                >
-                    <Image src="/home/arrow.png"></Image>
-                </Stack>
-            </Flex>
-        </Container>
+                    <ExampleSearches />
+                
+            </Stack>
+            <Stack
+                w="full"
+                h="full"
+                p={10}
+                spacing={10}
+            >
+                <Image src="/home/arrow.png"></Image>
+            </Stack>
+        </Flex>
+        </Container >
 
     )
 

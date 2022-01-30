@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Table,
     Thead,
@@ -7,13 +7,13 @@ import {
     Tr,
     Th,
     Td,
-    TableCaption,
+    TableCaption, VStack
 } from '@chakra-ui/react'
 
 import { filterTransferCourses } from '../../firebase/firebase_utils';
 
 
-const CourseTable = ({course}) => {
+const CourseTable = ({ course }) => {
 
 
     const [getCourseData, setCourseData] = useState({});
@@ -25,24 +25,26 @@ const CourseTable = ({course}) => {
     ), [])
 
 
-    return <Table>
-        <Thead>
-            <Tr>
-                <Th>State</Th>
-                <Th>School</Th>
-                <Th>Transfer Class</Th>
-            </Tr>
-        </Thead>
-        <Tbody>
-            {Object.entries(getCourseData).map(course => {
-                return <Tr key={course[0]}>
-                    <Td>{course[1]["state"]}</Td>
-                    <Td>{course[1]["transfer_school"]}</Td>
-                    <Td>{course[1]["transfer_class"]}</Td>
+    return (
+        <Table>
+            <Thead>
+                <Tr>
+                    <Th textAlign={"center"}>State</Th>
+                    <Th textAlign={"center"}>School</Th>
+                    <Th textAlign={"center"}>Transfer Class</Th>
                 </Tr>
-            })}
-        </Tbody>
-    </Table>
+            </Thead>
+            <Tbody>
+                {Object.entries(getCourseData).map(course => {
+                    return <Tr key={course[0]}>
+                        <Td textAlign={"center"}>{course[1]["state"]}</Td>
+                        <Td textAlign={"center"}>{course[1]["transfer_school"]}</Td>
+                        <Td textAlign={"center"}>{course[1]["transfer_class"]}</Td>
+                    </Tr>
+                })}
+            </Tbody>
+        </Table>
+    )
 }
 
 export default CourseTable
