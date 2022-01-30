@@ -6,7 +6,7 @@ import { Text } from '@chakra-ui/react'
 const ExampleSearches = () => {
 
     return (
-        <Text fontSize={"xl"} mt={["0 !important"]}>
+        <Text fontSize={"xl"} position={"relative"}>
             Example Searches:<br />
             ENGL 1102<br />
             Georgia State University

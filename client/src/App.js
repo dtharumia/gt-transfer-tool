@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Home from './pages/home/home.component';
-import Course from './pages/course/course.component'
-import School from './pages/school/school.component';
+import Home from './pages/home/home';
+import Course from './pages/course/course'
+import School from './pages/school/school';
 import { Routes, Route } from 'react-router-dom';
 
 const App = () => (

@@ -1,17 +1,16 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import CourseTable from '../../components/course-table/course-table.component';
-import Header from '../../components/header/header.component';
+import SchoolTable from '../../components/school-table/school-table';
+import Header from '../../components/header/header';
 import { Container, Flex, Stack, VStack } from '@chakra-ui/react';
+import Filter from '../../components/filter/filter';
 
-import Filter from '../../components/filter/filter.component';
+const School = () => {
 
-const Course = () => {
-
-    const { course } = useParams();
+    const { school } = useParams();
 
     return (
-        <Container maxWidth="container.xl" h="75vh" py={20}>
+        <Container maxWidth="container.xl" padding={0}>
             <VStack>
                 <Filter />
             </VStack>
@@ -23,8 +22,8 @@ const Course = () => {
                     spacing={10}
                     alignItems="center"
                 >
-                    <Header primary={course.replaceAll("_", " ")} />
-                    <CourseTable course={course.replaceAll("_", " ")} />
+                    <Header primary={school.replaceAll("_", " ")} />
+                    <SchoolTable school={school.replaceAll("_", " ")} />
                 </Stack>
             </Flex>
         </Container>
@@ -33,4 +32,4 @@ const Course = () => {
 }
 
 
-export default Course;
+export default School;
