@@ -6,11 +6,11 @@ import FilterHits from '../filter-hits/filter-hits';
 
 import CustomSearchBox from '../custom-search-box/custom-search-box';
 
-const Filter = () => {
+const Filter = ({ mt }) => {
     return (
         <InstantSearch indexName={"searches"} searchClient={searchClient} key={window.location.pathname}>
             <CustomSearchBox />
-            <FilterHits/>
+            <FilterHits mt={mt} />
         </InstantSearch>
     )
 

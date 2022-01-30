@@ -12,10 +12,10 @@ const FilterHit = ({ hit: { type, primary, secondary } }) => {
     }
 
     return (
-        <Flex w="md" onClick={filterSelect} cursor={"pointer"}>
-            <Text >{primary}</Text>
+        <Flex w="md" onClick={filterSelect} cursor={"pointer"} >
+            <Text fontSize={"xl"}>{primary}</Text>
             <Spacer></Spacer>
-            {secondary != "null" ? <Text>{secondary}</Text> : null}
+            {secondary != "null" ? <Text fontSize={"xl"}>{secondary}</Text> : null}
         </Flex>
     )
 }

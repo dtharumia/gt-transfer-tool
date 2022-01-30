@@ -1,8 +1,8 @@
 import React from 'react';
 import { Heading } from '@chakra-ui/react'
 
-const Header = ({primary}) => (
+const PageHeader = ({primary}) => (
     <Heading>{primary}</Heading>
 )
 
-export default Header;
+export default PageHeader;

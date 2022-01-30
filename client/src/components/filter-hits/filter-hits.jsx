@@ -3,10 +3,10 @@ import { connectHits } from "react-instantsearch-core";
 import FilterHit from "../filter-hit/filter-hit";
 import { Container } from "@chakra-ui/react";
 
-const FilterHits = ({ hits }) => {
+const FilterHits = ({ hits, mt }) => {
 
     return (
-        <Container position={"relative"} zIndex={"100"}>
+        <Container position={"absolute"} px="0" mt={`${mt}px !important`} zIndex={"100"} background={'#A4925A'} width={"md"}>
             {
                 hits.map((hit) => (
                     <FilterHit key={hit.objectID} hit={hit} />
