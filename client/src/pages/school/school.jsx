@@ -1,35 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import SchoolTable from '../../components/school-table/school-table';
+import SchoolGrid from '../../components/school-grid/school-grid';
 import PageHeader from '../../components/page-header/page-header';
 import { Container, Flex, Stack, VStack } from '@chakra-ui/react';
 import Filter from '../../components/filter/filter';
 import MainHeader from '../../components/main-header/main-header';
+
+import { filterTransferCourses } from '../../firebase/firebase_utils';
+
 const School = () => {
 
     const { school } = useParams();
+    const [getSchoolData, setSchoolData] = useState("")
+    useEffect(() => {
+        filterTransferCourses("transfer_school", school)
+            .then(data => setSchoolData(data))
+    }, [])
+
 
     return (
-        <Container maxWidth="container.xl" h="75vh" paddingBottom={20}>
+        <Container maxWidth="container.xl" position={"relative"} >
             <VStack paddingBottom={10}>
                 <MainHeader />
-            </VStack>
-
-            <VStack>
                 <Filter mt={50} />
             </VStack>
-            <Flex h="100vh" py={5}>
-                <Stack
-                    w="full"
-                    h="full"
-                    p={5}
-                    spacing={10}
-                    alignItems="center"
-                >
-                    <PageHeader primary={school.replaceAll("_", " ")} />
-                    <SchoolTable school={school.replaceAll("_", " ")} />
-                </Stack>
-            </Flex>
+            <SchoolGrid school={getSchoolData} />
         </Container>
 
     )
