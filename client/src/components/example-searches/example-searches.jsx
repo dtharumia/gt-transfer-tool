@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Text, Container } from '@chakra-ui/react'
+import { Text} from '@chakra-ui/react'
 
 
 const ExampleSearches = () => {

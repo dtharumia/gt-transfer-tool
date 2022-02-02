@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Flex, HStack, Stack } from '@chakra-ui/react';
+import { Container, Flex, Stack } from '@chakra-ui/react';
 
 import Filter from '../../components/filter/filter';
 

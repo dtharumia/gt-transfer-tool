@@ -1,7 +1,7 @@
 import React from "react";
 import { connectHits } from "react-instantsearch-core";
 import FilterHit from "../filter-hit/filter-hit";
-import { Stack, Box } from "@chakra-ui/react";
+import { Stack} from "@chakra-ui/react";
 
 const FilterHits = ({ hits, mt }) => {
 
