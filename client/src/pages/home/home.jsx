@@ -8,6 +8,8 @@ import { Image } from '@chakra-ui/react';
 
 import ExampleSearches from '../../components/example-searches/example-searches';
 
+import Footer from "../../components/footer/footer"
+
 const Home = () => {
 
     return (
@@ -31,6 +33,7 @@ const Home = () => {
                     <Image src="/home/arrow.png"></Image>
                 </Stack>
             </Flex>
+            <Footer/>
         </Container >
 
     )

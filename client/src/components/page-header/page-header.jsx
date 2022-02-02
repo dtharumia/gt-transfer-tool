@@ -1,17 +1,23 @@
 import React from 'react';
-import { Box, VStack} from '@chakra-ui/react'
-import MainHeader from '../main-header/main-header';
+import { Box, VStack, HStack, Heading } from '@chakra-ui/react'
 import Filter from '../filter/filter';
+import { useNavigate } from 'react-router-dom';
 
-const PageHeader = () => (
-    <Box paddingBottom={10}>
+const PageHeader = () => {
+    const navigate = useNavigate()
+    return <Box paddingBottom={10}>
         <VStack paddingBottom={10}>
-            <MainHeader />
+            <HStack onClick={() => navigate("/")} cursor={"pointer"}>
+                <Heading>
+                    <Box display={'inline'}>Georgia Tech </Box>
+                    <Box display={'inline'} color={'#A4925A'}>Transfer Tool</Box>
+                </Heading>
+            </HStack>
         </VStack>
         <VStack position={"relative"}>
             <Filter mt={50} />
         </VStack>
     </Box>
-)
+}
 
 export default PageHeader;

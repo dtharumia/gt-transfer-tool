@@ -6,6 +6,7 @@ import { Container, Heading } from '@chakra-ui/react';
 
 import { filterTransferCourses } from '../../firebase/firebase_utils';
 
+import Footer from '../../components/footer/footer';
 
 const School = () => {
 
@@ -23,6 +24,7 @@ const School = () => {
             <PageHeader />
             <Heading pb={10} textAlign={"center"} as='h3' size='lg'>{school}</Heading>
             <SchoolGrid school={getSchoolData} />
+
         </Container>
 
     )

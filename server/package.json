@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-typesense": "node scripts/startTypesenseServer.js",
-    "populate": "node scripts/populateTypesenseIndex"
+    "populate": "node scripts/populateTypesenseIndex.js",
+    "create-search": "node scripts/createTypesenseSearchAPI.js"
   },
   "keywords": [],
   "author": "",

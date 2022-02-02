@@ -4,6 +4,7 @@ import PageHeader from '../../components/page-header/page-header';
 import { Container, Heading } from '@chakra-ui/react';
 import CourseGrid from '../../components/course-grid/course-grid';
 import { filterTransferCourses } from '../../firebase/firebase_utils';
+import Footer from '../../components/footer/footer';
 
 const Course = () => {
 
