@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/gt-transfer-tool/static/css/main.e6c13ad2.css",
+    "main.js": "/gt-transfer-tool/static/js/main.b272cb55.js",
+    "static/js/787.fbc3f83e.chunk.js": "/gt-transfer-tool/static/js/787.fbc3f83e.chunk.js",
+    "index.html": "/gt-transfer-tool/index.html",
+    "main.e6c13ad2.css.map": "/gt-transfer-tool/static/css/main.e6c13ad2.css.map",
+    "main.b272cb55.js.map": "/gt-transfer-tool/static/js/main.b272cb55.js.map",
+    "787.fbc3f83e.chunk.js.map": "/gt-transfer-tool/static/js/787.fbc3f83e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.b272cb55.js"
+  ]
+}
