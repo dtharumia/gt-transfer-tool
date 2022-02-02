@@ -6,7 +6,6 @@ import { Container, Heading } from '@chakra-ui/react';
 
 import { filterTransferCourses } from '../../firebase/firebase_utils';
 
-import Footer from '../../components/footer/footer';
 
 const School = () => {
 
