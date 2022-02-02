@@ -22,12 +22,12 @@ client/npm-debug.log*
 client/yarn-debug.log*
 client/yarn-error.log*
 
-client/.env
+server/.env
 
-client/src/firebase/
-client/src/data/
-client/scripts/data
-client/typesense-server-data/
+server/scripts/
+server/typesense-server-data/
 
 
 server/node_modules
+client/src/firebase/
+client/.env
