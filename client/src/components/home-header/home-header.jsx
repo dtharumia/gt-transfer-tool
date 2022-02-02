@@ -1,12 +1,14 @@
-import { Heading, HStack } from "@chakra-ui/react"
+import { Heading, HStack, Box } from "@chakra-ui/react"
 
 
 const HomeHeader = () => {
 
     return (
         <HStack>
-            <Heading>Georgia Tech</Heading>
-            <Heading variant={"gold-text"}>Transfer Tool</Heading>
+            <Heading>
+                <Box display={'inline'}>Georgia Tech </Box>
+                <Box display={'inline'} color={'#A4925A'}>Transfer Tool</Box>
+            </Heading>
         </HStack>
     )
 }

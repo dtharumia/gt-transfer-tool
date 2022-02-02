@@ -1,37 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import CourseTable from '../../components/course-table/course-table';
 import PageHeader from '../../components/page-header/page-header';
-import { Container, Flex, Stack, VStack } from '@chakra-ui/react';
-
-import Filter from '../../components/filter/filter';
-import MainHeader from '../../components/main-header/main-header';
+import { Container, Heading } from '@chakra-ui/react';
+import CourseGrid from '../../components/course-grid/course-grid';
+import { filterTransferCourses } from '../../firebase/firebase_utils';
 
 const Course = () => {
 
     const { course } = useParams();
+    const [getCourseData, setCourseData] = useState("")
+
+
+    useEffect(() => {
+        filterTransferCourses("gt_class", course)
+            .then(data => setCourseData(data))
+    }, [course])
 
     return (
-        <Container maxWidth="container.xl" h="75vh" paddingBottom={20}>
-            <VStack paddingBottom={10}>
-                <MainHeader />
-            </VStack>
-            <VStack position={"relative"}>
-
-                <Filter mt={50} />
-            </VStack>
-            <Flex h="100vh" py={5}>
-                <Stack
-                    w="full"
-                    h="full"
-                    p={5}
-                    spacing={10}
-                    alignItems="center"
-                >
-                    <PageHeader primary={course.replaceAll("_", " ")} />
-                    <CourseTable course={course.replaceAll("_", " ")} />
-                </Stack>
-            </Flex>
+        <Container maxWidth="container.xl" position={"relative"} py={20}>
+            <PageHeader />
+            <Heading pb={10} textAlign={"center"} as='h3' size='lg'>{course}</Heading>
+            <CourseGrid course={getCourseData} />
         </Container>
 
     )

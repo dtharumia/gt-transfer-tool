@@ -1,16 +1,13 @@
 import React from 'react';
 import { Container, Flex, HStack, Stack } from '@chakra-ui/react';
 
-import PageHeader from '../../components/page-header/page-header';
 import Filter from '../../components/filter/filter';
 
 import HomeHeader from '../../components/home-header/home-header';
 import { Image } from '@chakra-ui/react';
 
 import ExampleSearches from '../../components/example-searches/example-searches';
-import MainHeader from '../../components/main-header/main-header';
 
-import Footer from '../../components/footer/footer';
 const Home = () => {
 
     return (
