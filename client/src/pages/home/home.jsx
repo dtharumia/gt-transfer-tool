@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Flex, Stack } from '@chakra-ui/react';
 
 import Filter from '../../components/filter/filter';
@@ -11,7 +11,6 @@ import ExampleSearches from '../../components/example-searches/example-searches'
 import Footer from "../../components/footer/footer"
 
 const Home = () => {
-
     return (
         <Container maxWidth="container.xl" position={"relative"} >
             <Flex h="75vh" py={20} >
@@ -33,7 +32,7 @@ const Home = () => {
                     <Image src="/home/arrow.png"></Image>
                 </Stack>
             </Flex>
-            <Footer/>
+            <Footer />
         </Container >
 
     )

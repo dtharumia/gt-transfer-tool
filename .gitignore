@@ -23,11 +23,10 @@ client/yarn-debug.log*
 client/yarn-error.log*
 
 server/.env
-
-server/scripts/
-server/typesense-server-data/
-
-
+server/firebase
 server/node_modules
+server/typesense-server-data
+server/typesense/data
+
 client/src/firebase/
 client/.env

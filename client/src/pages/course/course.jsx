@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import PageHeader from '../../components/page-header/page-header';
 import { Container, Heading } from '@chakra-ui/react';
 import CourseGrid from '../../components/course-grid/course-grid';
-import { filterTransferCourses } from '../../firebase/firebase_utils';
 
 const Course = () => {
 
@@ -12,8 +11,9 @@ const Course = () => {
 
 
     useEffect(() => {
-        filterTransferCourses("gt_class", course)
-            .then(data => setCourseData(data))
+        fetch(`http://localhost:3001/api/read/gt_class/${course}`)
+            .then(response => response.json())
+            .then(data => setCourseData(data));
     }, [course])
 
     return (

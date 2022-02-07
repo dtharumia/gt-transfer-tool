@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-typesense": "node scripts/startTypesenseServer.js",
-    "populate": "node scripts/populateTypesenseIndex.js",
-    "create-search": "node scripts/createTypesenseSearchAPI.js"
+    "start-typesense": "node typesense/startTypesenseServer.js",
+    "populate": "node typesense/populateTypesenseIndex.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,9 @@
     "cors": "^2.8.5",
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
+    "firebase": "^9.6.5",
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.17.1",
     "mongodb": "^4.3.1",
     "typesense": "^1.1.2"
   }

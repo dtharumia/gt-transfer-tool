@@ -4,8 +4,6 @@ import SchoolGrid from '../../components/school-grid/school-grid';
 import PageHeader from '../../components/page-header/page-header';
 import { Container, Heading } from '@chakra-ui/react';
 
-import { filterTransferCourses } from '../../firebase/firebase_utils';
-
 
 const School = () => {
 
@@ -13,8 +11,9 @@ const School = () => {
     const [getSchoolData, setSchoolData] = useState("")
 
     useEffect(() => {
-        filterTransferCourses("transfer_school", school)
-            .then(data => setSchoolData(data))
+        fetch(`http://localhost:3001/api/read/transfer_school/${school}`)
+            .then(response => response.json())
+            .then(data => setSchoolData(data));
     }, [school])
 
 
