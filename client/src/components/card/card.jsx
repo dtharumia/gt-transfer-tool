@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Center, Box, Heading, Stack, Text } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 const Card = ({ data }) => {
-    const [getHidden, setHidden] = useState(true)
+    const [getHidden, setHidden] = useState(false)
 
     return < Center py={6} >
         <Box
