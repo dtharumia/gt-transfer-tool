@@ -13,11 +13,32 @@ import {
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
+type School = {
+  found: number;
+  hits: Array<{
+    objectID: string;
+    document: {
+      primary: string;
+    };
+  }>;
+};
+
 const StatePage = () => {
   const router = useRouter();
   const { stateName } = router.query;
   const [page, setPage] = useState(1);
-  const [schools, setSchools] = useState({});
+  const [schools, setSchools] = useState<School>({
+    found: 0,
+    hits: [
+      {
+        objectID: "",
+        document: {
+          primary: "",
+        },
+      },
+    ],
+  });
+
   useEffect(() => {
     if (!stateName) {
       return;
@@ -29,7 +50,7 @@ const StatePage = () => {
       page,
       "primary:asc"
     ).then((res) => {
-      setSchools(res);
+      setSchools(res as any);
     });
   }, [stateName, page]);
 
@@ -68,7 +89,7 @@ const StatePage = () => {
           </ButtonGroup>
         </HStack>
         <SimpleGrid columns={4} spacing={5}>
-          {Object.keys(schools).length > 0 &&
+          {schools.found > 0 &&
             schools.hits.map((hit) => {
               const doc = hit.document;
               return (

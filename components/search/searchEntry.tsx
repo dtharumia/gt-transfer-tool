@@ -1,7 +1,6 @@
 import { Box, Text, VStack, HStack, Link } from "@chakra-ui/react";
 
 const SearchEntry = ({ hit }) => {
-  console.log(hit);
   return (
     <Box
       key={hit.objectID}
