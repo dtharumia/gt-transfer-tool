@@ -47,12 +47,24 @@ const Table = ({ heading, courses, onClickPrev, onClickNext, page }) => {
           <ChakraTable variant="striped" layout="fixed">
             <Thead>
               <Tr>
-                <Th width="10%">GT Class</Th>
-                <Th width="20%">GT Title</Th>
-                <Th width="15%">Transfer State</Th>
-                <Th width="20%">Transfer School</Th>
-                <Th width="15%">Transfer Class</Th>
-                <Th width="20%">Transfer Title</Th>
+                <Th width="10%" textAlign={"center"}>
+                  GT Class
+                </Th>
+                <Th width="23%" textAlign={"center"}>
+                  GT Title
+                </Th>
+                <Th width="10%" textAlign={"center"}>
+                  Transfer State
+                </Th>
+                <Th width="23%" textAlign={"center"}>
+                  Transfer School
+                </Th>
+                <Th width="10%" textAlign={"center"}>
+                  Transfer Class
+                </Th>
+                <Th width="23%" textAlign={"center"}>
+                  Transfer Title
+                </Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -61,12 +73,12 @@ const Table = ({ heading, courses, onClickPrev, onClickNext, page }) => {
                   const doc = hit.document;
                   return (
                     <Tr key={hit.objectID}>
-                      <Td>{heading}</Td>
-                      <Td>{doc.gt_title}</Td>
-                      <Td>{doc.state}</Td>
-                      <Td>{doc.transfer_school}</Td>
-                      <Td>{doc.transfer_class}</Td>
-                      <Td>{doc.transfer_title}</Td>
+                      <Td textAlign={"center"}>{doc.gt_class}</Td>
+                      <Td textAlign={"center"}>{doc.gt_title}</Td>
+                      <Td textAlign={"center"}>{doc.state}</Td>
+                      <Td textAlign={"center"}>{doc.transfer_school}</Td>
+                      <Td textAlign={"center"}>{doc.transfer_class}</Td>
+                      <Td textAlign={"center"}>{doc.transfer_title}</Td>
                     </Tr>
                   );
                 })}
