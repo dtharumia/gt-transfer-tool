@@ -60,7 +60,7 @@ const Table = ({ heading, courses, onClickPrev, onClickNext, page }) => {
                 courses.hits.map((hit) => {
                   const doc = hit.document;
                   return (
-                    <Tr>
+                    <Tr key={hit.objectID}>
                       <Td>{heading}</Td>
                       <Td>{doc.gt_title}</Td>
                       <Td>{doc.state}</Td>
