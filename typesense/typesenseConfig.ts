@@ -19,7 +19,7 @@ export const typesenseAdapter = new TypesenseInstantsearchAdapter({
       query_by: "gt_title, gt_class, transfer_school",
     },
     searches: {
-      query_by: "entry"
+      query_by: "primary, secondary"
     }
   },
 });

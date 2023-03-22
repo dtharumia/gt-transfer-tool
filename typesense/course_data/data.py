@@ -7,7 +7,11 @@ df = df.astype({
 })
 
 df = df.astype({
-    "entry": "string"
+    "primary": "string"
+})
+
+df = df.astype({
+    "secondary": "string"
 })
 
 df = df.astype({

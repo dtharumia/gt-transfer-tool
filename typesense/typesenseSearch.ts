@@ -6,7 +6,7 @@ export const searchTransfers = async (q, query_by, page, sort_by) => {
         'q': q,
         'query_by': query_by,
         'page': page,
-        // 'sort_by': sort_by,
+        'sort_by': sort_by,
         'filter_by': query_by + ":" + q,
         'per_page': 20,
     }
@@ -16,3 +16,18 @@ export const searchTransfers = async (q, query_by, page, sort_by) => {
     return results
 }
 
+export const searchSearches = async (q, query_by, page, sort_by) => {
+
+    const searchParameters = {
+        'q': q,
+        'query_by': query_by,
+        'page': page,
+        'sort_by': sort_by,
+        'filter_by': query_by + ":" + q,
+        'per_page': 20,
+    }
+
+    const results = client.collections('searches').documents().search(searchParameters)
+
+    return results
+}

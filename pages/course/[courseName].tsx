@@ -32,7 +32,7 @@ const CoursePage = () => {
     if (!courseName) {
       return;
     }
-    searchTransfers(courseName, "gt_class", page, "transfer_school:asc").then(
+    searchTransfers(courseName, "gt_class", page, "state:asc").then(
       (res) => {
         console.log(res);
         setCourses(res);

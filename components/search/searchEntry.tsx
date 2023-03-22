@@ -11,7 +11,21 @@ const SearchEntry = ({ hit }) => {
       overflow="hidden"
     >
       <HStack>
-        <Link href={"/courses/" + hit.entry}>{hit.entry}</Link>
+        {hit.type == "gt_class" ? (
+          <Link href={`/course/${hit.primary}`}>{hit.primary}</Link>
+        ) : (
+          <></>
+        )}
+        {hit.type == "transfer_school" ? (
+          <Link href={`/school/${hit.primary}`}>{hit.primary}</Link>
+        ) : (
+          <></>
+        )}
+        {hit.type == "transfer_state" ? (
+          <Link href={`/state/${hit.primary}`}>{hit.primary}</Link>
+        ) : (
+          <></>
+        )}
       </HStack>
     </Box>
   );
