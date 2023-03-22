@@ -7,7 +7,16 @@ import {
   Heading,
   HStack,
   SimpleGrid,
+  Table,
+  TableCaption,
+  TableContainer,
+  Tbody,
+  Td,
   Text,
+  Tfoot,
+  Th,
+  Thead,
+  Tr,
   VStack,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -48,7 +57,7 @@ const CoursePage = () => {
       <Box padding={"5vh"}>
         <VStack>
           <Heading textAlign={"center"}>{courseName}</Heading>
-          <Text>{courses.hits[0].document.gt_title}</Text>
+          {/* <Text>{courses.hits[0].document.gt_title}</Text> */}
         </VStack>
         <HStack
           spacing={4}
@@ -70,32 +79,36 @@ const CoursePage = () => {
             </Button>
           </ButtonGroup>
         </HStack>
-        <SimpleGrid columns={4} spacing={5}>
-          {Object.keys(courses).length > 0 &&
-            courses.hits.map((hit) => {
-              const doc = hit.document;
-              return (
-                <Box
-                  key={hit.objectID}
-                  padding={"2vh"}
-                  borderWidth="1px"
-                  borderRadius="lg"
-                  overflow="hidden"
-                >
-                  <VStack>
-                    <HStack>
-                      <Text>{doc.transfer_class}</Text>
-                      <Text>{doc.transfer_title}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text>{doc.transfer_school}</Text>
-                      <Text>{doc.state}</Text>
-                    </HStack>
-                  </VStack>
-                </Box>
-              );
-            })}
-        </SimpleGrid>
+        <TableContainer>
+          <Table variant="striped" layout='fixed'>
+            <Thead>
+              <Tr>
+                <Th width="10%">GT Class</Th>
+                <Th width="20%">GT Title</Th>
+                <Th width="15%">Transfer State</Th>
+                <Th width="20%">Transfer School</Th>
+                <Th width="15%">Transfer Class</Th>
+                <Th width="20%">Transfer Title</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {Object.keys(courses).length > 0 &&
+                courses.hits.map((hit) => {
+                  const doc = hit.document;
+                  return (
+                    <Tr>
+                      <Td>{courseName}</Td>
+                      <Td>{doc.gt_title}</Td>
+                      <Td>{doc.state}</Td>
+                      <Td>{doc.transfer_school}</Td>
+                      <Td>{doc.transfer_class}</Td>
+                      <Td>{doc.transfer_title}</Td>
+                    </Tr>
+                  );
+                })}
+            </Tbody>
+          </Table>
+        </TableContainer>
       </Box>
     </Box>
   );
