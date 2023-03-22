@@ -1,12 +1,12 @@
 import Typesense from 'typesense'
 
-const client = new Typesense.Client({
+export const client = new Typesense.Client({
   'nodes': [{
-    'host': process.env.TYPESENSE_HOST, // where xxx is the ClusterID of your Typesense Cloud cluster
-    'port': process.env.TYPESENSE_PORT,
-    'protocol': 'https'
+    "host": "teq6fdvwgrz84jm0p-1.a1.typesense.net",
+    "port": "443",
+    "protocol": "https",
   }],
-  'apiKey': process.env.TYPESENSE_ADMIN_API_KEY,
+  'apiKey': "JejcBtnDlRYKCTvBuhSCpH3jafOBvFh2",
   'connectionTimeoutSeconds': 2
 })
 

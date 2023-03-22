@@ -19,6 +19,7 @@
     "dotenv": "^16.0.3",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
+    "firebase": "^9.18.0",
     "framer-motion": "^10.8.4",
     "i": "^0.3.7",
     "next": "13.2.4",

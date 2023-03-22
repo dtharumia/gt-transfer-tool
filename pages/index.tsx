@@ -37,8 +37,10 @@ export default function Home() {
           </Heading>
           <Text fontSize={"3xl"} textAlign={"center"}>
             GT Transfer Tool helps you find courses that transfer back to
-            Georgia Tech.<br>
-            </br>Search for courses and schools below.
+            Georgia Tech.
+          </Text>
+          <Text fontSize={"3xl"} textAlign={"center"}>
+            Search for courses and schools below.
           </Text>
           <Search></Search>
         </Box>
