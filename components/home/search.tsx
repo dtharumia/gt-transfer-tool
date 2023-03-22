@@ -1,11 +1,11 @@
-import { InstantSearch, SearchBox } from "react-instantsearch-dom";
-import { typesenseAdapter } from "@/typesense/typesenseConfig";
-const searchClient = typesenseAdapter.searchClient;
+import { InstantSearch } from "react-instantsearch-dom";
+import SearchBox from "../search/searchBox";
+import { typesenseAdapter, searchClient } from "@/typesense/typesenseConfig";
 
 import SearchHits from "../search/searchHits";
 
 const Search = () => (
-  <InstantSearch indexName="transfers" searchClient={searchClient}>
+  <InstantSearch indexName="searches" searchClient={searchClient}>
     <SearchBox />
     <SearchHits />
   </InstantSearch>

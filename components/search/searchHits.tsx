@@ -1,13 +1,13 @@
 import { Box, Grid, GridItem, SimpleGrid, Text } from "@chakra-ui/react";
 import { connectHits } from "react-instantsearch-core";
-import Entry from "./entry";
+import SearchEntry from "./searchEntry";
 
 
 const SearchHits = ({ hits }) => {
   return (
-    <SimpleGrid columns={4} spacing={5}>
+    <SimpleGrid columns={4} spacing={5} justifyItems={"center"}>
       {hits.map((hit) => (
-        <Entry key={hit.objectID} hit={hit} />
+        <SearchEntry key={hit.objectID} hit={hit} />
       ))}
     </SimpleGrid>
   );

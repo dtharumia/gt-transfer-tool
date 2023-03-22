@@ -7,7 +7,8 @@ export const searchTransfers = async (q, query_by, page, sort_by) => {
         'query_by': query_by,
         'page': page,
         'sort_by': sort_by,
-        'filter_by': query_by + ":" + q
+        'filter_by': query_by + ":" + q,
+        'per_page': 20,
     }
 
     const results = client.collections('transfers').documents().search(searchParameters)

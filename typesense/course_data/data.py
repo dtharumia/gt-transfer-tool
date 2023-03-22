@@ -1,17 +1,17 @@
 import pandas as pd
 
-df = pd.read_csv('all_data_translated.csv')
+df = pd.read_csv('search_fields.csv')
 
 df = df.astype({
     "id": "string",
 })
 
 df = df.astype({
-    "gt_ch": "string"
+    "entry": "string"
 })
 
-df = df.drop(
-    columns="gt_title_translated"
-)
+df = df.astype({
+    "type": "string"
+})
 
-df.to_json("all_data_translated.jsonl", orient="records", lines=True)
+df.to_json("search_fields.jsonl", orient="records", lines=True)

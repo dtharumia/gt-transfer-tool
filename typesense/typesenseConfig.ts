@@ -16,7 +16,10 @@ export const typesenseAdapter = new TypesenseInstantsearchAdapter({
   server: TYPESENSE_SERVER_CONFIG,
   collectionSpecificSearchParameters: {
     transfers: {
-      queryBy: "gt_title, gt_class, transfer_school"
+      query_by: "gt_title, gt_class, transfer_school",
+    },
+    searches: {
+      query_by: "entry"
     }
   },
 });
@@ -32,6 +35,10 @@ export const searchClient = {
           nbPages: 0,
           page: 0,
           processingTimeMS: 0,
+          hitsPerPage: 0,
+          exhaustiveNbHits: false,
+          query: '',
+          params: '',
         })),
       });
     }
