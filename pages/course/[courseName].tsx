@@ -3,24 +3,19 @@ import {
   Box,
   Button,
   ButtonGroup,
-  Divider,
   Heading,
   HStack,
-  SimpleGrid,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Td,
-  Text,
-  Tfoot,
   Th,
   Thead,
   Tr,
   VStack,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { searchTransfers } from "@/typesense/typesenseSearch";
+import { searchTypesense } from "@/typesense/typesenseSearch";
 import { useEffect, useState } from "react";
 
 const CoursePage = () => {
@@ -32,12 +27,16 @@ const CoursePage = () => {
     if (!courseName) {
       return;
     }
-    searchTransfers(courseName, "gt_class", page, "state:asc").then(
-      (res) => {
-        console.log(res);
-        setCourses(res);
-      }
-    );
+    searchTypesense(
+      "transfers",
+      courseName,
+      "gt_class",
+      page,
+      "state:asc"
+    ).then((res) => {
+      console.log(res);
+      setCourses(res);
+    });
   }, [courseName, page]);
 
   const onClickPrev = (e) => {
@@ -57,7 +56,6 @@ const CoursePage = () => {
       <Box padding={"5vh"}>
         <VStack>
           <Heading textAlign={"center"}>{courseName}</Heading>
-          {/* <Text>{courses.hits[0].document.gt_title}</Text> */}
         </VStack>
         <HStack
           spacing={4}
@@ -80,7 +78,7 @@ const CoursePage = () => {
           </ButtonGroup>
         </HStack>
         <TableContainer>
-          <Table variant="striped" layout='fixed'>
+          <Table variant="striped" layout="fixed">
             <Thead>
               <Tr>
                 <Th width="10%">GT Class</Th>

@@ -1,5 +1,5 @@
 import Navbar from "@/components/navbar";
-import { searchSearches } from "@/typesense/typesenseSearch";
+import { searchTypesense } from "@/typesense/typesenseSearch";
 import {
   Box,
   Button,
@@ -8,7 +8,6 @@ import {
   HStack,
   SimpleGrid,
   VStack,
-  Text,
   Link,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -23,9 +22,13 @@ const StatePage = () => {
     if (!stateName) {
       return;
     }
-    console.log(stateName);
-    searchSearches(stateName, "secondary", page, "primary:asc").then((res) => {
-      console.log(res);
+    searchTypesense(
+      "searches",
+      stateName,
+      "secondary",
+      page,
+      "primary:asc"
+    ).then((res) => {
       setSchools(res);
     });
   }, [stateName, page]);

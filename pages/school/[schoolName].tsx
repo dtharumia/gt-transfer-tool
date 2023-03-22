@@ -1,5 +1,5 @@
 import Navbar from "@/components/navbar";
-import { searchTransfers } from "@/typesense/typesenseSearch";
+import { searchTypesense } from "@/typesense/typesenseSearch";
 import {
   Box,
   Button,
@@ -27,7 +27,8 @@ const SchoolPage = () => {
     if (!schoolName) {
       return;
     }
-    searchTransfers(
+    searchTypesense(
+      "transfers",
       schoolName,
       "transfer_school",
       page,
