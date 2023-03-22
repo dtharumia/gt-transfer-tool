@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+typesense/course_data/all_data_translated.csv
+typesense/course_data/all_data_translated.jsonl
+.gitignore

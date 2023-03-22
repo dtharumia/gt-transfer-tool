@@ -19,6 +19,7 @@ import {
 } from "@chakra-ui/react";
 
 import Navbar from "@/components/home/navbar";
+import Search from "@/components/home/search";
 
 export default function Home() {
   return (
@@ -38,13 +39,7 @@ export default function Home() {
             GT Transfer Tool helps you find courses that transfer back to
             Georgia Tech. Search for courses and schools below.
           </Text>
-          <Input placeholder="Search for courses and schools"></Input>
-          {/* <Text>Example Searches:</Text>
-          <UnorderedList>
-            <ListItem>PSYC 1101</ListItem>
-            <ListItem>English Composition I</ListItem>
-            <ListItem>Georgia State University</ListItem>
-          </UnorderedList> */}
+          <Search></Search>
         </Box>
         <HStack style={{ justifyContent: "center" }}>
           <Image
