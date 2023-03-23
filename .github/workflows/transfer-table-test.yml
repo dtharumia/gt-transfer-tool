@@ -1,5 +1,6 @@
 name: transfer_table_scrape-test
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'public/data/transfer_table_scrape_test.py'
