@@ -663,13 +663,15 @@ jobs:
     steps:
       - name: Check out this repo
         uses: actions/checkout@v2
+      - name: Git Pull
+        run: git pull
       - name: Remove existing all_data_test directory
         run: rm -rf ./public/data/output/all_data_test
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
           path: ./public/data/output/all_data_test
-      - name: Git Pull
-        run: git pull
+      - name: git status
+        run: git status
       - name: Git Auto Commit
         uses: stefanzweifel/git-auto-commit-action@v4.16.0

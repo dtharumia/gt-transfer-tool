@@ -80,7 +80,7 @@ def scrape_transfer_table():
                     f.close()
                     break
                 term_sem = driver.find_element("xpath", 
-                    '//option[@value="202108"]')
+                    '//option[@value="202308"]')
                 term_sem.click()
                 term = term_sem.text
                 driver.find_element("xpath", 
@@ -88,7 +88,7 @@ def scrape_transfer_table():
 
                 # goes through all courses
                 for row in range(3, len(driver.find_elements("xpath", '//table[@class="datadisplaytable"]//tr')) + 1):
-                    
+
                     if driver.find_element("xpath", '//table[@class="datadisplaytable"]//tr[' + str(row) + ']').text != '  ----- No Equivalent Course(s) -----':
                         try:
                             gt_class = driver.find_element("xpath", 
