@@ -1,4 +1,4 @@
-name: scrape
+name: scrape-test
 on:
   push:
     paths:
