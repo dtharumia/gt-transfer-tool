@@ -30,7 +30,7 @@ runs:
       run: python public/data/transfer_table_scrape_test.py ${{ inputs.state-number }}
       shell: bash
     - name: Upload artifact
-      uses: actions/checkout@v3
+      uses: actions/upload-artifact@v3.1.2
       with:
         name: ${{ inputs.state-number }}_test
         path: 'public/data/all_data_test/${{ inputs.state-number }}_test.json'
