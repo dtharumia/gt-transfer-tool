@@ -132,7 +132,7 @@ def scrape_transfer_table():
     df['id'] = df['id'].astype(str)
     df['gt_ch'] = df['gt_ch'].astype(str)
 
-    df.to_json(os.path.join(sys.path[0], f'output/all_data_test/{transfer_state}_test.json'), orient='records')
+    df.to_json(os.path.join(sys.path[0], f'output/all_data_test/{selected_state_number}_test.json'), orient='records')
 
 if __name__ == '__main__':
     scrape_transfer_table()
