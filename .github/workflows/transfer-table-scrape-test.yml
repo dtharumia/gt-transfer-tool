@@ -24,6 +24,8 @@ jobs:
         run: echo "directory=${{ github.workspace }}" >> $GITHUB_ENV
       - name: Print directory
         run: echo ${{ env.directory }}
+      - name: Print ls of github.workspace
+        run: ls ${{ env.directory }}
       # - id: scrape_1
       #   uses: ./.github/actions/tt_scrape_test
       #   with:
