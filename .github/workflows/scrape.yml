@@ -22,4 +22,4 @@ jobs:
       - name: Install all necessary packages
         run: pip install selenium chromedriver_autoinstaller
       - name: Run the scraping script
-        run: python scraper.py
+        run: python selenium/scrape.py
