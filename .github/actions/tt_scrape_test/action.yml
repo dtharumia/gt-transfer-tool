@@ -33,6 +33,7 @@ runs:
       run: |
         git stash
         git pull
+        git stash pop
       shell: bash
     - name: Git Auto Commit
       uses: stefanzweifel/git-auto-commit-action@v4.16.0
