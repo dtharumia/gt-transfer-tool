@@ -1,0 +1,28 @@
+name: Create JSON data for test
+
+# Only trigger, when the build workflow succeeded
+on:
+  workflow_run:
+    workflows: ["transfer-table-scrape-test"]
+    types:
+      - completed
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Install all necessary packages
+        run: pip install pandas
+      - name: Combine individual state outputs
+        run: python public/data/combine_state_output.py all_data_test
+      - name: Create formatted search fields
+        run: python public/data/format_search_fields.py all_data_test
+      
