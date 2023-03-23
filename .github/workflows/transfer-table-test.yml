@@ -1,4 +1,4 @@
-name: scrape-test
+name: transfer_table_scrape-test
 on:
   push:
     paths:
