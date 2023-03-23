@@ -1,10 +1,10 @@
-name: Create JSON data for test
+name: Create JSON data for full
 
 # Only trigger, when the build workflow succeeded
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["transfer-table-scrape-test"]
+    workflows: ["transfer-table-scrape"]
     types:
       - completed
 
@@ -23,7 +23,7 @@ jobs:
       - name: Install all necessary packages
         run: pip install pandas
       - name: Combine individual state outputs
-        run: python public/data/combine_state_output.py all_data_test
+        run: python public/data/combine_state_output.py all_data
       - name: Create formatted search fields
-        run: python public/data/format_search_fields.py all_data_test
+        run: python public/data/format_search_fields.py all_data
       
