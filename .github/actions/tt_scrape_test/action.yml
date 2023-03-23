@@ -1,5 +1,5 @@
-name: 'Transfer Table Scrape'
-description: 'Composite action to perform scraping for a particular state'
+name: 'Transfer Table Test Scrape'
+description: 'Composite action to perform scraping for a particular state with testing data'
 inputs:
   state-number: 
     description: 'Which state number'
