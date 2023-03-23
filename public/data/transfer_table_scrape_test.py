@@ -119,6 +119,7 @@ def scrape_transfer_table():
                 # print last row of df
                 print(df.tail(1), flush=True)
                 time.sleep(1)
+                
                 driver.find_element("xpath", 
                     '//input[@value="Search Another Subject/Level/Term"]').click()
             driver.find_element("xpath", 
