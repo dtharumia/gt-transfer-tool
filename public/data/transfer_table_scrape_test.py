@@ -50,6 +50,7 @@ def scrape_transfer_table():
             selected_state_number, selected_state_number + 1):
         state = driver.find_element("xpath", '//option[' + str(count_state) + ']')
         transfer_state = state.text
+        print(transfer_state, flush=True)
         state.click()
         driver.find_element("xpath", '//input[@value="Get State"]').click()
 
