@@ -2,7 +2,7 @@ name: transfer_table_scrape-test
 on:
   push:
     paths:
-      - 'public/data/transfer_table_scrape.py'
+      - 'public/data/transfer_table_scrape_test.py'
 jobs:
   scrape:
     runs-on: ubuntu-latest
