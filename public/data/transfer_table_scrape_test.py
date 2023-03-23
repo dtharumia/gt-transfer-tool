@@ -88,6 +88,7 @@ def scrape_transfer_table():
 
                 # goes through all courses
                 for row in range(3, len(driver.find_elements("xpath", '//table[@class="datadisplaytable"]//tr')) + 1):
+                    
                     if driver.find_element("xpath", '//table[@class="datadisplaytable"]//tr[' + str(row) + ']').text != '  ----- No Equivalent Course(s) -----':
                         try:
                             gt_class = driver.find_element("xpath", 
