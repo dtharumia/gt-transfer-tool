@@ -61,7 +61,7 @@ def scrape_transfer_table():
             driver.find_element("xpath", '//input[@value="Get School"]').click()
 
             # goes through all subjects
-            for count_subject in range(1, len(driver.find_elements("xpath", "//select[@name='sel_subj']//option")) + 1):
+            for count_subject in range(1,2):
                 subject = driver.find_element("xpath", 
                     '//select[@name="sel_subj"]//option[' + str(count_subject) + ']')
                 subject.click()
@@ -113,7 +113,7 @@ def scrape_transfer_table():
                         break
 
                 # print last row of df
-                print(df.tail(1))
+                print(df.tail(1), flush=True)
                 time.sleep(1)
                 driver.find_element("xpath", 
                     '//input[@value="Search Another Subject/Level/Term"]').click()
