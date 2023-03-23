@@ -5,17 +5,17 @@ on:
     paths:
       - 'public/data/transfer_table_scrape_test.py'
 jobs:
-  scrape_0:
+  scrape_1:
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - name: Check out this repo
         uses: actions/checkout@v2
-      - id: scrape_0
+      - id: scrape_1
         uses: ./.github/actions/tt_scrape
         with:
-          state-number: 0
+          state-number: 1
       - name: Git Auto Commit
         uses: stefanzweifel/git-auto-commit-action@v4.16.0
 
