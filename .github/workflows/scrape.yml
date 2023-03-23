@@ -1,6 +1,10 @@
 name: scrape
 on:
-  workflow_dispatch:
+  push:
+    paths:
+      - 'public/data/scrape_test.py'
+  schedule:
+    - cron: '0 0 1 * *'
 jobs:
   scrape:
     runs-on: ubuntu-latest
