@@ -23,6 +23,9 @@ jobs:
         run: pip install selenium chromedriver_autoinstaller
       - name: Run the scraping script
         run: python selenium/scrape.py
-      - name: Show changed files after scraping
+      - name: Commit files
         run: |
-          git diff --name-only
+          git config --global user.name 'Dharshan Tharumia'
+          git config --global user.email 'dtharumia@users.noreply.github.com'
+          git commit -am "Automated Scraping"
+          git push
