@@ -56,7 +56,7 @@ def scrape_transfer_table():
 
         # goes through all schools
         for count_school in range(
-                1, 3):
+                1, 2):
             school = driver.find_element("xpath", 
                 '//option[' + str(count_school) + ']')
             transfer_school = school.text
