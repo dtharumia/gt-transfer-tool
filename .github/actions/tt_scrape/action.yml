@@ -9,12 +9,10 @@ runs:
   steps:
     - name: Check out this repo
       uses: actions/checkout@v2
-      shell: bash
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: '3.9'
-      shell: bash
     - name: Installed package list
       run: apt list --installed
       shell: bash
