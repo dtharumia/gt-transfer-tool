@@ -78,7 +78,7 @@ def scrape_transfer_table():
                     f.close()
                     break
                 term_sem = driver.find_element("xpath", 
-                    '//option[@value="202108"]')
+                    '//option[@value="202308"]')
                 term_sem.click()
                 term = term_sem.text
                 driver.find_element("xpath", 
