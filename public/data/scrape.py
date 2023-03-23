@@ -22,7 +22,7 @@ for option in options:
 
 driver = webdriver.Chrome(options=chrome_options)
 
-df = pd.DataFrame(columns=['state_entry', 'term', 'school_name', 'transfer_class',
+df = pd.DataFrame(columns=['transfer_state', 'term', 'transfer_school', 'transfer_class',
                   'transfer_title', 'transfer_level', 'transfer_mingrade', 'gt_class', 'gt_title', 'gt_ch'])
 
 def scrape_transfer_table():
@@ -31,13 +31,13 @@ def scrape_transfer_table():
     # school in US
     driver.find_element("xpath", "//input[@value='Yes']").click()
 
-    state_entry = ""
+    transfer_state = ""
     term = ""
-    school_name = ""
-    t_class = ""
-    t_title = ""
-    t_level = ""
-    t_mingrade = ""
+    transfer_school = ""
+    transfer_class = ""
+    transfer_title = ""
+    transfer_level = ""
+    transfer_mingrade = ""
     gt_class = ""
     gt_title = ""
     gt_ch = ""
@@ -46,7 +46,7 @@ def scrape_transfer_table():
     for count_state in range(
             1, len(driver.find_elements("xpath", '//option')) + 1):
         state = driver.find_element("xpath", '//option[' + str(count_state) + ']')
-        state_entry = state.text
+        transfer_state = state.text
         state.click()
         driver.find_element("xpath", '//input[@value="Get State"]').click()
 
@@ -55,7 +55,7 @@ def scrape_transfer_table():
                 1, len(driver.find_elements("xpath", '//option')) + 1):
             school = driver.find_element("xpath", 
                 '//option[' + str(count_school) + ']')
-            school_name = school.text
+            transfer_school = school.text
 
             school.click()
             driver.find_element("xpath", '//input[@value="Get School"]').click()
@@ -70,7 +70,7 @@ def scrape_transfer_table():
                         '//select[@name="levl_in"]//option[@value="US"]').click()
                 except:
                     f = open("error.txt", "a")
-                    f.write(school_name + '\n')
+                    f.write(transfer_school + '\n')
                     f.close()
                     break
                 term_sem = driver.find_element("xpath", 
@@ -90,16 +90,16 @@ def scrape_transfer_table():
                                 '//table[@class="datadisplaytable"]//tr[' + str(row) + ']//td[9]').text
                             gt_ch = driver.find_element("xpath", 
                                 '//table[@class="datadisplaytable"]//tr[' + str(row) + ']//td[10]').text
-                            t_class = driver.find_element("xpath", 
+                            transfer_class = driver.find_element("xpath", 
                                 '//table[@class="datadisplaytable"]//tr[' + str(row) + ']//td[1]').text
-                            t_title = driver.find_element("xpath", 
+                            transfer_title = driver.find_element("xpath", 
                                 '//table[@class="datadisplaytable"]//tr[' + str(row) + ']//td[2]').text
-                            t_level = driver.find_element("xpath", 
+                            transfer_level = driver.find_element("xpath", 
                                 '//table[@class="datadisplaytable"]//tr[' + str(row) + ']//td[3]').text
-                            t_mingrade = driver.find_element("xpath", 
+                            transfer_mingrade = driver.find_element("xpath", 
                                 '//table[@class="datadisplaytable"]//tr[' + str(row) + ']//td[5]').text
-                            df.loc[(len(df.index))] = [state_entry, term, school_name,
-                                                    t_class, t_title, t_level, t_mingrade, gt_class, gt_title, gt_ch]
+                            df.loc[(len(df.index))] = [transfer_state, term, transfer_school,
+                                                    transfer_class, transfer_title, transfer_level, transfer_mingrade, gt_class, gt_title, gt_ch]
                         except:
                             gt_class = driver.find_element("xpath", 
                                 '//table[@class="datadisplaytable"]//tr[' + str(row) + ']//td[2]').text
@@ -107,8 +107,8 @@ def scrape_transfer_table():
                                 '//table[@class="datadisplaytable"]//tr[' + str(row) + ']//td[3]').text
                             gt_ch = driver.find_element("xpath", 
                                 '//table[@class="datadisplaytable"]//tr[' + str(row) + ']//td[4]').text
-                            df.loc[(len(df.index))] = [state_entry, term, school_name,
-                                                    t_class, t_title, t_level, t_mingrade, gt_class, gt_title, gt_ch]
+                            df.loc[(len(df.index))] = [transfer_state, term, transfer_school,
+                                                    transfer_class, transfer_title, transfer_level, transfer_mingrade, gt_class, gt_title, gt_ch]
                     else:
                         break
 
@@ -132,7 +132,7 @@ def scrape_transfer_table():
 
 def format_search_fields():
     # get unique_states and include transfer_state as type
-    unique_states = df['state_entry'].unique()
+    unique_states = df['transfer_state'].unique()
     df_states = pd.DataFrame(unique_states, columns=['primary'])
     df_states['secondary'] = ""
     df_states['type'] = "transfer_state"
@@ -144,14 +144,14 @@ def format_search_fields():
     df_gt_class['type'] = "gt_class"
 
     # get unique_schools and include transfer_school as type
-    unique_schools = df['school_name'].unique()
+    unique_schools = df['transfer_school'].unique()
     df_schools = pd.DataFrame(unique_schools, columns=['primary'])
     df_schools['secondary'] = ""
     df_schools['type'] = "transfer_school"
 
     # find corresponding state for each school
     for index, row in df_schools.iterrows():
-        df_schools.at[index, 'secondary'] = df.loc[df['school_name'] == row['primary'], 'state_entry'].iloc[0]
+        df_schools.at[index, 'secondary'] = df.loc[df['transfer_school'] == row['primary'], 'transfer_state'].iloc[0]
     
     # group into one df with id, primary, secondary, and type
     df_search = pd.concat([df_states, df_gt_class, df_schools], ignore_index=True)
