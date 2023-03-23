@@ -29,4 +29,10 @@ runs:
     - name: Run scraping
       run: python public/data/transfer_table_scrape_test.py ${{ inputs.state-number }}
       shell: bash
-      
+    - name: Ensure repo is updated
+      run: |
+        git stash
+        git pull
+      shell: bash
+    - name: Git Auto Commit
+      uses: stefanzweifel/git-auto-commit-action@v4.16.0
