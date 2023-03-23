@@ -63,13 +63,17 @@ const SchoolPage = () => {
   };
 
   return (
+    courses.found > 0 ? (
     <Table
       onClickNext={onClickNext}
       onClickPrev={onClickPrev}
       page={page}
       courses={courses}
       heading={schoolName}
-    ></Table>
+      subHeading={ "state"}
+      ></Table>
+    ) : <></>
+
   );
 };
 

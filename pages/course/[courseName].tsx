@@ -62,13 +62,16 @@ const CoursePage = () => {
   };
 
   return (
+    courses.found > 0 ? (
     <Table
       onClickNext={onClickNext}
       onClickPrev={onClickPrev}
       page={page}
       courses={courses}
       heading={courseName}
-    ></Table>
+      subHeading={"gt_title"}
+      ></Table>
+    ) : <></>
   );
 };
 
