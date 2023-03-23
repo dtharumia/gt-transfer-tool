@@ -1,0 +1,140 @@
+name: scrape-test
+on:
+  push:
+    paths:
+      - 'public/data/transfer_table_scrape.py'
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Installed package list
+        run: apt list --installed
+      - name: Remove Chrome
+        run: sudo apt purge google-chrome-stable
+      - name: Remove default Chromium
+        run: sudo apt purge chromium-browser
+      - name: Install a new Chromium
+        run: sudo apt install -y chromium-browser
+      - name: Install all necessary packages
+        run: pip install selenium chromedriver_autoinstaller pandas
+      - name: Run scraping on Alabama
+        run: python public/data/transfer_table_scrape_test.py 1
+      - name: Run scraping on Alaska
+        run: python public/data/transfer_table_scrape_test.py 2
+      - name: Run scraping on Arizona
+        run: python public/data/transfer_table_scrape_test.py 3
+      - name: Run scraping on Arkansas
+        run: python public/data/transfer_table_scrape_test.py 4
+      - name: Run scraping on California
+        run: python public/data/transfer_table_scrape_test.py 5
+      - name: Run scraping on Colorado
+        run: python public/data/transfer_table_scrape_test.py 6
+      - name: Run scraping on Connecticut
+        run: python public/data/transfer_table_scrape_test.py 7
+      - name: Run scraping on Delaware
+        run: python public/data/transfer_table_scrape_test.py 9
+      - name: Run scraping on District of Columbia
+        run: python public/data/transfer_table_scrape_test.py 10
+      - name: Run scraping on Florida
+        run: python public/data/transfer_table_scrape_test.py 11
+      - name: Run scraping on Georgia
+        run: python public/data/transfer_table_scrape_test.py 12
+      - name: Run scraping on Guam
+        run: python public/data/transfer_table_scrape_test.py 13
+      - name: Run scraping on Hawaii
+        run: python public/data/transfer_table_scrape_test.py 14
+      - name: Run scraping on Idaho
+        run: python public/data/transfer_table_scrape_test.py 15
+      - name: Run scraping on Illinois
+        run: python public/data/transfer_table_scrape_test.py 16
+      - name: Run scraping on Indiana
+        run: python public/data/transfer_table_scrape_test.py 17
+      - name: Run scraping on Iowa
+        run: python public/data/transfer_table_scrape_test.py 18
+      - name: Run scraping on Kansas
+        run: python public/data/transfer_table_scrape_test.py 19
+      - name: Run scraping on Kentucky
+        run: python public/data/transfer_table_scrape_test.py 20
+      - name: Run scraping on Louisiana
+        run: python public/data/transfer_table_scrape_test.py 21
+      - name: Run scraping on Maine
+        run: python public/data/transfer_table_scrape_test.py 22
+      - name: Run scraping on Maryland
+        run: python public/data/transfer_table_scrape_test.py 23
+      - name: Run scraping on Massachusetts
+        run: python public/data/transfer_table_scrape_test.py 24
+      - name: Run scraping on Michigan
+        run: python public/data/transfer_table_scrape_test.py 25
+      - name: Run scraping on Minnesota
+        run: python public/data/transfer_table_scrape_test.py 26
+      - name: Run scraping on Mississippi
+        run: python public/data/transfer_table_scrape_test.py 27
+      - name: Run scraping on Missouri
+        run: python public/data/transfer_table_scrape_test.py 28
+      - name: Run scraping on Montana
+        run: python public/data/transfer_table_scrape_test.py 29
+      - name: Run scraping on Nebraska
+        run: python public/data/transfer_table_scrape_test.py 30
+      - name: Run scraping on Nevada
+        run: python public/data/transfer_table_scrape_test.py 31
+      - name: Run scraping on New Hampshire
+        run: python public/data/transfer_table_scrape_test.py 32
+      - name: Run scraping on New Jersey
+        run: python public/data/transfer_table_scrape_test.py 33
+      - name: Run scraping on New Mexico
+        run: python public/data/transfer_table_scrape_test.py 34
+      - name: Run scraping on New York
+        run: python public/data/transfer_table_scrape_test.py 35
+      - name: Run scraping on North Carolina
+        run: python public/data/transfer_table_scrape_test.py 36
+      - name: Run scraping on North Dakota
+        run: python public/data/transfer_table_scrape_test.py 37
+      - name: Run scraping on Ohio
+        run: python public/data/transfer_table_scrape_test.py 38
+      - name: Run scraping on Oklahoma
+        run: python public/data/transfer_table_scrape_test.py 39
+      - name: Run scraping on Oregon
+        run: python public/data/transfer_table_scrape_test.py 40
+      - name: Run scraping on Pennsylvania
+        run: python public/data/transfer_table_scrape_test.py 41
+      - name: Run scraping on Puerto Rico
+        run: python public/data/transfer_table_scrape_test.py 42
+      - name: Run scraping on Rhode Island
+        run: python public/data/transfer_table_scrape_test.py 43
+      - name: Run scraping on South Carolina
+        run: python public/data/transfer_table_scrape_test.py 44
+      - name: Run scraping on South Dakota
+        run: python public/data/transfer_table_scrape_test.py 45
+      - name: Run scraping on Tennessee
+        run: python public/data/transfer_table_scrape_test.py 46
+      - name: Run scraping on Texas
+        run: python public/data/transfer_table_scrape_test.py 47
+      - name: Run scraping on Utah
+        run: python public/data/transfer_table_scrape_test.py 48
+      - name: Run scraping on Vermont
+        run: python public/data/transfer_table_scrape_test.py 49
+      - name: Run scraping on Virgin Islands, U.S.
+        run: python public/data/transfer_table_scrape_test.py 50
+      - name: Run scraping on Virginia
+        run: python public/data/transfer_table_scrape_test.py 51
+      - name: Run scraping on Washington
+        run: python public/data/transfer_table_scrape_test.py 52
+      - name: Run scraping on West Virginia
+        run: python public/data/transfer_table_scrape_test.py 53
+      - name: Run scraping on Wisconsin
+        run: python public/data/transfer_table_scrape_test.py 54
+      - name: Combine state outputs
+        run: python public/data/combine_state_output.py all_data_test
+      - name: Format into search json
+        run: python public/data/format_search_fields.py all_data_test
+      - name: Git Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v4.16.0
+
