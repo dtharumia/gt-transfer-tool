@@ -9,20 +9,28 @@ runs:
   steps:
     - name: Check out this repo
       uses: actions/checkout@v2
+      shell: bash
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: '3.9'
+      shell: bash
     - name: Installed package list
       run: apt list --installed
+      shell: bash
     - name: Remove Chrome
       run: sudo apt purge google-chrome-stable
+      shell: bash
     - name: Remove default Chromium
       run: sudo apt purge chromium-browser
+      shell: bash
     - name: Install a new Chromium
       run: sudo apt install -y chromium-browser
+      shell: bash
     - name: Install all necessary packages
       run: pip install selenium chromedriver_autoinstaller pandas
+      shell: bash
     - name: Run scraping
       run: python public/data/transfer_table_scrape.py ${{ inputs.state-number }}
+      shell: bash
       
