@@ -22,9 +22,9 @@ jobs:
       - name: Install a new Chromium
         run: sudo apt install -y chromium-browser
       - name: Install all necessary packages
-        run: pip install selenium chromedriver_autoinstaller
+        run: pip install selenium chromedriver_autoinstaller pandas
       - name: Run the scraping script
-        run: python selenium/scrape.py
+        run: python public/data/scrape_test.py
       - name: Git Auto Commit
         uses: stefanzweifel/git-auto-commit-action@v4.16.0
 
