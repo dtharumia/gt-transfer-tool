@@ -25,7 +25,7 @@ driver = webdriver.Chrome(options=chrome_options)
 df = pd.DataFrame(columns=['transfer_state', 'term', 'transfer_school', 'transfer_class',
                   'transfer_title', 'transfer_level', 'transfer_mingrade', 'gt_class', 'gt_title', 'gt_ch'])
 
-# get first command line argument
+# get selected state from first command line argument
 selected_state_number = int(sys.argv[1])
 
 def scrape_transfer_table():
