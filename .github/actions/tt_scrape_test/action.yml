@@ -30,11 +30,11 @@ runs:
       run: python public/data/transfer_table_scrape_test.py ${{ inputs.state-number }}
       shell: bash
     - name: check for output
-      run: ls -l public/data/all_data_test
+      run: ls -l public/data/output/all_data_test
       shell: bash
     - name: Upload artifact
       uses: actions/upload-artifact@v3.1.2
       with:
         name: ${{ inputs.state-number }}_test
-        path: 'public/data/all_data_test/${{ inputs.state-number }}_test.json'
+        path: 'public/data/output/all_data_test/${{ inputs.state-number }}_test.json'
 
