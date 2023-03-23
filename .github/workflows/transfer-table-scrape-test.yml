@@ -23,7 +23,7 @@ jobs:
       - name: Set directory
         run: cd ${{ github.workspace }}
       - name: Print ls of github.workspace
-        run: ls -a
+        run: cd && ls -a
       # - id: scrape_1
       #   uses: ./.github/actions/tt_scrape_test
       #   with:
