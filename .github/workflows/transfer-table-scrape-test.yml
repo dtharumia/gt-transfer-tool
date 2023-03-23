@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    needs: setup
     steps:
       - name: Check out this repo
         uses: actions/checkout@v2
