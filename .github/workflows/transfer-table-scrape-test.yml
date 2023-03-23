@@ -19,11 +19,16 @@ jobs:
       contents: write
     needs: setup
     steps:
-      - id: scrape_1
-        uses: ./.github/actions/tt_scrape_test
-        with:
-          state-number: 1
-          directory: ${{ github.workspace }}
+      # set directory to github.workspace
+      - name: Set directory
+        run: echo "directory=${{ github.workspace }}" >> $GITHUB_ENV
+      - name: Print directory
+        run: echo ${{ env.directory }}
+      # - id: scrape_1
+      #   uses: ./.github/actions/tt_scrape_test
+      #   with:
+      #     state-number: 1
+      #     directory: ${{ github.workspace }}
   # scrape_2:
   #   runs-on: ubuntu-latest
   #   permissions:
