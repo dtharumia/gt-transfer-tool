@@ -1,10 +1,10 @@
-name: Create JSON data for full
+name: JSON Formatter for Full Scrape
 
 # Only trigger, when the build workflow succeeded
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["transfer-table-scrape"]
+    workflows: ["Transfer Table Full Scrape Workflow"]
     types:
       - completed
 
@@ -26,4 +26,5 @@ jobs:
         run: python public/data/combine_state_output.py all_data
       - name: Create formatted search fields
         run: python public/data/format_search_fields.py all_data
-      
+      - name: Git Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v4.16.0

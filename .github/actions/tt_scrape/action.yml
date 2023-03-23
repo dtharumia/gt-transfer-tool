@@ -1,4 +1,4 @@
-name: 'Transfer Table Scrape'
+name: 'Transfer Table Scrape Action'
 description: 'Composite action to perform scraping for a particular state with full data'
 inputs:
   state-number: 
