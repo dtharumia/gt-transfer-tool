@@ -3,15 +3,23 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'public/data/transfer_table_scrape_test.py'
+      - "public/data/transfer_table_scrape_test.py"
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: setup
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v2
+
   scrape_1:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_1
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -20,9 +28,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_2
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -31,9 +38,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_3
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -42,9 +48,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_4
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -53,9 +58,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_5
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -64,9 +68,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_6
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -75,9 +78,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_7
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -86,9 +88,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_8
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -97,9 +98,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_9
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -108,31 +108,30 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_10
         uses: ./.github/actions/tt_scrape_test
         with:
           state-number: 10
   scrape_11:
-      runs-on: ubuntu-latest
-      permissions:
-        contents: write
-      steps:
-        - name: Check out this repo
-          uses: actions/checkout@v2   
-        - id: scrape_11
-          uses: ./.github/actions/tt_scrape_test
-          with:
-            state-number: 11
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: setup
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v2
+      - id: scrape_11
+        uses: ./.github/actions/tt_scrape_test
+        with:
+          state-number: 11
   scrape_12:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_12
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -141,9 +140,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_13
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -152,9 +150,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_14
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -163,9 +160,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_15
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -174,9 +170,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_16
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -185,9 +180,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_17
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -196,9 +190,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_18
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -207,9 +200,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_19
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -218,9 +210,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_20
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -229,9 +220,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_21
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -240,9 +230,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_22
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -251,9 +240,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_23
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -262,9 +250,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_4
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -273,9 +260,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_5
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -284,9 +270,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_6
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -295,9 +280,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_7
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -306,9 +290,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_8
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -317,9 +300,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_9
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -328,9 +310,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_30
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -339,9 +320,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_31
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -350,9 +330,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_32
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -361,9 +340,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_33
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -372,9 +350,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_34
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -383,9 +360,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_35
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -394,9 +370,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_36
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -405,9 +380,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_7
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -416,9 +390,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_38
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -427,9 +400,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_39
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -438,9 +410,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_40
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -449,9 +420,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_41
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -460,9 +430,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_42
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -471,9 +440,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_43
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -482,9 +450,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_44
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -493,9 +460,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_5
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -504,9 +470,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_46
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -515,9 +480,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_7
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -526,9 +490,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_48
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -537,9 +500,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_49
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -548,9 +510,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_50
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -559,9 +520,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_51
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -570,9 +530,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_52
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -581,9 +540,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_53
         uses: ./.github/actions/tt_scrape_test
         with:
@@ -592,11 +550,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: setup
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2   
       - id: scrape_54
         uses: ./.github/actions/tt_scrape_test
         with:
           state-number: 54
-  
