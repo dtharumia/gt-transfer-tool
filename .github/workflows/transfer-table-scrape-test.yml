@@ -669,5 +669,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           path: ./public/data/output/all_data_test
+      - name: Git Pull
+        run: git pull
       - name: Git Auto Commit
         uses: stefanzweifel/git-auto-commit-action@v4.16.0
