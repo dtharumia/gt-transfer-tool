@@ -1,8 +1,6 @@
 import { InstantSearch } from "react-instantsearch-dom";
 import SearchBox from "../search/searchBox";
-import {
-  searchClient,
-} from "@/typesense/typesenseSearchConfig";
+import { searchClient } from "@/typesense/typesenseSearchConfig";
 
 import SearchHits from "../search/searchHits";
 
