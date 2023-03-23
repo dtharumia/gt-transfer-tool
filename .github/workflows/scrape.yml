@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'public/data/scrape_test.py'
+      - 'public/data/scrape.py'
   schedule:
     - cron: '0 0 1 * *'
 jobs:
