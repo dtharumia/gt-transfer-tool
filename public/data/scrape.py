@@ -113,7 +113,7 @@ def scrape_transfer_table():
                         break
 
                 # print last row of df
-                print(df.tail(1))
+                print(df.tail(1), flush=True)
                 time.sleep(1)
                 driver.find_element("xpath", 
                     '//input[@value="Search Another Subject/Level/Term"]').click()
@@ -129,7 +129,29 @@ def scrape_transfer_table():
 
     df.to_json(os.path.join(sys.path[0], 'all_data.json'), orient='records')
 
+def format_search_fields():
+    unique_states = df['state_entry'].unique()
+    df_states = pd.DataFrame(unique_states, columns=['primary'])
+    df_states['secondary'] = ""
+    df_states['type'] = "transfer_state"
+    unique_gt_class = df['gt_class'].unique()
+    df_gt_class = pd.DataFrame(unique_gt_class, columns=['primary'])
+    df_gt_class['secondary'] = ""
+    df_gt_class['type'] = "gt_class"
+    unique_schools = df['school_name'].unique()
+    df_schools = pd.DataFrame(unique_schools, columns=['primary'])
+    df_schools['secondary'] = ""
+    df_schools['type'] = "transfer_school"
+    for index, row in df_schools.iterrows():
+        df_schools.at[index, 'secondary'] = df.loc[df['school_name'] == row['primary'], 'state_entry'].iloc[0]
+    
+    df_search = pd.concat([df_states, df_gt_class, df_schools], ignore_index=True)
+    df_search.insert(0, 'id', range(0, 0 + len(df_search)))
+    df_search['id'] = df_search['id'].astype(str)
+    df_search.to_json(os.path.join(sys.path[0], 'search_fields.json'), orient='records')
+
 if __name__ == '__main__':
     scrape_transfer_table()
+    format_search_fields()
 
 
