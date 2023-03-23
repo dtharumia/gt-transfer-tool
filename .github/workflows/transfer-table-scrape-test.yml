@@ -663,6 +663,8 @@ jobs:
     steps:
       - name: Check out this repo
         uses: actions/checkout@v2
+      - name: Remove existing all_data_test directory
+        run: rm -rf ./public/data/output/all_data_test
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:

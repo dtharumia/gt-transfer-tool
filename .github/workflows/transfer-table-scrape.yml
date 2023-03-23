@@ -663,9 +663,11 @@ jobs:
     steps:
       - name: Check out this repo
         uses: actions/checkout@v2
+      - name: Remove existing all_data directory
+        run: rm -rf ./public/data/output/all_data
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          path: ./public/data/output/all_data_test
+          path: ./public/data/output/all_data
       - name: Git Auto Commit
         uses: stefanzweifel/git-auto-commit-action@v4.16.0

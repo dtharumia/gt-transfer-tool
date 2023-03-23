@@ -26,7 +26,10 @@ def combine_json():
     df.drop('id', axis=1, inplace=True)
     df.insert(0, 'id', range(0, 0 + len(df)))
 
-    # # save combined df as json
+    df['id'] = df['id'].astype(str)
+    df['gt_ch'] = df['gt_ch'].astype(str)
+
+    # save combined df as json
     df.to_json(os.path.join(sys.path[0], f'output/{folder_path}/{folder_path}_combined.json'), orient='records')
 
 if __name__ == '__main__':
