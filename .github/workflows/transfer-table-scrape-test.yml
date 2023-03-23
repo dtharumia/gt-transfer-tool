@@ -1,4 +1,4 @@
-name: transfer_table_scrape-test
+name: transfer-table-scrape-test
 on:
   workflow_dispatch:
   push:
