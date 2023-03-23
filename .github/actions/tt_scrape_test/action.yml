@@ -30,5 +30,8 @@ runs:
       run: python public/data/transfer_table_scrape_test.py ${{ inputs.state-number }}
       shell: bash
     - name: Ensure repo is updated
-      run: git add . && git status && git stash && git pull && git stash pop && git commit -m "Automatic changes" && git push
+      run: git add . && git status && git stash && git pull && git stash pop && git status
       shell: bash
+    - name: Git Auto Commit
+      uses: stefanzweifel/git-auto-commit-action@v4.16.0
+
