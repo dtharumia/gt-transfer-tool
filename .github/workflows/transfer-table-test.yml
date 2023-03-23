@@ -39,6 +39,8 @@ jobs:
         run: python public/data/transfer_table_scrape_test.py 6
       - name: Run scraping on Connecticut
         run: python public/data/transfer_table_scrape_test.py 7
+      - name: Run scraping on Connecticut
+        run: python public/data/transfer_table_scrape_test.py 8
       - name: Run scraping on Delaware
         run: python public/data/transfer_table_scrape_test.py 9
       - name: Run scraping on District of Columbia
