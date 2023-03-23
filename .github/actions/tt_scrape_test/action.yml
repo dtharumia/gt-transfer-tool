@@ -29,6 +29,6 @@ runs:
       run: pip install selenium chromedriver_autoinstaller pandas
       shell: bash
     - name: Run scraping
-      run: python public/data/transfer_table_scrape.py ${{ inputs.state-number }}
+      run: python public/data/transfer_table_scrape_test.py ${{ inputs.state-number }}
       shell: bash
       

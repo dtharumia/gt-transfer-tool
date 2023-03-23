@@ -10,10 +10,8 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2
       - id: scrape_1
-        uses: ./.github/actions/tt_scrape
+        uses: ./.github/actions/tt_scrape_test
         with:
           state-number: 1
       - name: Git Auto Commit
