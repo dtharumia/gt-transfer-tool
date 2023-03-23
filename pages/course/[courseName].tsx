@@ -38,7 +38,22 @@ const CoursePage = () => {
   const router = useRouter();
   const { courseName } = router.query;
   const [page, setPage] = useState(1);
-  const [courses, setCourses] = useState({});
+  const [courses, setCourses] = useState<Course>({
+    found: 0,
+    hits: [
+      {
+        objectID: "",
+        document: {
+          gt_class: "",
+          gt_title: "",
+          state: "",
+          transfer_school: "",
+          transfer_class: "",
+          transfer_title: "",
+        },
+      },
+    ],
+  });
   useEffect(() => {
     if (!courseName) {
       return;
@@ -50,7 +65,7 @@ const CoursePage = () => {
       page,
       "state:asc"
     ).then((res) => {
-      setCourses(res);
+      setCourses(res as any);
     });
   }, [courseName, page]);
 
