@@ -115,6 +115,7 @@ def scrape_transfer_table():
                 # print last row of df
                 print(df.tail(1), flush=True)
                 time.sleep(1)
+
                 driver.find_element("xpath", 
                     '//input[@value="Search Another Subject/Level/Term"]').click()
             driver.find_element("xpath", 
@@ -130,21 +131,29 @@ def scrape_transfer_table():
     df.to_json(os.path.join(sys.path[0], 'all_data.json'), orient='records')
 
 def format_search_fields():
+    # get unique_states and include transfer_state as type
     unique_states = df['state_entry'].unique()
     df_states = pd.DataFrame(unique_states, columns=['primary'])
     df_states['secondary'] = ""
     df_states['type'] = "transfer_state"
+
+    # get unique_gt_class and include gt_class as type
     unique_gt_class = df['gt_class'].unique()
     df_gt_class = pd.DataFrame(unique_gt_class, columns=['primary'])
     df_gt_class['secondary'] = ""
     df_gt_class['type'] = "gt_class"
+
+    # get unique_schools and include transfer_school as type
     unique_schools = df['school_name'].unique()
     df_schools = pd.DataFrame(unique_schools, columns=['primary'])
     df_schools['secondary'] = ""
     df_schools['type'] = "transfer_school"
+
+    # find corresponding state for each school
     for index, row in df_schools.iterrows():
         df_schools.at[index, 'secondary'] = df.loc[df['school_name'] == row['primary'], 'state_entry'].iloc[0]
     
+    # group into one df with id, primary, secondary, and type
     df_search = pd.concat([df_states, df_gt_class, df_schools], ignore_index=True)
     df_search.insert(0, 'id', range(0, 0 + len(df_search)))
     df_search['id'] = df_search['id'].astype(str)
