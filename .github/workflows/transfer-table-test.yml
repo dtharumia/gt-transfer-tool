@@ -18,4 +18,121 @@ jobs:
           state-number: 1
       - name: Git Auto Commit
         uses: stefanzweifel/git-auto-commit-action@v4.16.0
-
+  scrape_2:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v2   
+      - id: scrape_2
+        uses: ./.github/actions/tt_scrape_test
+        with:
+          state-number: 2
+      - name: Git Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v4.16.0
+  scrape_3:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v2   
+      - id: scrape_3
+        uses: ./.github/actions/tt_scrape_test
+        with:
+          state-number: 3
+      - name: Git Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v4.16.0
+  scrape_4:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v2   
+      - id: scrape_4
+        uses: ./.github/actions/tt_scrape_test
+        with:
+          state-number: 4
+      - name: Git Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v4.16.0
+  scrape_5:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v2   
+      - id: scrape_5
+        uses: ./.github/actions/tt_scrape_test
+        with:
+          state-number: 5
+      - name: Git Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v4.16.0
+  scrape_6:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v2   
+      - id: scrape_6
+        uses: ./.github/actions/tt_scrape_test
+        with:
+          state-number: 6
+      - name: Git Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v4.16.0
+  scrape_7:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v2   
+      - id: scrape_7
+        uses: ./.github/actions/tt_scrape_test
+        with:
+          state-number: 7
+      - name: Git Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v4.16.0
+  scrape_8:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v2   
+      - id: scrape_8
+        uses: ./.github/actions/tt_scrape_test
+        with:
+          state-number: 8
+      - name: Git Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v4.16.0
+  scrape_9:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v2   
+      - id: scrape_9
+        uses: ./.github/actions/tt_scrape_test
+        with:
+          state-number: 9
+      - name: Git Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v4.16.0
+  scrape_10:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v2   
+      - id: scrape_10
+        uses: ./.github/actions/tt_scrape_test
+        with:
+          state-number: 10
+      - name: Git Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v4.16.0
+  
