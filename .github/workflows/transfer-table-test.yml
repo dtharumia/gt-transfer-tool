@@ -12,7 +12,7 @@ jobs:
       - name: Check out this repo
         uses: actions/checkout@v2
       - id: scrape_0
-        uses: actions/tt_scrape
+        uses: ./.github/actions/tt_scrape
         with:
           state-number: 0
       - name: Git Auto Commit
