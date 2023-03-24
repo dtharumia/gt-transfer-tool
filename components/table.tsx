@@ -13,6 +13,7 @@ import {
   Td,
   Text,
   Table as ChakraTable,
+  Center,
 } from "@chakra-ui/react";
 import Navbar from "./navbar";
 
@@ -52,62 +53,72 @@ const Table = ({
             </Button>
           </ButtonGroup>
         </HStack>
-        <TableContainer>
-          <ChakraTable variant="striped" layout="fixed">
-            <Thead>
-              <Tr>
-                {subHeading === "gt_title" ? (
-                  <>
-                    <Th width="10%" textAlign={"center"}>
-                      Transfer State
-                    </Th>
-                    <Th width="23%" textAlign={"center"}>
-                      Transfer School
-                    </Th>
-                  </>
-                ) : (
-                  <>
-                    <Th width="10%" textAlign={"center"}>
-                      GT Class
-                    </Th>
-                    <Th width="23%" textAlign={"center"}>
-                      GT Title
-                    </Th>
-                  </>
-                )}
-                <Th width="10%" textAlign={"center"}>
-                  Transfer Class
-                </Th>
-                <Th width="23%" textAlign={"center"}>
-                  Transfer Title
-                </Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {Object.keys(courses).length > 0 &&
-                courses.hits.map((hit) => {
-                  const doc = hit.document;
-                  return (
-                    <Tr key={hit.objectID}>
-                      {subHeading === "gt_title" ? (
-                        <>
-                          <Td textAlign={"center"}>{doc.transfer_state}</Td>
-                          <Td textAlign={"center"}>{doc.transfer_school}</Td>
-                        </>
-                      ) : (
-                        <>
-                          <Td textAlign={"center"}>{doc.gt_class}</Td>
-                          <Td textAlign={"center"}>{doc.gt_title}</Td>
-                        </>
-                      )}
-                      <Td textAlign={"center"}>{doc.transfer_class}</Td>
-                      <Td textAlign={"center"}>{doc.transfer_title}</Td>
-                    </Tr>
-                  );
-                })}
-            </Tbody>
-          </ChakraTable>
-        </TableContainer>
+        <Center>
+          <TableContainer>
+            <ChakraTable variant="striped" layout="fixed" maxW={"6xl"}>
+              <Thead>
+                <Tr>
+                  {subHeading === "gt_title" ? (
+                    <>
+                      <Th width="10%" textAlign={"center"}>
+                        Transfer State
+                      </Th>
+                      <Th width="40%" textAlign={"center"}>
+                        Transfer School
+                      </Th>
+                      <Th width="10%" textAlign={"center"}>
+                        Transfer Class
+                      </Th>
+                      <Th width="40%" textAlign={"center"}>
+                        Transfer Title
+                      </Th>
+                    </>
+                  ) : (
+                    <>
+                      <Th width="10%" textAlign={"center"}>
+                        Transfer Class
+                      </Th>
+                      <Th width="23%" textAlign={"center"}>
+                        Transfer Title
+                      </Th>
+                      <Th width="10%" textAlign={"center"}>
+                        GT Class
+                      </Th>
+                      <Th width="23%" textAlign={"center"}>
+                        GT Title
+                      </Th>
+                    </>
+                  )}
+                </Tr>
+              </Thead>
+              <Tbody>
+                {Object.keys(courses).length > 0 &&
+                  courses.hits.map((hit) => {
+                    const doc = hit.document;
+                    return (
+                      <Tr key={hit.objectID}>
+                        {subHeading === "gt_title" ? (
+                          <>
+                            <Td textAlign={"center"}>{doc.transfer_state}</Td>
+                            <Td textAlign={"center"}>{doc.transfer_school}</Td>
+                            <Td textAlign={"center"}>{doc.transfer_class}</Td>
+                            <Td textAlign={"center"}>{doc.transfer_title}</Td>
+                          </>
+                        ) : (
+                          <>
+                            <Td textAlign={"center"}>{doc.transfer_class}</Td>
+                            <Td textAlign={"center"}>{doc.transfer_title}</Td>
+                            <Td textAlign={"center"}>{doc.gt_class}</Td>
+                            <Td textAlign={"center"}>{doc.gt_title}</Td>
+                          </>
+                        )}
+                      </Tr>
+                    );
+                  })}
+              </Tbody>
+            </ChakraTable>
+          </TableContainer>
+        </Center>
       </Box>
     </Box>
   );

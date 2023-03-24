@@ -11,8 +11,8 @@ const Navbar = () => {
       alignItems="center"
     >
       <Flex flexDirection="row" justifyContent="center" alignItems="center">
-        <Link href="/" color={"white"}>
-          <Text>GT Transfer Tool</Text>
+        <Link href="/" color={"white"} fontWeight='bold' fontSize={'2xl'} >
+          GT Transfer Tool
         </Link>
       </Flex>
       <Box>

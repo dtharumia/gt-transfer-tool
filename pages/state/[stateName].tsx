@@ -9,6 +9,7 @@ import {
   SimpleGrid,
   VStack,
   Link,
+  Center,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
@@ -88,23 +89,25 @@ const StatePage = () => {
             </Button>
           </ButtonGroup>
         </HStack>
-        <SimpleGrid columns={4} spacing={5}>
-          {schools.found > 0 &&
-            schools.hits.map((hit) => {
-              const doc = hit.document;
-              return (
-                <Box
-                  key={hit.objectID}
-                  padding={"2vh"}
-                  borderWidth="1px"
-                  borderRadius="lg"
-                  overflow="hidden"
-                >
-                  <Link href={`/school/${doc.primary}`}>{doc.primary}</Link>
-                </Box>
-              );
-            })}
-        </SimpleGrid>
+        <Center>
+          <SimpleGrid columns={4} spacing={5}>
+            {schools.found > 0 &&
+              schools.hits.map((hit) => {
+                const doc = hit.document;
+                return (
+                  <Box
+                    key={hit.objectID}
+                    padding={"2vh"}
+                    borderWidth="1px"
+                    borderRadius="lg"
+                    overflow="hidden"
+                  >
+                    <Link href={`/school/${doc.primary}`}>{doc.primary}</Link>
+                  </Box>
+                );
+              })}
+          </SimpleGrid>
+        </Center>
       </Box>
     </Box>
   );
