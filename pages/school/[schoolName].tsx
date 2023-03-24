@@ -11,7 +11,7 @@ type Course = {
     document: {
       gt_class: string;
       gt_title: string;
-      state: string;
+      transfer_state: string;
       transfer_school: string;
       transfer_class: string;
       transfer_title: string;
@@ -31,7 +31,7 @@ const SchoolPage = () => {
         document: {
           gt_class: "",
           gt_title: "",
-          state: "",
+          transfer_state: "",
           transfer_school: "",
           transfer_class: "",
           transfer_title: "",
@@ -62,18 +62,17 @@ const SchoolPage = () => {
     setPage(page + 1);
   };
 
-  return (
-    courses.found > 0 ? (
+  return courses.found > 0 ? (
     <Table
       onClickNext={onClickNext}
       onClickPrev={onClickPrev}
       page={page}
       courses={courses}
       heading={schoolName}
-      subHeading={ "state"}
-      ></Table>
-    ) : <></>
-
+      subHeading={"transfer_state"}
+    ></Table>
+  ) : (
+    <></>
   );
 };
 

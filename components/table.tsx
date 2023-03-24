@@ -91,7 +91,7 @@ const Table = ({
                     <Tr key={hit.objectID}>
                       {subHeading === "gt_title" ? (
                         <>
-                          <Td textAlign={"center"}>{doc.state}</Td>
+                          <Td textAlign={"center"}>{doc.transfer_state}</Td>
                           <Td textAlign={"center"}>{doc.transfer_school}</Td>
                         </>
                       ) : (

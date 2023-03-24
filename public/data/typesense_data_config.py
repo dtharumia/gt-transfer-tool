@@ -102,7 +102,7 @@ def transfers(collection, test):
                     "name": "transfer_school",
                     "type": "string",
                 },
-                {"index": True, "name": "transfer_state", "type": "string"},
+                {"index": True, "sort": True, "name": "transfer_state", "type": "string"},
                 {
                     "facet": True,
                     "index": True,

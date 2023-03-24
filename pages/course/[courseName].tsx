@@ -26,7 +26,7 @@ type Course = {
     document: {
       gt_class: string;
       gt_title: string;
-      state: string;
+      transfer_state: string;
       transfer_school: string;
       transfer_class: string;
       transfer_title: string;
@@ -46,7 +46,7 @@ const CoursePage = () => {
         document: {
           gt_class: "",
           gt_title: "",
-          state: "",
+          transfer_state: "",
           transfer_school: "",
           transfer_class: "",
           transfer_title: "",
@@ -63,7 +63,7 @@ const CoursePage = () => {
       courseName,
       "gt_class",
       page,
-      "state:asc"
+      "transfer_state:asc"
     ).then((res) => {
       setCourses(res as any);
     });
