@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - "public/data/transfer_table_scrape.py"
+  schedule:
+    - cron: '0 0 1 * *'
 jobs:
   scrape_1:
     runs-on: ubuntu-latest
