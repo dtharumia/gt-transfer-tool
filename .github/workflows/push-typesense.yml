@@ -1,0 +1,29 @@
+name: Push to Typesense
+
+# Only trigger, when the build workflow succeeded
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["JSON Formatter for Full Scrape"]
+    types:
+      - completed
+
+jobs:
+  format:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Install all necessary packages
+        run: pip install typesense pandas selenium python-dotenv
+      - name: Push searches to Typesense
+        run: python public/data/typesense_data_config.py searches searches 0
+      - name: Push searches to Typesense
+        run: python public/data/typesense_data_config.py transfers transfers 0

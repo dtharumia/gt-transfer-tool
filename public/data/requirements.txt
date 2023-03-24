@@ -1,0 +1,4 @@
+typesense
+pandas
+selenium
+python-dotenv
