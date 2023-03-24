@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-export default async function (req, res) {
+export default async function handler(req, res) {
   try {
     const filePath = path.join(
       process.cwd(),
