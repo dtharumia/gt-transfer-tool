@@ -9,7 +9,7 @@ on:
       - completed
 
 jobs:
-  format:
+  upload:
     if: ${{ github.event.workflow_run.conclusion == 'success' }} || ${{github.event_name == 'workflow_dispatch'}}
     runs-on: ubuntu-latest
     permissions:
@@ -25,5 +25,5 @@ jobs:
         run: pip install typesense pandas selenium python-dotenv
       - name: Push searches to Typesense
         run: python public/data/typesense_data_config.py searches searches 0
-      - name: Push searches to Typesense
+      - name: Push transfers to Typesense
         run: python public/data/typesense_data_config.py transfers transfers 0
