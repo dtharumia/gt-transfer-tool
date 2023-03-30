@@ -1,8 +1,10 @@
 import Navbar from "@/components/navbar";
 import { searchTypesense } from "@/typesense/typesenseSearch";
-import Table from "@/components/table";
+import Table from "@/components/table/table";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import TableHeader from "@/components/table/tableHeader";
+import { Box } from "@chakra-ui/react";
 
 type Course = {
   found: number;
@@ -55,23 +57,39 @@ const SchoolPage = () => {
     });
   }, [schoolName, page]);
 
-  const onClickPrev = (e) => {
-    setPage(page - 1);
-  };
-  const onClickNext = (e) => {
-    setPage(page + 1);
-  };
-
+  
   return courses.found > 0 ? (
-    <Table
-      onClickNext={onClickNext}
-      onClickPrev={onClickPrev}
-      page={page}
-      courses={courses}
-      heading={schoolName}
-      subHeading={"transfer_state"}
-      setPage = {setPage}
-    ></Table>
+    <Box>
+      <Navbar />
+      <TableHeader
+        total={courses.found}
+        heading={schoolName}
+        subHeading={courses.hits[0].document["transfer_state"]}
+        page={page}
+        setPage={setPage}
+      />
+      <Table
+        courses={courses}
+        columns={[
+          {
+            accessorKey: "transfer_class",
+            header: "Transfer Class",
+          },
+          {
+            accessorKey: "transfer_title",
+            header: "Transfer Title",
+          },
+          {
+            accessorKey: "gt_class",
+            header: "GT Class",
+          },
+          {
+            accessorKey: "gt_title",
+            header: "GT Title",
+          },
+        ]}
+      ></Table>
+    </Box>
   ) : (
     <></>
   );

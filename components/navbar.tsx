@@ -15,16 +15,6 @@ const Navbar = () => {
           GT Transfer Tool
         </Link>
       </Flex>
-      <Box>
-        <ButtonGroup>
-          <Button>
-            Sign Up
-          </Button>
-          <Button>
-            Sign In
-          </Button>
-        </ButtonGroup>
-      </Box>
     </Flex>
   );
 };

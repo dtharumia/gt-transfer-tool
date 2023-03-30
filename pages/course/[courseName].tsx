@@ -17,7 +17,8 @@ import { useRouter } from "next/router";
 import { searchTypesense } from "@/typesense/typesenseSearch";
 import { useEffect, useState } from "react";
 
-import Table from "@/components/table";
+import Table from "@/components/table/table";
+import TableHeader from "@/components/table/tableHeader";
 
 type Course = {
   found: number;
@@ -69,23 +70,38 @@ const CoursePage = () => {
     });
   }, [courseName, page]);
 
-  const onClickPrev = (e) => {
-    setPage(page - 1);
-  };
-  const onClickNext = (e) => {
-    setPage(page + 1);
-  };
-
   return courses.found > 0 ? (
-    <Table
-      onClickNext={onClickNext}
-      onClickPrev={onClickPrev}
-      page={page}
-      courses={courses}
-      heading={courseName}
-      subHeading={"gt_title"}
-      setPage={setPage}
-    ></Table>
+    <Box>
+      <Navbar></Navbar>
+      <TableHeader
+        total={courses.found}
+        heading={courseName}
+        subHeading={courses.hits[0].document["gt_title"]}
+        page={page}
+        setPage={setPage}
+      />
+      <Table
+        courses={courses}
+        columns={[
+          {
+            accessorKey: "transfer_state",
+            header: "Transfer State",
+          },
+          {
+            accessorKey: "transfer_school",
+            header: "Transfer School",
+          },
+          {
+            accessorKey: "transfer_class",
+            header: "Transfer Class",
+          },
+          {
+            accessorKey: "transfer_title",
+            header: "Transfer Title",
+          },
+        ]}
+      ></Table>
+    </Box>
   ) : (
     <></>
   );
