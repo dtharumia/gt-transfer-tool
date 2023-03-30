@@ -16,6 +16,11 @@ import {
   Center,
 } from "@chakra-ui/react";
 import Navbar from "./navbar";
+import { ThemeProvider } from "@mui/system";
+import { createTheme } from "@mui/material";
+import MaterialReactTable from "material-react-table";
+import Example from './table_test'
+import { useMemo } from "react";
 
 const Table = ({
   heading,
@@ -25,10 +30,56 @@ const Table = ({
   onClickNext,
   page,
 }) => {
+  const data = courses.hits.map((hit) => {
+    return {
+      transfer_class: hit.document.transfer_class,
+      transfer_title: hit.document.transfer_title,
+      gt_class: hit.document.gt_class,
+      gt_title: hit.document.gt_title,
+      transfer_state: hit.document.transfer_state,
+      transfer_school: hit.document.transfer_school,
+    };
+  });
+
+  console.log(data)
+
+  const columns = useMemo(
+    () => [
+      {
+        accessorKey: "transfer_class", //access nested data with dot notation
+        header: "Transfer Class",
+      },
+      {
+        accessorKey: "transfer_title",
+        header: "Transfer Title",
+      },
+      {
+        accessorKey: "gt_class",
+        header: "GT Class",
+      },
+      {
+        accessorKey: "gt_title",
+        header: "GT Title",
+      },
+      {
+        accessorKey: "transfer_state",
+        header: "State",
+      },
+      {
+        accessorKey: "transfer_school",
+        header: "School",
+      },
+      
+    ],
+    []
+  );
+
+  const myTheme = createTheme({});
+
   return (
     <Box>
       <Navbar></Navbar>
-      <Box padding={"5vh"}>
+      <Box>
         <VStack>
           <Heading textAlign={"center"}>{heading}</Heading>
           <Text>{courses.hits[0].document[subHeading]}</Text>
@@ -54,7 +105,21 @@ const Table = ({
           </ButtonGroup>
         </HStack>
         <Center>
-          <TableContainer>
+          {/* <Example /> */}
+          <ThemeProvider theme={myTheme}>
+            <MaterialReactTable
+              columns={columns}
+              data={data}
+              enableColumnActions={false}
+              enableColumnFilters={false}
+              enablePagination={false}
+              enableSorting={false}
+              enableBottomToolbar={false}
+              enableTopToolbar={false}
+              muiTableBodyRowProps={{ hover: false }}
+            />
+          </ThemeProvider>
+          {/* <TableContainer>
             <ChakraTable variant="striped" layout="fixed" maxW={"6xl"}>
               <Thead>
                 <Tr>
@@ -117,7 +182,7 @@ const Table = ({
                   })}
               </Tbody>
             </ChakraTable>
-          </TableContainer>
+          </TableContainer> */}
         </Center>
       </Box>
     </Box>
