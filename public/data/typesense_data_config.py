@@ -10,14 +10,19 @@ curr_dir = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.abspath(os.path.join(curr_dir, os.pardir)))
 load_dotenv()
 
+TYPESENSE_ADMIN_API_KEY = sys.argv[4]
+TYPESENSE_HOST = sys.argv[5]
+TYPESENSE_PORT = sys.argv[6]
+TYPESENSE_PROTOCOL = sys.argv[7]
+
 client = typesense.Client(
     {
-        "api_key": os.environ.get("TYPESENSE_ADMIN_API_KEY"),
+        "api_key": TYPESENSE_ADMIN_API_KEY,
         "nodes": [
             {
-                "host": os.environ.get("TYPESENSE_HOST"),
-                "port": os.environ.get("TYPESENSE_PORT"),
-                "protocol": os.environ.get("TYPESENSE_PROTOCOL"),
+                "host": TYPESENSE_HOST,
+                "port": TYPESENSE_PORT,
+                "protocol": TYPESENSE_PROTOCOL,
             }
         ],
         "connection_timeout_seconds": 2,
@@ -143,7 +148,7 @@ def transfers(collection, test):
     # need to use REST API to import data because of the size of the data
     url = "https://teq6fdvwgrz84jm0p-1.a1.typesense.net/collections/transfers/documents/import?action=create"
     headers = {
-        "X-TYPESENSE-API-KEY": "{0}".format(os.environ.get("TYPESENSE_ADMIN_API_KEY"))
+        "X-TYPESENSE-API-KEY": "{0}".format(TYPESENSE_ADMIN_API_KEY)
     }
     with open(os.path.join(sys.path[0], "all_data_combined.jsonl"), "r") as f:
         payload = f.read()
