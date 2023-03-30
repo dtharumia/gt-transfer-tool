@@ -104,7 +104,6 @@ const Table = ({
             </Button>
           </ButtonGroup>
         </HStack>
-        <Center>
           {/* <Example /> */}
           <ThemeProvider theme={myTheme}>
             <MaterialReactTable
@@ -183,7 +182,6 @@ const Table = ({
               </Tbody>
             </ChakraTable>
           </TableContainer> */}
-        </Center>
       </Box>
     </Box>
   );
