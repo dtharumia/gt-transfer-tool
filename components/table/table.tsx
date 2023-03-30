@@ -26,7 +26,7 @@ const Table = ({
   const myTheme = createTheme({});
 
   return (
-      <Box width={"5xl"} mx="auto">
+      <Box mx="auto" overflow={'auto'} maxWidth={'6xl'}>
         <ThemeProvider theme={myTheme}>
           <MaterialReactTable
             columns={courseColumns}
@@ -37,7 +37,8 @@ const Table = ({
             enableSorting={false}
             enableBottomToolbar={false}
             enableTopToolbar={false}
-            muiTableBodyRowProps={{ hover: false }}
+            muiTableBodyRowProps={{ hover: false }
+          }
           />
         </ThemeProvider>
       </Box>

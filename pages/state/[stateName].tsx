@@ -1,4 +1,5 @@
 import Navbar from "@/components/navbar";
+import TableHeader from "@/components/table/tableHeader";
 import { searchTypesense } from "@/typesense/typesenseSearch";
 import {
   Box,
@@ -55,40 +56,17 @@ const StatePage = () => {
     });
   }, [stateName, page]);
 
-  const onClickPrev = (e) => {
-    setPage(page - 1);
-  };
-  const onClickNext = (e) => {
-    setPage(page + 1);
-  };
-
   return (
     <Box>
-      <Navbar></Navbar>
-      <Box padding={"5vh"}>
-        <VStack>
-          <Heading textAlign={"center"}>{stateName}</Heading>
-        </VStack>
-        <HStack
-          spacing={4}
-          align="center"
-          justify="center"
-          pt={"2vh"}
-          pb={"2vh"}
-        >
-          <ButtonGroup>
-            <Button onClick={onClickPrev} isDisabled={page <= 1}>
-              ◀ Prev
-            </Button>
-            <Button disabled>Page {page}</Button>
-            <Button
-              onClick={onClickNext}
-              isDisabled={page * 20 >= schools.found}
-            >
-              Next ▶
-            </Button>
-          </ButtonGroup>
-        </HStack>
+      <Box>
+        <Navbar></Navbar>
+        <TableHeader
+          total={schools.found}
+          heading={stateName}
+          subHeading={""}
+          page={page}
+          setPage={setPage}
+        />
         <Center>
           <SimpleGrid columns={4} spacing={5}>
             {schools.found > 0 &&
