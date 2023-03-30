@@ -58,7 +58,7 @@ const StatePage = () => {
           setPage={setPage}
         />
         <Center>
-          <SimpleGrid columns={4} spacing={5}>
+          <SimpleGrid columns={3} spacing={5}>
             {schools.found > 0 &&
               schools.hits.map((hit) => {
                 const doc = hit.document;
