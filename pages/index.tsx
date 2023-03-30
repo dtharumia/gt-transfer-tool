@@ -7,6 +7,8 @@ import {
   HStack,
   Text,
   Spacer,
+  Center,
+  Stack,
 } from "@chakra-ui/react";
 
 import Navbar from "@/components/navbar";
@@ -34,7 +36,14 @@ export default function Home() {
         </Text>
         <Search></Search>
       </Box>
-      <HStack style={{ justifyContent: "center" }}>
+      <HStack
+        spacing="20px"
+        flexDirection={["column", "row"]}
+        wrap="wrap"
+        align={"center"}
+        justify={"center"}
+
+      >
         <Image
           src="/images/arrow.png"
           width={500}
