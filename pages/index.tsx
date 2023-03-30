@@ -34,7 +34,9 @@ export default function Home() {
         <Text fontSize={"2xl"} textAlign={"center"} pb={5}>
           Search for courses and schools below.
         </Text>
-        <Search></Search>
+        <Center>
+          <Search></Search>
+        </Center>
       </Box>
       <HStack
         spacing="20px"
@@ -42,7 +44,6 @@ export default function Home() {
         wrap="wrap"
         align={"center"}
         justify={"center"}
-
       >
         <Image
           src="/images/arrow.png"

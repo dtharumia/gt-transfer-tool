@@ -3,11 +3,14 @@ import SearchBox from "../search/searchBox";
 import { searchClient } from "@/typesense/typesenseSearchConfig";
 
 import SearchHits from "../search/searchHits";
+import { VStack } from "@chakra-ui/react";
 
 const Search = () => (
   <InstantSearch indexName="searches" searchClient={searchClient}>
-    <SearchBox />
-    <SearchHits />
+    <VStack>
+      <SearchBox />
+      <SearchHits />
+    </VStack>
   </InstantSearch>
 );
 
