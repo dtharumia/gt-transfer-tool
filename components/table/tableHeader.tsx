@@ -1,17 +1,16 @@
 import {
-  VStack,
+  Box,
+  Button,
+  ButtonGroup,
   Heading,
   HStack,
-  ButtonGroup,
-  Button,
-  Stack,
   Select,
-  Box,
+  Stack,
   Text,
+  VStack,
 } from "@chakra-ui/react";
 
 const TableHeader = ({ total, heading, subHeading, page, setPage }) => {
-    
   const onClickPrev = (e) => {
     setPage(page - 1);
   };

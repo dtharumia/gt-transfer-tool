@@ -1,19 +1,9 @@
 import Navbar from "@/components/navbar";
 import TableHeader from "@/components/table/tableHeader";
 import { searchTypesense } from "@/typesense/typesenseSearch";
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Heading,
-  HStack,
-  SimpleGrid,
-  VStack,
-  Link,
-  Center,
-} from "@chakra-ui/react";
+import { Box, Center, Link, SimpleGrid } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type School = {
   found: number;

@@ -1,4 +1,4 @@
-import { Box, Text, VStack, HStack, Link } from "@chakra-ui/react";
+import { Box, Link } from "@chakra-ui/react";
 
 const SearchEntry = ({ hit }) => {
   return (

@@ -1,10 +1,10 @@
 import Navbar from "@/components/navbar";
-import { searchTypesense } from "@/typesense/typesenseSearch";
 import Table from "@/components/table/table";
+import TableHeader from "@/components/table/tableHeader";
+import { searchTypesense } from "@/typesense/typesenseSearch";
+import { Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import TableHeader from "@/components/table/tableHeader";
-import { Box } from "@chakra-ui/react";
 
 type Course = {
   found: number;
@@ -57,7 +57,6 @@ const SchoolPage = () => {
     });
   }, [schoolName, page]);
 
-  
   return courses.found > 0 ? (
     <Box>
       <Navbar />

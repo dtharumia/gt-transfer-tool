@@ -1,5 +1,5 @@
-import { connectSearchBox } from "react-instantsearch-dom";
 import { Box, Flex, Input } from "@chakra-ui/react";
+import { connectSearchBox } from "react-instantsearch-dom";
 
 const SearchBox = ({ refine }) => (
   <Flex justifyContent="center" alignItems="center">

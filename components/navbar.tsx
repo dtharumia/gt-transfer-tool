@@ -1,4 +1,4 @@
-import { Link, Flex, Box, Text, Button, ButtonGroup } from "@chakra-ui/react";
+import { Flex, Link } from "@chakra-ui/react";
 
 const Navbar = () => {
   return (
@@ -11,7 +11,7 @@ const Navbar = () => {
       alignItems="center"
     >
       <Flex flexDirection="row" justifyContent="center" alignItems="center">
-        <Link href="/" color={"white"} fontWeight='bold' fontSize={'2xl'} >
+        <Link href="/" color={"white"} fontWeight="bold" fontSize={"2xl"}>
           GT Transfer Tool
         </Link>
       </Flex>

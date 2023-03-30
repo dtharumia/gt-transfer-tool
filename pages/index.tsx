@@ -1,18 +1,15 @@
-import Image from "next/image";
 import {
   Box,
-  Divider,
+  Center,
   Heading,
   Highlight,
   HStack,
   Text,
-  Spacer,
-  Center,
-  Stack,
 } from "@chakra-ui/react";
+import Image from "next/image";
 
-import Navbar from "@/components/navbar";
 import Search from "@/components/home/search";
+import Navbar from "@/components/navbar";
 
 export default function Home() {
   return (

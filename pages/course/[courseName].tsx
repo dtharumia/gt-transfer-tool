@@ -1,20 +1,7 @@
 import Navbar from "@/components/navbar";
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Heading,
-  HStack,
-  TableContainer,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-  VStack,
-} from "@chakra-ui/react";
-import { useRouter } from "next/router";
 import { searchTypesense } from "@/typesense/typesenseSearch";
+import { Box } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 import Table from "@/components/table/table";
