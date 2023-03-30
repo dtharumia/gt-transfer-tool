@@ -4,7 +4,7 @@ import SearchEntry from "./searchEntry";
 
 const SearchHits = ({ hits }) => {
   return (
-    <SimpleGrid columns={2} minWidth='xl' spacingX={'2'}>
+    <SimpleGrid columns={2} width='xl' spacingX={'2'}>
       {hits.map((hit) => (
         <SearchEntry key={hit.objectID} hit={hit} />
       ))}

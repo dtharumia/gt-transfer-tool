@@ -9,7 +9,7 @@ const SearchBox = ({ refine }) => (
           id="filter-search"
           type="search"
           placeholder="Search for GT Class, Transfer School, or State"
-          w="2xl"
+          w="md"
           onChange={(event) => refine(event.currentTarget.value)}
         />
       </form>
