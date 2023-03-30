@@ -7,9 +7,10 @@ const SearchEntry = ({ hit }) => {
       padding={"2vh"}
       borderWidth="1px"
       borderRadius="lg"
-      overflow="hidden"
+      minWidth={"sm"}
+      textAlign={"center"}
     >
-      <HStack>
+      <>
         {hit.type == "gt_class" ? (
           <Link href={`/course/${hit.primary}`}>{hit.primary}</Link>
         ) : (
@@ -25,7 +26,7 @@ const SearchEntry = ({ hit }) => {
         ) : (
           <></>
         )}
-      </HStack>
+      </>
     </Box>
   );
 };
