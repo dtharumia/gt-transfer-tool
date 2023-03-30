@@ -49,7 +49,7 @@ const SchoolPage = () => {
       schoolName,
       "transfer_school",
       page,
-      "gt_class:asc"
+      "transfer_class:asc, gt_class:asc"
     ).then((res) => {
       setCourses(res as any);
     });
@@ -70,6 +70,7 @@ const SchoolPage = () => {
       courses={courses}
       heading={schoolName}
       subHeading={"transfer_state"}
+      setPage = {setPage}
     ></Table>
   ) : (
     <></>

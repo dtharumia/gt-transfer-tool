@@ -63,7 +63,7 @@ const CoursePage = () => {
       courseName,
       "gt_class",
       page,
-      "transfer_state:asc"
+      "transfer_state:asc, transfer_school:asc, transfer_class:asc"
     ).then((res) => {
       setCourses(res as any);
     });
@@ -76,8 +76,7 @@ const CoursePage = () => {
     setPage(page + 1);
   };
 
-  return (
-    courses.found > 0 ? (
+  return courses.found > 0 ? (
     <Table
       onClickNext={onClickNext}
       onClickPrev={onClickPrev}
@@ -85,8 +84,10 @@ const CoursePage = () => {
       courses={courses}
       heading={courseName}
       subHeading={"gt_title"}
-      ></Table>
-    ) : <></>
+      setPage={setPage}
+    ></Table>
+  ) : (
+    <></>
   );
 };
 

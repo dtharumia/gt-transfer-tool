@@ -14,12 +14,13 @@ import {
   Text,
   Table as ChakraTable,
   Center,
+  Select,
+  Stack,
 } from "@chakra-ui/react";
 import Navbar from "./navbar";
 import { ThemeProvider } from "@mui/system";
 import { createTheme } from "@mui/material";
 import MaterialReactTable from "material-react-table";
-import Example from './table_test'
 import { useMemo } from "react";
 
 const Table = ({
@@ -29,6 +30,7 @@ const Table = ({
   onClickPrev,
   onClickNext,
   page,
+  setPage,
 }) => {
   const data = courses.hits.map((hit) => {
     return {
@@ -41,35 +43,24 @@ const Table = ({
     };
   });
 
-  console.log(data)
-
-  const columns = useMemo(
+  const courseColumns = useMemo(
     () => [
       {
-        accessorKey: "transfer_class", //access nested data with dot notation
+        accessorKey: "transfer_state",
+        header: "Transfer State",
+      },
+      {
+        accessorKey: "transfer_school",
+        header: "Transfer School",
+      },
+      {
+        accessorKey: "transfer_class",
         header: "Transfer Class",
       },
       {
         accessorKey: "transfer_title",
         header: "Transfer Title",
       },
-      {
-        accessorKey: "gt_class",
-        header: "GT Class",
-      },
-      {
-        accessorKey: "gt_title",
-        header: "GT Title",
-      },
-      {
-        accessorKey: "transfer_state",
-        header: "State",
-      },
-      {
-        accessorKey: "transfer_school",
-        header: "School",
-      },
-      
     ],
     []
   );
@@ -95,7 +86,23 @@ const Table = ({
             <Button onClick={onClickPrev} isDisabled={page <= 1}>
               ◀ Prev
             </Button>
-            <Button disabled>Page {page}</Button>
+            <Stack direction="row" align="center">
+              <Text fontWeight="bold" mr="2">
+                Page:
+              </Text>
+              <Select
+                value={page}
+                onChange={(e) => setPage(parseInt(e.target.value))}
+              >
+                {[...Array(Math.ceil(courses.found / 20))].map((_, i) => {
+                  return (
+                    <option key={i} value={i + 1}>
+                      {i + 1}
+                    </option>
+                  );
+                })}
+              </Select>
+            </Stack>
             <Button
               onClick={onClickNext}
               isDisabled={page * 20 >= courses.found}
@@ -104,10 +111,10 @@ const Table = ({
             </Button>
           </ButtonGroup>
         </HStack>
-          {/* <Example /> */}
+        <Box width={"5xl"} mx="auto">
           <ThemeProvider theme={myTheme}>
             <MaterialReactTable
-              columns={columns}
+              columns={courseColumns}
               data={data}
               enableColumnActions={false}
               enableColumnFilters={false}
@@ -118,70 +125,7 @@ const Table = ({
               muiTableBodyRowProps={{ hover: false }}
             />
           </ThemeProvider>
-          {/* <TableContainer>
-            <ChakraTable variant="striped" layout="fixed" maxW={"6xl"}>
-              <Thead>
-                <Tr>
-                  {subHeading === "gt_title" ? (
-                    <>
-                      <Th width="10%" textAlign={"center"}>
-                        Transfer State
-                      </Th>
-                      <Th width="40%" textAlign={"center"}>
-                        Transfer School
-                      </Th>
-                      <Th width="10%" textAlign={"center"}>
-                        Transfer Class
-                      </Th>
-                      <Th width="40%" textAlign={"center"}>
-                        Transfer Title
-                      </Th>
-                    </>
-                  ) : (
-                    <>
-                      <Th width="10%" textAlign={"center"}>
-                        Transfer Class
-                      </Th>
-                      <Th width="23%" textAlign={"center"}>
-                        Transfer Title
-                      </Th>
-                      <Th width="10%" textAlign={"center"}>
-                        GT Class
-                      </Th>
-                      <Th width="23%" textAlign={"center"}>
-                        GT Title
-                      </Th>
-                    </>
-                  )}
-                </Tr>
-              </Thead>
-              <Tbody>
-                {Object.keys(courses).length > 0 &&
-                  courses.hits.map((hit) => {
-                    const doc = hit.document;
-                    return (
-                      <Tr key={hit.objectID}>
-                        {subHeading === "gt_title" ? (
-                          <>
-                            <Td textAlign={"center"}>{doc.transfer_state}</Td>
-                            <Td textAlign={"center"}>{doc.transfer_school}</Td>
-                            <Td textAlign={"center"}>{doc.transfer_class}</Td>
-                            <Td textAlign={"center"}>{doc.transfer_title}</Td>
-                          </>
-                        ) : (
-                          <>
-                            <Td textAlign={"center"}>{doc.transfer_class}</Td>
-                            <Td textAlign={"center"}>{doc.transfer_title}</Td>
-                            <Td textAlign={"center"}>{doc.gt_class}</Td>
-                            <Td textAlign={"center"}>{doc.gt_title}</Td>
-                          </>
-                        )}
-                      </Tr>
-                    );
-                  })}
-              </Tbody>
-            </ChakraTable>
-          </TableContainer> */}
+        </Box>
       </Box>
     </Box>
   );

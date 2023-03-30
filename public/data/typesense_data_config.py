@@ -92,6 +92,7 @@ def transfers(collection, test):
                 {"index": True, "name": "gt_ch", "type": "string"},
                 {
                     "index": True,
+                    "sort": True,
                     "infix": False,
                     "name": "transfer_class",
                     "type": "string",
@@ -104,6 +105,7 @@ def transfers(collection, test):
                 {
                     "facet": True,
                     "index": True,
+                    "sort": True,
                     "name": "transfer_school",
                     "type": "string",
                 },
