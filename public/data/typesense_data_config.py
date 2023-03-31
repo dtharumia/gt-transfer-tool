@@ -148,7 +148,7 @@ def transfers(collection, test):
         lines=True,
     )
     # need to use REST API to import data because of the size of the data
-    url = "https://teq6fdvwgrz84jm0p-1.a1.typesense.net/collections/transfers/documents/import?action=create"
+    url = f"{TYPESENSE_PROTOCOL}://{TYPESENSE_HOST}:{TYPESENSE_PORT}/collections/transfers/documents/import?action=create"
     headers = {
         "X-TYPESENSE-API-KEY": "{0}".format(TYPESENSE_ADMIN_API_KEY)
     }
