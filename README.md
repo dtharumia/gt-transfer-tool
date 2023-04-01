@@ -1,38 +1,9 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# GT Transfer Tool: Find Courses that Transfer Back to GT
 
-## Getting Started
+[GT Transfer Tool](gt-transfer-tool.com) helps you find courses that transfer back to Georgia Tech. It is similar to the existing [Transfer Equivalency Table](https://oscar.gatech.edu/pls/bprod/wwsktrna.P_find_location) except that it also goes in the reverse direction i.e. showing all transfer courses available for a specific GT class. With the availability of online classes in schools, you may no longer be limited to your local vicinity to find classes. This can especially be useful for general education requirements that are common across many schools.
 
-First, run the development server:
+GT Transfer Tool enables you to search by GT Class #, Transfer School, and State. You can also save courses for later.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+GT Transfer Tool is built using Next.js, TypeScript, Chakra UI, and Typesense,  Azure, and Vercel. A Github Action automatically scrapes the existing transfer equivalency table once a month to ensure that the transfer data is accurate.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+For local development, ensure that GT Transfer Tool runs on `http:localhost:3000` to avoid CORS errors when connecting to the backend. To run locally, download the repository and execute `npm run dev`.
