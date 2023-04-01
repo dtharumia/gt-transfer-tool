@@ -6,11 +6,13 @@ GT Transfer Tool enables you to search by GT Class #, Transfer School, and State
 
 ## Transfer Policy Excerpts
 
-The following are excerpts from the [GT Registrar's Office](https://registrar.gatech.edu/info/transfer-credit-online-courses):
+The following are excerpts from the GT Registrar's Office:
 
 > Georgia Tech accepts credit for coursework as listed on the transfer equivalency table online at oscar.gatech.edu. If the course is not listed on the transfer equivalency site, the course must be submitted for review to Transfer Credit site.
 > 
 > If the transfer equivalency site states: No Credit for Online Section, you will need to submit a syllabus for the course to be reviewed. Please allow time for review and the update on the equivalency table.
+> 
+> No student may be considered a candidate for a degree unless the final 36 credit hours required for the degree are earned in residence at Georgia Tech and approved by the major school.
  
 ## Codebase
 
