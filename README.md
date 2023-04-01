@@ -4,7 +4,7 @@
 
 GT Transfer Tool enables you to search by GT Class #, Transfer School, and State. You can also save courses for later.
 
-## Transfer Policy Excerpts
+## Transfer Policy & Residency Requirement
 
 The following are excerpts from the GT Registrar's Office:
 
