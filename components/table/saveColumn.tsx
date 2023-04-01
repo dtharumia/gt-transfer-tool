@@ -15,8 +15,6 @@ const SaveColumn = ({ course, text }) => {
       removeSavedCourse(course);
       toast({
         title: "Course removed",
-        description:
-          "You can view your saved courses in the Saved Courses tab.",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -25,8 +23,6 @@ const SaveColumn = ({ course, text }) => {
       addSavedCourse(course);
       toast({
         title: "Course saved",
-        description:
-          "You can view your saved courses in the Saved Courses tab.",
         status: "success",
         duration: 3000,
         isClosable: true,
