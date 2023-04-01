@@ -1,6 +1,17 @@
 import { Button, Flex, Link } from "@chakra-ui/react";
+import { useEffect } from "react";
+
+import { setSavedCourses } from "../state";
 
 const Navbar = () => {
+  useEffect(() => {
+    const savedCourses = localStorage.getItem("savedCourses");
+    if (savedCourses) {
+      setSavedCourses(JSON.parse(savedCourses));
+    }
+  }, []);
+
+  
   return (
     <Flex
       bg="#B3A369"

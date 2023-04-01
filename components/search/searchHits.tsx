@@ -3,11 +3,18 @@ import { connectHits } from "react-instantsearch-core";
 import SearchEntry from "./searchEntry";
 
 import { entity } from "simpler-state";
+import { useEffect } from "react";
 
 export const haveSearchHits = entity(false);
 
 const SearchHits = ({ hits }) => {
-  haveSearchHits.set(hits.length > 0);
+  useEffect(() => {
+    if (hits.length > 0) {
+      haveSearchHits.set(true);
+    } else {
+      haveSearchHits.set(false);
+    }
+  }, [hits]);
   return (
     <VStack>
       {hits.map((hit) => (

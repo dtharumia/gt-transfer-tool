@@ -2,25 +2,17 @@ import { Box, IconButton, useToast } from "@chakra-ui/react";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import SaveIcon from "@mui/icons-material/Save";
 
-import { useState } from "react";
+import { addSavedCourse, removeSavedCourse, savedCourses } from "../state";
 
 const SaveColumn = ({ course, text }) => {
   const toast = useToast();
-  const [isSaved, setIsSaved] = useState(
-    JSON.parse(localStorage.getItem("savedCourses") || "[]").some(
-      (c) => c.id === course.id
-    )
-  );
 
-  const id = course.id;
+  const allSavedCourses = savedCourses.use();
+  const isSaved = allSavedCourses.some((c) => c.id === course.id);
 
   const handleClick = () => {
-    let savedCourses = JSON.parse(localStorage.getItem("savedCourses") || "[]");
-
     if (isSaved) {
-      const updatedSavedCourses = savedCourses.filter((c) => c.id !== id);
-      localStorage.setItem("savedCourses", JSON.stringify(updatedSavedCourses));
-      setIsSaved(false);
+      removeSavedCourse(course);
       toast({
         title: "Course removed",
         description:
@@ -30,9 +22,7 @@ const SaveColumn = ({ course, text }) => {
         isClosable: true,
       });
     } else {
-      const updatedSavedCourses = [...savedCourses, course];
-      localStorage.setItem("savedCourses", JSON.stringify(updatedSavedCourses));
-      setIsSaved(true);
+      addSavedCourse(course);
       toast({
         title: "Course saved",
         description:
