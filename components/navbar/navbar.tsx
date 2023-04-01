@@ -29,7 +29,9 @@ const Navbar = () => {
           <Link href="/saved-courses">Saved Courses</Link>
         </Button>
         <IconButton
-          onClick={() => window.location.replace('https://github.com/dtharumia/gt-transfer-tool')}
+          onClick={() =>
+            window.open("https://github.com/dtharumia/gt-transfer-tool")
+          }
           aria-label={"github"}
           icon={<AiFillGithub size={"25"} />}
         />
