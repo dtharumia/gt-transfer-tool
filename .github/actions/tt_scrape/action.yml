@@ -1,16 +1,16 @@
-name: 'Transfer Table Scrape Action'
-description: 'Composite action to perform scraping for a particular state with full data'
+name: "Transfer Table Scrape Action"
+description: "Composite action to perform scraping for a particular state with full data"
 inputs:
-  state-number: 
-    description: 'Which state number'
+  state-number:
+    description: "Which state number"
     required: true
 runs:
   using: "composite"
   steps:
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
-        python-version: '3.9'
+        python-version: "3.9"
     - name: Installed package list
       run: apt list --installed
       shell: bash
@@ -36,5 +36,4 @@ runs:
       uses: actions/upload-artifact@v3.1.2
       with:
         name: ${{ inputs.state-number }}
-        path: 'public/data/output/all_data/${{ inputs.state-number }}.json'
-
+        path: "public/data/output/all_data/${{ inputs.state-number }}.json"

@@ -5,7 +5,7 @@ on:
     paths:
       - "public/data/transfer_table_scrape.py"
   schedule:
-    - cron: '0 0 1 * *'
+    - cron: "0 0 1 * *"
 jobs:
   scrape_1:
     runs-on: ubuntu-latest
@@ -13,7 +13,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_1
         uses: ./.github/actions/tt_scrape
         with:
@@ -24,7 +24,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_2
         uses: ./.github/actions/tt_scrape
         with:
@@ -35,7 +35,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_3
         uses: ./.github/actions/tt_scrape
         with:
@@ -46,7 +46,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_4
         uses: ./.github/actions/tt_scrape
         with:
@@ -57,7 +57,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_5
         uses: ./.github/actions/tt_scrape
         with:
@@ -68,7 +68,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_6
         uses: ./.github/actions/tt_scrape
         with:
@@ -79,7 +79,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_7
         uses: ./.github/actions/tt_scrape
         with:
@@ -90,7 +90,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_8
         uses: ./.github/actions/tt_scrape
         with:
@@ -101,7 +101,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_9
         uses: ./.github/actions/tt_scrape
         with:
@@ -112,7 +112,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_10
         uses: ./.github/actions/tt_scrape
         with:
@@ -123,7 +123,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_11
         uses: ./.github/actions/tt_scrape
         with:
@@ -134,7 +134,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_12
         uses: ./.github/actions/tt_scrape
         with:
@@ -145,7 +145,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_13
         uses: ./.github/actions/tt_scrape
         with:
@@ -156,7 +156,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_14
         uses: ./.github/actions/tt_scrape
         with:
@@ -167,7 +167,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_15
         uses: ./.github/actions/tt_scrape
         with:
@@ -178,7 +178,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_16
         uses: ./.github/actions/tt_scrape
         with:
@@ -189,7 +189,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_17
         uses: ./.github/actions/tt_scrape
         with:
@@ -200,7 +200,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_18
         uses: ./.github/actions/tt_scrape
         with:
@@ -211,7 +211,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_19
         uses: ./.github/actions/tt_scrape
         with:
@@ -222,7 +222,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_20
         uses: ./.github/actions/tt_scrape
         with:
@@ -233,7 +233,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_21
         uses: ./.github/actions/tt_scrape
         with:
@@ -244,7 +244,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_22
         uses: ./.github/actions/tt_scrape
         with:
@@ -255,7 +255,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_23
         uses: ./.github/actions/tt_scrape
         with:
@@ -266,7 +266,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_4
         uses: ./.github/actions/tt_scrape
         with:
@@ -277,7 +277,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_5
         uses: ./.github/actions/tt_scrape
         with:
@@ -288,7 +288,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_6
         uses: ./.github/actions/tt_scrape
         with:
@@ -299,7 +299,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_7
         uses: ./.github/actions/tt_scrape
         with:
@@ -310,7 +310,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_8
         uses: ./.github/actions/tt_scrape
         with:
@@ -321,7 +321,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_9
         uses: ./.github/actions/tt_scrape
         with:
@@ -332,7 +332,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_30
         uses: ./.github/actions/tt_scrape
         with:
@@ -343,7 +343,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_31
         uses: ./.github/actions/tt_scrape
         with:
@@ -354,7 +354,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_32
         uses: ./.github/actions/tt_scrape
         with:
@@ -365,7 +365,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_33
         uses: ./.github/actions/tt_scrape
         with:
@@ -376,7 +376,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_34
         uses: ./.github/actions/tt_scrape
         with:
@@ -387,7 +387,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_35
         uses: ./.github/actions/tt_scrape
         with:
@@ -398,7 +398,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_36
         uses: ./.github/actions/tt_scrape
         with:
@@ -409,7 +409,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_7
         uses: ./.github/actions/tt_scrape
         with:
@@ -420,7 +420,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_38
         uses: ./.github/actions/tt_scrape
         with:
@@ -431,7 +431,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_39
         uses: ./.github/actions/tt_scrape
         with:
@@ -442,7 +442,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_40
         uses: ./.github/actions/tt_scrape
         with:
@@ -453,7 +453,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_41
         uses: ./.github/actions/tt_scrape
         with:
@@ -464,7 +464,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_42
         uses: ./.github/actions/tt_scrape
         with:
@@ -475,7 +475,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_43
         uses: ./.github/actions/tt_scrape
         with:
@@ -486,7 +486,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_44
         uses: ./.github/actions/tt_scrape
         with:
@@ -497,7 +497,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_5
         uses: ./.github/actions/tt_scrape
         with:
@@ -508,7 +508,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_46
         uses: ./.github/actions/tt_scrape
         with:
@@ -519,7 +519,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_7
         uses: ./.github/actions/tt_scrape
         with:
@@ -530,7 +530,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_48
         uses: ./.github/actions/tt_scrape
         with:
@@ -541,7 +541,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_49
         uses: ./.github/actions/tt_scrape
         with:
@@ -552,7 +552,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_50
         uses: ./.github/actions/tt_scrape
         with:
@@ -563,7 +563,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_51
         uses: ./.github/actions/tt_scrape
         with:
@@ -574,7 +574,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_52
         uses: ./.github/actions/tt_scrape
         with:
@@ -585,7 +585,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_53
         uses: ./.github/actions/tt_scrape
         with:
@@ -596,7 +596,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - id: scrape_54
         uses: ./.github/actions/tt_scrape
         with:
@@ -664,7 +664,7 @@ jobs:
       contents: write
     steps:
       - name: Check out this repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Git Pull
         run: git pull
       - name: Remove existing all_data directory
