@@ -9,9 +9,12 @@ import {
 import Image from "next/image";
 
 import Search from "@/components/home/search";
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/navbar/navbar";
+import { haveSearchHits } from "@/components/search/searchHits";
 
 export default function Home() {
+  let haveHits = haveSearchHits.use();
+
   return (
     <Box>
       <Navbar></Navbar>
@@ -35,21 +38,23 @@ export default function Home() {
           <Search></Search>
         </Center>
       </Box>
-      <HStack
-        spacing="20px"
-        flexDirection={["column", "row"]}
-        wrap="wrap"
-        align={"center"}
-        justify={"center"}
-      >
-        <Image
-          src="/images/arrow.png"
-          width={500}
-          height={500}
-          alt="Transfer Arrow"
-        />
-        <Image src="/images/buzz.png" width={250} height={250} alt="Buzz" />
-      </HStack>
+      {!haveHits && (
+        <HStack
+          spacing="20px"
+          flexDirection={["column", "row"]}
+          wrap="wrap"
+          align={"center"}
+          justify={"center"}
+        >
+          <Image
+            src="/images/arrow.png"
+            width={500}
+            height={500}
+            alt="Transfer Arrow"
+          />
+          <Image src="/images/buzz.png" width={250} height={250} alt="Buzz" />
+        </HStack>
+      )}
     </Box>
   );
 }

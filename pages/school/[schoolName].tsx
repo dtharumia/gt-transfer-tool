@@ -1,4 +1,5 @@
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/navbar/navbar";
+import SaveColumn from "@/components/table/saveColumn";
 import Table from "@/components/table/table";
 import TableHeader from "@/components/table/tableHeader";
 import { searchTypesense } from "@/typesense/typesenseSearch";
@@ -6,20 +7,7 @@ import { Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-type Course = {
-  found: number;
-  hits: Array<{
-    objectID: string;
-    document: {
-      gt_class: string;
-      gt_title: string;
-      transfer_state: string;
-      transfer_school: string;
-      transfer_class: string;
-      transfer_title: string;
-    };
-  }>;
-};
+import { Course } from "../../components/types";
 
 const SchoolPage = () => {
   const router = useRouter();
@@ -29,15 +17,13 @@ const SchoolPage = () => {
     found: 0,
     hits: [
       {
-        objectID: "",
-        document: {
-          gt_class: "",
-          gt_title: "",
-          transfer_state: "",
-          transfer_school: "",
-          transfer_class: "",
-          transfer_title: "",
-        },
+        id: "",
+        gt_class: "",
+        gt_title: "",
+        transfer_state: "",
+        transfer_school: "",
+        transfer_class: "",
+        transfer_title: "",
       },
     ],
   });
@@ -53,7 +39,22 @@ const SchoolPage = () => {
       page,
       "transfer_class:asc, gt_class:asc"
     ).then((res) => {
-      setCourses(res as any);
+      const data: Course = {
+        found: res.found,
+        hits:
+          res.hits?.map((hit) => {
+            return {
+              id: hit.document["id"] as string,
+              gt_class: hit.document["gt_class"] as string,
+              gt_title: hit.document["gt_title"] as string,
+              transfer_state: hit.document["transfer_state"] as string,
+              transfer_school: hit.document["transfer_school"] as string,
+              transfer_class: hit.document["transfer_class"] as string,
+              transfer_title: hit.document["transfer_title"] as string,
+            };
+          }) ?? [],
+      };
+      setCourses(data);
     });
   }, [schoolName, page]);
 
@@ -63,7 +64,7 @@ const SchoolPage = () => {
       <TableHeader
         total={courses.found}
         heading={schoolName}
-        subHeading={courses.hits[0].document["transfer_state"]}
+        subHeading={courses.hits[0]["transfer_state"]}
         page={page}
         setPage={setPage}
       />
@@ -73,18 +74,45 @@ const SchoolPage = () => {
           {
             accessorKey: "transfer_class",
             header: "Transfer Class",
+            Cell: ({ cell }) => (
+              <SaveColumn
+                course={cell.row.original}
+                text={cell.row.original.transfer_class}
+              />
+            ),
+            muiTableHeadCellProps: {
+              align: "center",
+            },
           },
           {
             accessorKey: "transfer_title",
             header: "Transfer Title",
+            muiTableHeadCellProps: {
+              align: "center",
+            },
+            muiTableBodyCellProps: {
+              align: "center",
+            },
           },
           {
             accessorKey: "gt_class",
             header: "GT Class",
+            muiTableHeadCellProps: {
+              align: "center",
+            },
+            muiTableBodyCellProps: {
+              align: "center",
+            },
           },
           {
             accessorKey: "gt_title",
             header: "GT Title",
+            muiTableHeadCellProps: {
+              align: "center",
+            },
+            muiTableBodyCellProps: {
+              align: "center",
+            },
           },
         ]}
       ></Table>

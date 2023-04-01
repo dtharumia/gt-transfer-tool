@@ -5,16 +5,7 @@ import MaterialReactTable from "material-react-table";
 import { useMemo } from "react";
 
 const Table = ({ courses, columns }) => {
-  const data = courses.hits.map((hit) => {
-    return {
-      transfer_class: hit.document.transfer_class,
-      transfer_title: hit.document.transfer_title,
-      gt_class: hit.document.gt_class,
-      gt_title: hit.document.gt_title,
-      transfer_state: hit.document.transfer_state,
-      transfer_school: hit.document.transfer_school,
-    };
-  });
+  const data = courses.hits
 
   const courseColumns = useMemo(() => columns, []);
 

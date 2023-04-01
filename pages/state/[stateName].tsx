@@ -1,4 +1,4 @@
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/navbar/navbar";
 import TableHeader from "@/components/table/tableHeader";
 import { searchTypesense } from "@/typesense/typesenseSearch";
 import { Box, Center, Link, SimpleGrid } from "@chakra-ui/react";
