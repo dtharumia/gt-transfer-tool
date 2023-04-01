@@ -1,7 +1,8 @@
-import { Button, Flex, Link } from "@chakra-ui/react";
+import { Box, Button, Flex, IconButton, Link } from "@chakra-ui/react";
 import { useEffect } from "react";
-
 import { setSavedCourses } from "../state";
+
+import { AiFillGithub } from "react-icons/ai";
 
 const Navbar = () => {
   useEffect(() => {
@@ -11,7 +12,6 @@ const Navbar = () => {
     }
   }, []);
 
-  
   return (
     <Flex
       bg="#B3A369"
@@ -24,11 +24,16 @@ const Navbar = () => {
       <Link href="/" color={"white"} fontWeight="bold" fontSize={"2xl"}>
         GT Transfer Tool
       </Link>
-      <Button colorScheme={'facebook'}>
-        <Link href="/saved-courses" >
-          Saved Courses
-        </Link>
-      </Button>
+      <Box>
+        <Button colorScheme={"facebook"} marginRight={"1em"}>
+          <Link href="/saved-courses">Saved Courses</Link>
+        </Button>
+        <IconButton
+          onClick={() => window.location.replace('https://github.com/dtharumia/gt-transfer-tool')}
+          aria-label={"github"}
+          icon={<AiFillGithub size={"25"} />}
+        />
+      </Box>
     </Flex>
   );
 };

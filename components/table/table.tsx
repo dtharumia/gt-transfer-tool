@@ -5,7 +5,7 @@ import MaterialReactTable from "material-react-table";
 import { useMemo } from "react";
 
 const Table = ({ courses, columns }) => {
-  const data = courses.hits
+  const data = courses.hits;
 
   const courseColumns = useMemo(() => columns, []);
 

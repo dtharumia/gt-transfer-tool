@@ -17,3 +17,8 @@ The following are excerpts from the [GT Registrar's Office](https://registrar.ga
 GT Transfer Tool is built using Next.js, TypeScript, Chakra UI, Typesense, Python, Selenium, Azure, and Vercel. A Github Action automatically scrapes the existing transfer equivalency table once a month to ensure that the transfer data is accurate.
 
 For local development, ensure that GT Transfer Tool runs on `http:localhost:3000` to avoid CORS errors when connecting to the backend. To run locally, download the repository and execute `npm run dev`.
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request.
+
