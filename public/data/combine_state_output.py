@@ -18,14 +18,12 @@ def combine_json():
         for file in f:
             if ".json" in file:
                 files.append(os.path.join(r, file))
-    dfs = []
+
     # combine all json files into one df
     for file in files:
-        df = pd.read_json(os.path.join(path, file), orient="records")
-    
-        dfs.append(df)
-    
-    df = pd.concat(dfs, ignore_index=True)
+        df = df.append(
+            pd.read_json(os.path.join(path, file), orient="records"), ignore_index=True
+        )
 
     # replace id with index
     df.drop("id", axis=1, inplace=True)
