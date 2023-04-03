@@ -26,7 +26,7 @@ export default function Home() {
         />
       </Head>
       <Navbar></Navbar>
-      <Box padding={"10vh"}>
+      <Box paddingTop={"10vh"}>
         <Heading textAlign={"center"} pb={5}>
           <Highlight
             query="Transfer Tool"
@@ -46,23 +46,25 @@ export default function Home() {
           <Search></Search>
         </Center>
       </Box>
-      {!haveHits && (
-        <HStack
-          spacing="20px"
-          flexDirection={["column", "row"]}
-          wrap="wrap"
-          align={"center"}
-          justify={"center"}
-        >
-          <Image
-            src="/images/arrow.png"
-            width={500}
-            height={500}
-            alt="Transfer Arrow"
-          />
-          <Image src="/images/buzz.png" width={250} height={250} alt="Buzz" />
-        </HStack>
-      )}
+      <Box minH={'5vh'}>
+        {!haveHits && (
+          <HStack
+            spacing="20px"
+            flexDirection={["column", "row"]}
+            wrap="wrap"
+            align={"center"}
+            justify={"center"}
+          >
+            <Image
+              src="/images/arrow.png"
+              width={500}
+              height={500}
+              alt="Transfer Arrow"
+            />
+            <Image src="/images/buzz.png" width={250} height={250} alt="Buzz" />
+          </HStack>
+        )}
+      </Box>
     </Box>
   );
 }
