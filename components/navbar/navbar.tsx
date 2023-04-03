@@ -25,7 +25,11 @@ const Navbar = () => {
         GT Transfer Tool
       </Link>
       <Box>
-        <Button colorScheme={"facebook"} marginRight={"0.5em"}>
+        <Button
+          colorScheme={"facebook"}
+          marginRight={"0.5em"}
+          fontSize={["md", "2xl"]}
+        >
           <Link href="/saved-courses">Saved Courses</Link>
         </Button>
         <IconButton
