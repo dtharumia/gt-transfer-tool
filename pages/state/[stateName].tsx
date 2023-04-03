@@ -40,7 +40,8 @@ const StatePage = () => {
       stateName,
       "secondary",
       page,
-      "primary:asc"
+      "primary:asc",
+      18
     ).then((res) => {
       setSchools(res as any);
     });

@@ -37,7 +37,8 @@ const SchoolPage = () => {
       schoolName,
       "transfer_school",
       page,
-      "transfer_class:asc, gt_class:asc"
+      "transfer_class:asc, gt_class:asc",
+      20
     ).then((res) => {
       const data: Course = {
         found: res.found,
