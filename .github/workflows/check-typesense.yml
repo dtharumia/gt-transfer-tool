@@ -3,7 +3,7 @@ name: Check Typesense Health
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/1 * * * *'
+    - cron: '*/30 * * * *'
 
 jobs:
   check:
