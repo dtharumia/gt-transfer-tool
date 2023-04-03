@@ -5,6 +5,7 @@ import {
   Highlight,
   HStack,
   Text,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import Image from "next/image";
 
@@ -15,6 +16,8 @@ import Head from "next/head";
 
 export default function Home() {
   let haveHits = haveSearchHits.use();
+
+  const [largeScreen] = useMediaQuery("(min-width: 450px)");
 
   return (
     <Box>
@@ -46,7 +49,7 @@ export default function Home() {
           <Search></Search>
         </Center>
       </Box>
-      <Box >
+      <Box minHeight={largeScreen ? "0" : "750"}>
         {!haveHits && (
           <HStack
             spacing="20px"
