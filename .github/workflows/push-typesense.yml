@@ -22,7 +22,7 @@ jobs:
         with:
           python-version: "3.9"
       - name: Install all necessary packages
-        run: pip install typesense pandas selenium python-dotenv
+        run: pip install typesense pandas python-dotenv
       - name: Push searches to Typesense
         run: python public/data/typesense_data_config.py searches searches 0 ${{secrets.TYPESENSE_ADMIN_API_KEY}} ${{secrets.TYPESENSE_HOST}} ${{secrets.TYPESENSE_PORT}} ${{secrets.TYPESENSE_PROTOCOL}}
       - name: Push transfers to Typesense
