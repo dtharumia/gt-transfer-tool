@@ -1,0 +1,23 @@
+name: Check Typesense Health
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/1 * * * *'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Typesense health
+        run: |
+          response=$(curl --write-out '%{http_code}' --silent --output /dev/null ${{secrets.TYPESENSE_PROTOCOL}}://${{secrets.TYPESENSE_HOST}}:${{secrets.TYPESENSE_PORT}}/health)
+          if [[ "$response" -ne "200" ]]; then
+            echo "Error: Status code $response"
+            exit 1
+          fi
+          if [[ $(curl --silent ${{secrets.TYPESENSE_PROTOCOL}}://${{secrets.TYPESENSE_HOST}}:${{secrets.TYPESENSE_PORT}}/health) != '{"ok":true}' ]]; then
+            echo "Error: Typesense not healthy"
+            exit 1
+          fi
+          echo "Typesense is healthy"
