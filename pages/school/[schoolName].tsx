@@ -64,6 +64,10 @@ const SchoolPage = () => {
     <Box>
       <Head>
         <title>{schoolName} | GT Transfer Tool</title>
+        <meta
+          name="description"
+          content={`Transfers from ${schoolName} to Georgia Tech`}
+        />
       </Head>
       <Navbar />
       <TableHeader

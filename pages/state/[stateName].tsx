@@ -1,11 +1,10 @@
 import Navbar from "@/components/navbar/navbar";
 import TableHeader from "@/components/table/tableHeader";
 import { searchTypesense } from "@/typesense/typesenseSearch";
-import { Box, Center, Link, SimpleGrid } from "@chakra-ui/react";
+import { Box, Center, Link, SimpleGrid, useMediaQuery } from "@chakra-ui/react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useMediaQuery } from "@chakra-ui/react";
-
 
 type School = {
   found: number;
@@ -37,7 +36,6 @@ const StatePage = () => {
 
   console.log(isSmallerScreen);
 
-
   useEffect(() => {
     if (!stateName) {
       return;
@@ -56,35 +54,40 @@ const StatePage = () => {
 
   return (
     <Box>
-      <Box>
-        <Navbar></Navbar>
-        <TableHeader
-          total={schools.found}
-          heading={stateName}
-          subHeading={""}
-          page={page}
-          setPage={setPage}
+      <Head>
+        <title>{stateName} | GT Transfer Tool</title>
+        <meta
+          name="description"
+          content={`Transfers from ${stateName} to Georgia Tech`}
         />
-        <Center>
-          <SimpleGrid columns={isSmallerScreen ? 2 : 3} spacing={5}>
-            {schools.found > 0 &&
-              schools.hits.map((hit) => {
-                const doc = hit.document;
-                return (
-                  <Box
-                    key={hit.objectID}
-                    padding={"2vh"}
-                    borderWidth="1px"
-                    borderRadius="lg"
-                    overflow="hidden"
-                  >
-                    <Link href={`/school/${doc.primary}`}>{doc.primary}</Link>
-                  </Box>
-                );
-              })}
-          </SimpleGrid>
-        </Center>
-      </Box>
+      </Head>
+      <Navbar></Navbar>
+      <TableHeader
+        total={schools.found}
+        heading={stateName}
+        subHeading={""}
+        page={page}
+        setPage={setPage}
+      />
+      <Center>
+        <SimpleGrid columns={isSmallerScreen ? 2 : 3} spacing={5}>
+          {schools.found > 0 &&
+            schools.hits.map((hit) => {
+              const doc = hit.document;
+              return (
+                <Box
+                  key={hit.objectID}
+                  padding={"2vh"}
+                  borderWidth="1px"
+                  borderRadius="lg"
+                  overflow="hidden"
+                >
+                  <Link href={`/school/${doc.primary}`}>{doc.primary}</Link>
+                </Box>
+              );
+            })}
+        </SimpleGrid>
+      </Center>
     </Box>
   );
 };

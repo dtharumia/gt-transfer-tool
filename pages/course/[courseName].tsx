@@ -64,6 +64,10 @@ const CoursePage = () => {
     <Box>
       <Head>
         <title>{courseName} | GT Transfer Tool</title>
+        <meta
+          name="description"
+          content={`Transfer equivalencies for ${courseName} at Georgia Tech`}
+        />
       </Head>
       <Navbar></Navbar>
       <TableHeader

@@ -20,6 +20,10 @@ export default function Home() {
     <Box>
       <Head>
         <title>GT Transfer Tool</title>
+        <meta
+          name="description"
+          content="A tool to help you find courses that transfer to Georgia Tech"
+        />
       </Head>
       <Navbar></Navbar>
       <Box padding={"10vh"}>

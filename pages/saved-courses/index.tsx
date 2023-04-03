@@ -2,6 +2,7 @@ import Navbar from "@/components/navbar/navbar";
 import SaveColumn from "@/components/table/saveColumn";
 import Table from "@/components/table/table";
 import { Box } from "@chakra-ui/react";
+import Head from "next/head";
 
 import { savedCourses } from "../../components/stateManagement";
 
@@ -10,6 +11,13 @@ const SavedCoursesPage = () => {
 
   return (
     <Box backgroundColor={"white"} minHeight={"100vh"}>
+      <Head>
+        <title>Saved Courses | GT Transfer Tool</title>
+        <meta
+          name="description"
+          content="View all of your saved courses here"
+        />
+      </Head>
       <Navbar />
       <Table
         courses={{
