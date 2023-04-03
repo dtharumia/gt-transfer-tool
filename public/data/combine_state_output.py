@@ -10,6 +10,13 @@ folder_path = sys.argv[1]
 def combine_json():
     # get all json files in data folder
     path = os.path.join(sys.path[0], f"output/{folder_path}")
+    # delete combined json if it already exists
+    if os.path.exists(os.path.join(path, f"{folder_path}_combined.json")):
+        os.remove(os.path.join(path, f"{folder_path}_combined.json"))
+    # delete search fields json if it already exists
+    if os.path.exists(os.path.join(path, f"{folder_path}_search_fields.json")):
+        os.remove(os.path.join(path, f"{folder_path}_search_fields.json"))    
+
     df = pd.DataFrame()
 
     # go through all the subfolders and get all the json files
@@ -20,10 +27,16 @@ def combine_json():
                 files.append(os.path.join(r, file))
 
     # combine all json files into one df
+    dfs = []
+
     for file in files:
-        df = df.append(
-            pd.read_json(os.path.join(path, file), orient="records"), ignore_index=True
-        )
+        df = pd.read_json(os.path.join(path, file), orient="records")
+    
+        # Append the dataframe to the list
+        dfs.append(df)
+    
+    # Concatenate all dataframes in the list
+    df = pd.concat(dfs, ignore_index=True)
 
     # replace id with index
     df.drop("id", axis=1, inplace=True)
@@ -37,7 +50,6 @@ def combine_json():
         os.path.join(sys.path[0], f"output/{folder_path}/{folder_path}_combined.json"),
         orient="records",
     )
-
 
 if __name__ == "__main__":
     combine_json()
