@@ -1,5 +1,7 @@
 # GT Transfer Tool: Find Courses that Transfer Back to GT
 
+<img src="readme_images/homepage.png" alt="GT Transfer Tool Homepage" width="50%"/>
+
 [GT Transfer Tool](https://gt-transfer-tool.com) helps you find courses that transfer back to Georgia Tech. It is similar to the existing [Transfer Equivalency Table](https://oscar.gatech.edu/pls/bprod/wwsktrna.P_find_location) except that it also goes in the reverse direction i.e. showing all transfer courses available for a specific GT class. With the availability of online classes in schools, you may no longer be limited to your local vicinity to find classes. This can especially be useful for general education requirements that are common across many schools.
 
 GT Transfer Tool enables you to search by GT Class #, Transfer School, and State. You can also save courses for later.
