@@ -46,7 +46,7 @@ export default function Home() {
           <Search></Search>
         </Center>
       </Box>
-      <Box minH={'5vh'}>
+      <Box >
         {!haveHits && (
           <HStack
             spacing="20px"
