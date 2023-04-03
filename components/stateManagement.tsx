@@ -1,6 +1,8 @@
 import { entity } from "simpler-state";
 import { CourseStorage } from "./types";
 
+export const haveSearchHits = entity(false);
+
 export const savedCourses = entity([] as CourseStorage[]);
 
 export const setSavedCourses = (courses: CourseStorage[]) => {

@@ -10,7 +10,7 @@ import Image from "next/image";
 
 import Search from "@/components/home/search";
 import Navbar from "@/components/navbar/navbar";
-import { haveSearchHits } from "@/components/search/searchHits";
+import { haveSearchHits } from "@/components/stateManagement";
 
 export default function Home() {
   let haveHits = haveSearchHits.use();

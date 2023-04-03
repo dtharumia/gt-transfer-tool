@@ -2,7 +2,11 @@ import { Box, IconButton, useToast } from "@chakra-ui/react";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import SaveIcon from "@mui/icons-material/Save";
 
-import { addSavedCourse, removeSavedCourse, savedCourses } from "../state";
+import {
+  addSavedCourse,
+  removeSavedCourse,
+  savedCourses,
+} from "../stateManagement";
 
 const SaveColumn = ({ course, text }) => {
   const toast = useToast();

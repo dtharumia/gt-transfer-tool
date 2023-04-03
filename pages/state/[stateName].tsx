@@ -4,6 +4,8 @@ import { searchTypesense } from "@/typesense/typesenseSearch";
 import { Box, Center, Link, SimpleGrid } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useMediaQuery } from "@chakra-ui/react";
+
 
 type School = {
   found: number;
@@ -30,6 +32,11 @@ const StatePage = () => {
       },
     ],
   });
+
+  const [isSmallerScreen] = useMediaQuery("(max-width: 768px)");
+
+  console.log(isSmallerScreen);
+
 
   useEffect(() => {
     if (!stateName) {
@@ -59,7 +66,7 @@ const StatePage = () => {
           setPage={setPage}
         />
         <Center>
-          <SimpleGrid columns={3} spacing={5}>
+          <SimpleGrid columns={isSmallerScreen ? 2 : 3} spacing={5}>
             {schools.found > 0 &&
               schools.hits.map((hit) => {
                 const doc = hit.document;

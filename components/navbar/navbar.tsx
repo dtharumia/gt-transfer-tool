@@ -1,6 +1,6 @@
 import { Box, Button, Flex, IconButton, Link } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { setSavedCourses } from "../state";
+import { setSavedCourses } from "../stateManagement";
 
 import { AiFillGithub } from "react-icons/ai";
 
@@ -21,11 +21,11 @@ const Navbar = () => {
       justifyContent="space-between"
       alignItems="center"
     >
-      <Link href="/" color={"white"} fontWeight="bold" fontSize={"2xl"}>
+      <Link href="/" color={"white"} fontWeight="bold" fontSize={["md", "2xl"]}>
         GT Transfer Tool
       </Link>
       <Box>
-        <Button colorScheme={"facebook"} marginRight={"1em"}>
+        <Button colorScheme={"facebook"} marginRight={"0.5em"}>
           <Link href="/saved-courses">Saved Courses</Link>
         </Button>
         <IconButton

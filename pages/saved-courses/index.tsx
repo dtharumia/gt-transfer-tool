@@ -3,7 +3,7 @@ import SaveColumn from "@/components/table/saveColumn";
 import Table from "@/components/table/table";
 import { Box } from "@chakra-ui/react";
 
-import { savedCourses } from "../../components/state";
+import { savedCourses } from "../../components/stateManagement";
 
 const SavedCoursesPage = () => {
   const allSavedCourses = savedCourses.use();
