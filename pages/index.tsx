@@ -11,12 +11,16 @@ import Image from "next/image";
 import Search from "@/components/home/search";
 import Navbar from "@/components/navbar/navbar";
 import { haveSearchHits } from "@/components/stateManagement";
+import Head from "next/head";
 
 export default function Home() {
   let haveHits = haveSearchHits.use();
 
   return (
     <Box>
+      <Head>
+        <title>GT Transfer Tool</title>
+      </Head>
       <Navbar></Navbar>
       <Box padding={"10vh"}>
         <Heading textAlign={"center"} pb={5}>

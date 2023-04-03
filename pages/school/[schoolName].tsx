@@ -4,6 +4,7 @@ import Table from "@/components/table/table";
 import TableHeader from "@/components/table/tableHeader";
 import { searchTypesense } from "@/typesense/typesenseSearch";
 import { Box } from "@chakra-ui/react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -61,6 +62,9 @@ const SchoolPage = () => {
 
   return courses.found > 0 ? (
     <Box>
+      <Head>
+        <title>{schoolName} | GT Transfer Tool</title>
+      </Head>
       <Navbar />
       <TableHeader
         total={courses.found}

@@ -36,6 +36,7 @@ const Navbar = () => {
           onClick={() =>
             window.open("https://github.com/dtharumia/gt-transfer-tool")
           }
+          size={"md"}
           aria-label={"github"}
           icon={<AiFillGithub size={"25"} />}
         />
