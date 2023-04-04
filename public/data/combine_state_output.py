@@ -38,6 +38,11 @@ def combine_json():
     # Concatenate all dataframes in the list
     df = pd.concat(dfs, ignore_index=True)
 
+    # sort by "transfer_state", "transfer_school", "transfer_class"
+    df.sort_values(
+        by=["transfer_state", "transfer_school", "transfer_class"], inplace=True
+    )
+
     # replace id with index
     df.drop("id", axis=1, inplace=True)
     df.insert(0, "id", range(0, 0 + len(df)))
