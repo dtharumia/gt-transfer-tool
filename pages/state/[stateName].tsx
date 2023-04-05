@@ -34,8 +34,6 @@ const StatePage = () => {
 
   const [isSmallerScreen] = useMediaQuery("(max-width: 768px)");
 
-  console.log(isSmallerScreen);
-
   useEffect(() => {
     if (!stateName) {
       return;

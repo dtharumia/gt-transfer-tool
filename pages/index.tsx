@@ -25,7 +25,7 @@ export default function Home() {
         <title>GT Transfer Tool</title>
         <meta
           name="description"
-          content="A tool to help you find courses that transfer to Georgia Tech"
+          content="Find courses that transfer to Georgia Tech"
         />
       </Head>
       <Navbar></Navbar>
