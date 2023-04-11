@@ -50,6 +50,9 @@ def combine_json():
     df["id"] = df["id"].astype(str)
     df["gt_ch"] = df["gt_ch"].astype(str)
 
+    # for all columns, replace multiple spaces with one space
+    df.replace(to_replace=r"\s+", value=" ", regex=True, inplace=True)
+
     # save combined df as json
     df.to_json(
         os.path.join(sys.path[0], f"output/{folder_path}/{folder_path}_combined.json"),
