@@ -27,6 +27,17 @@ export default function Home() {
           name="description"
           content="Find courses that transfer to Georgia Tech"
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://gt-transfer-tool.com",
+              "@type": "WebSite",
+              name: "GT Transfer Tool",
+              url: "https://gt-transfer-tool.com/",
+            }),
+          }}
+        />
       </Head>
       <Navbar></Navbar>
       <Box paddingTop={"10vh"}>
