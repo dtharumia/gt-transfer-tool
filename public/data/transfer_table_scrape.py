@@ -1,11 +1,11 @@
 from selenium import webdriver
-import chromedriver_autoinstaller
+from chromedriver_py import binary_path # this will get you the path variable
 import time, os, sys
 import pandas as pd
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 
-chromedriver_autoinstaller.install()
+svc = Service(executable_path=binary_path)
 
 chrome_options = Options()
 options = [
@@ -20,7 +20,7 @@ options = [
 for option in options:
     chrome_options.add_argument(option)
 
-driver = webdriver.Chrome(options=chrome_options)
+driver = webdriver.Chrome(service=svc, options=chrome_options)
 
 df = pd.DataFrame(columns=['transfer_state', 'term', 'transfer_school', 'transfer_class',
                   'transfer_title', 'transfer_level', 'transfer_mingrade', 'gt_class', 'gt_title', 'gt_ch'])
