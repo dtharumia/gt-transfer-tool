@@ -24,7 +24,7 @@ runs:
       run: sudo apt install -y chromium-browser
       shell: bash
     - name: Install all necessary packages
-      run: pip install selenium chromedriver_autoinstaller pandas
+      run: pip install selenium chromedriver-py pandas
       shell: bash
     - name: Run scraping
       run: python public/data/transfer_table_scrape.py ${{ inputs.state-number }}
