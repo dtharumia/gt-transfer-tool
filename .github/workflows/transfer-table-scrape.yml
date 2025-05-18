@@ -22,6 +22,12 @@ jobs:
         uses: ./.github/actions/tt_scrape
         with:
           state-number: ${{ matrix.state-number }}
+      - name: Upload scraped data
+        uses: actions/upload-artifact@v4
+        with:
+          name: state-${{ matrix.state-number }}-data
+          path: ./public/data/output/all_data
+          if-no-files-found: error
 
   final:
     runs-on: ubuntu-latest
@@ -35,10 +41,12 @@ jobs:
         run: git pull
       - name: Remove existing all_data directory
         run: rm -rf ./public/data/output/all_data
-      - name: Download artifact
+      - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
           path: ./public/data/output/all_data
+          pattern: state-*-data
+          merge-multiple: true
       - name: git status
         run: git status
       - name: Git Auto Commit
