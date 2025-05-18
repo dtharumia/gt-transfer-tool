@@ -2,3 +2,4 @@ typesense
 pandas
 selenium
 python-dotenv
+chromedriver-py>=120.0.0
