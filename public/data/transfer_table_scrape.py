@@ -1,264 +1,383 @@
+import logging
 import os
 import sys
 import time
+from datetime import datetime
 
 import pandas as pd
-from chromedriver_py import binary_path  # this will get you the path variable
+from chromedriver_py import binary_path
 from selenium import webdriver
-from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
+from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-svc = Service(executable_path=binary_path)
-
-chrome_options = Options()
-options = [
-    "--headless",
-    "--disable-gpu",
-    "--window-size=1920,1200",
-    "--ignore-certificate-errors",
-    "--disable-extensions",
-    "--no-sandbox",
-    "--disable-dev-shm-usage",
-]
-for option in options:
-    chrome_options.add_argument(option)
-
-driver = webdriver.Chrome(service=svc, options=chrome_options)
-wait = WebDriverWait(driver, 10)  # 10 seconds timeout
-
-df = pd.DataFrame(
-    columns=[
-        "transfer_state",
-        "term",
-        "transfer_school",
-        "transfer_class",
-        "transfer_title",
-        "transfer_level",
-        "transfer_mingrade",
-        "gt_class",
-        "gt_title",
-        "gt_ch",
-    ]
+# Set up logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(asctime)s] %(levelname)s: %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
 )
 
-# get selected state from first command line argument
-selected_state_number = int(sys.argv[1])
 
+class TransferScraper:
+    def __init__(self, state_number):
+        self.state_number = state_number
+        self.driver = self._setup_driver()
+        self.wait = WebDriverWait(self.driver, 10)
+        self.data = []
+        logging.info(f"Initialized scraper for state number {state_number}")
 
-def wait_and_click(xpath):
-    element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath)))
-    element.click()
-    return element
+    def _setup_driver(self):
+        logging.info("Setting up Chrome driver...")
+        options = Options()
+        for option in [
+            "--headless",
+            "--disable-gpu",
+            "--window-size=1920,1200",
+            "--ignore-certificate-errors",
+            "--disable-extensions",
+            "--no-sandbox",
+            "--disable-dev-shm-usage",
+        ]:
+            options.add_argument(option)
+        return webdriver.Chrome(service=Service(binary_path), options=options)
 
-
-def wait_and_find(xpath):
-    return wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
-
-
-def get_schools():
-    # Wait for the school options to be present
-    wait.until(EC.presence_of_element_located((By.XPATH, "//option")))
-    # Get all school options
-    return driver.find_elements(By.XPATH, "//option")
-
-
-def scrape_transfer_table():
-    driver.get("https://oscar.gatech.edu/pls/bprod/wwsktrna.P_find_location")
-
-    # school in US
-    wait_and_click("//input[@value='Yes']")
-
-    transfer_state = ""
-    term = ""
-    transfer_school = ""
-    transfer_class = ""
-    transfer_title = ""
-    transfer_level = ""
-    transfer_mingrade = ""
-    gt_class = ""
-    gt_title = ""
-    gt_ch = ""
-
-    # goes through selected_state
-    for count_state in range(selected_state_number, selected_state_number + 1):
-        state = wait_and_find("//option[" + str(count_state) + "]")
-        transfer_state = state.text
-        print("Transfer State: " + transfer_state, flush=True)
-        state.click()
-        wait_and_click('//input[@value="Get State"]')
-
-        # Get initial list of schools
-        schools = get_schools()
-        num_schools = len(schools)
-
-        # goes through all schools
-        for count_school in range(1, num_schools + 1):
+    def _wait_and_click(self, xpath, max_retries=3):
+        for attempt in range(max_retries):
             try:
-                # Re-find the school element each time to avoid stale elements
-                school = wait_and_find("//option[" + str(count_school) + "]")
-                transfer_school = school.text
-                print(
-                    f"Processing school {count_school}/{num_schools}: {transfer_school}",
-                    flush=True,
-                )
-
-                school.click()
-                wait_and_click('//input[@value="Get School"]')
-
-                # goes through all subjects
-                subjects = wait.until(
-                    EC.presence_of_all_elements_located(
-                        (By.XPATH, "//select[@name='sel_subj']//option")
+                logging.info(f"Attempting to click element: {xpath}")
+                element = self.wait.until(EC.element_to_be_clickable((By.XPATH, xpath)))
+                element.click()
+                return element
+            except StaleElementReferenceException:
+                if attempt == max_retries - 1:
+                    logging.error(
+                        f"Failed to click element after {max_retries} attempts: {xpath}"
                     )
+                    raise
+                logging.info(f"Stale element, retrying click: {xpath}")
+                time.sleep(1)
+
+    def _wait_and_find(self, xpath, max_retries=3):
+        for attempt in range(max_retries):
+            try:
+                element = self.wait.until(
+                    EC.presence_of_element_located((By.XPATH, xpath))
                 )
-                for count_subject in range(1, len(subjects) + 1):
+                return element
+            except StaleElementReferenceException:
+                if attempt == max_retries - 1:
+                    logging.error(
+                        f"Failed to find element after {max_retries} attempts: {xpath}"
+                    )
+                    raise
+                logging.info(f"Stale element, retrying find: {xpath}")
+                time.sleep(1)
+
+    def _get_schools(self):
+        logging.info("Getting list of schools...")
+        self.wait.until(EC.presence_of_element_located((By.XPATH, "//option")))
+        schools = self.driver.find_elements(By.XPATH, "//option")
+        logging.info(f"Found {len(schools)} schools")
+        return schools
+
+    def _process_course_row(self, row, state, term, school, last_transfer_info=None):
+        try:
+            logging.info(f"Processing course row {row} for {school}")
+            row_xpath = f'//table[@class="datadisplaytable"]//tr[{row}]'
+            row_text = self._wait_and_find(row_xpath).text
+            if row_text == "  ----- No Equivalent Course(s) -----":
+                logging.info("No equivalent courses found")
+                return False, last_transfer_info
+
+            # Get all tds in the row
+            tds = self.driver.find_elements(By.XPATH, f"{row_xpath}//td")
+            # Check for 'And' or 'Or' row (first 5 tds are empty, 6th is 'And' or 'Or')
+            is_and_row = (
+                len(tds) >= 10
+                and all((td.text.strip() == "" for td in tds[:5]))
+                and tds[5].text.strip().lower() == "and"
+            )
+            is_or_row = (
+                len(tds) >= 10
+                and all((td.text.strip() == "" for td in tds[:5]))
+                and tds[5].text.strip().lower() == "or"
+            )
+
+            if (is_and_row or is_or_row) and last_transfer_info:
+                transfer_class, transfer_title, transfer_level, transfer_mingrade = (
+                    last_transfer_info
+                )
+                rel_type = "And" if is_and_row else "Or"
+                logging.info(
+                    f"Detected '{rel_type}' row, carrying forward transfer info: {transfer_class}, {transfer_title}"
+                )
+            else:
+                transfer_class = tds[0].text.strip() if len(tds) > 0 else ""
+                transfer_title = tds[1].text.strip() if len(tds) > 1 else ""
+                transfer_level = tds[2].text.strip() if len(tds) > 2 else ""
+                transfer_mingrade = tds[4].text.strip() if len(tds) > 4 else ""
+                last_transfer_info = (
+                    transfer_class,
+                    transfer_title,
+                    transfer_level,
+                    transfer_mingrade,
+                )
+                rel_type = "Normal"
+
+            # GT course info (always present in both normal and 'And'/'Or' rows)
+            gt_class = tds[7].text.strip() if len(tds) > 7 else ""
+            gt_title = tds[8].text.strip() if len(tds) > 8 else ""
+            gt_ch = tds[9].text.strip() if len(tds) > 9 else ""
+
+            logging.info(
+                f"Found course mapping: {transfer_class} -> {gt_class} ({rel_type})"
+            )
+            self.data.append(
+                {
+                    "transfer_state": state,
+                    "term": term,
+                    "transfer_school": school,
+                    "transfer_class": transfer_class,
+                    "transfer_title": transfer_title,
+                    "transfer_level": transfer_level,
+                    "transfer_mingrade": transfer_mingrade,
+                    "gt_class": gt_class,
+                    "gt_title": gt_title,
+                    "gt_ch": gt_ch,
+                    "relationship": rel_type,
+                }
+            )
+            return True, last_transfer_info
+        except Exception as e:
+            logging.error(f"Error processing row {row}: {str(e)}")
+            return False, last_transfer_info
+
+    def _wait_for_page_load(self):
+        logging.info("Waiting for page to load...")
+        self.wait.until(
+            lambda driver: driver.execute_script("return document.readyState")
+            == "complete"
+        )
+        logging.info("Page load complete")
+
+    def scrape(self):
+        try:
+            logging.info("Starting scrape process...")
+            self.driver.get(
+                "https://oscar.gatech.edu/pls/bprod/wwsktrna.P_find_location"
+            )
+            self._wait_for_page_load()
+            self._wait_and_click("//input[@value='Yes']")
+
+            # Select state
+            try:
+                state = self._wait_and_find(f"//option[{self.state_number}]")
+                state_name = state.text
+                logging.info(f"Processing state: {state_name}")
+                state.click()
+                self._wait_and_click('//input[@value="Get State"]')
+                self._wait_for_page_load()
+            except Exception as e:
+                logging.error(f"Error selecting state: {str(e)}")
+                return
+
+            # Process schools
+            schools = self._get_schools()
+            for school_idx, school in enumerate(schools):
+                try:
+                    # Refresh school element to avoid stale reference
+                    school = self._wait_and_find(f"//option[{school_idx + 1}]")
+                    school_name = school.text
+                    logging.info(
+                        f"Processing school {school_idx + 1}/{len(schools)}: {school_name}"
+                    )
                     try:
-                        subject = wait_and_find(
-                            '//select[@name="sel_subj"]//option['
-                            + str(count_subject)
-                            + "]"
-                        )
-                        subject.click()
-                        try:
-                            wait_and_click(
-                                '//select[@name="levl_in"]//option[@value="US"]'
-                            )
-                        except:
-                            f = open("error.txt", "a")
-                            f.write(transfer_school + "\n")
-                            f.close()
-                            break
-                        term_sem = wait_and_find('//option[@value="202308"]')
-                        term_sem.click()
-                        term = term_sem.text
-                        wait_and_click('//input[@value="Get Courses"]')
-
-                        # goes through all courses
-                        rows = wait.until(
-                            EC.presence_of_all_elements_located(
-                                (By.XPATH, '//table[@class="datadisplaytable"]//tr')
-                            )
-                        )
-                        for row in range(3, len(rows) + 1):
-                            row_text = wait_and_find(
-                                '//table[@class="datadisplaytable"]//tr['
-                                + str(row)
-                                + "]"
-                            ).text
-                            if row_text != "  ----- No Equivalent Course(s) -----":
-                                try:
-                                    gt_class = wait_and_find(
-                                        '//table[@class="datadisplaytable"]//tr['
-                                        + str(row)
-                                        + "]//td[8]"
-                                    ).text
-                                    gt_title = wait_and_find(
-                                        '//table[@class="datadisplaytable"]//tr['
-                                        + str(row)
-                                        + "]//td[9]"
-                                    ).text
-                                    gt_ch = wait_and_find(
-                                        '//table[@class="datadisplaytable"]//tr['
-                                        + str(row)
-                                        + "]//td[10]"
-                                    ).text
-                                    transfer_class = wait_and_find(
-                                        '//table[@class="datadisplaytable"]//tr['
-                                        + str(row)
-                                        + "]//td[1]"
-                                    ).text
-                                    transfer_title = wait_and_find(
-                                        '//table[@class="datadisplaytable"]//tr['
-                                        + str(row)
-                                        + "]//td[2]"
-                                    ).text
-                                    transfer_level = wait_and_find(
-                                        '//table[@class="datadisplaytable"]//tr['
-                                        + str(row)
-                                        + "]//td[3]"
-                                    ).text
-                                    transfer_mingrade = wait_and_find(
-                                        '//table[@class="datadisplaytable"]//tr['
-                                        + str(row)
-                                        + "]//td[5]"
-                                    ).text
-                                    df.loc[(len(df.index))] = [
-                                        transfer_state,
-                                        term,
-                                        transfer_school,
-                                        transfer_class,
-                                        transfer_title,
-                                        transfer_level,
-                                        transfer_mingrade,
-                                        gt_class,
-                                        gt_title,
-                                        gt_ch,
-                                    ]
-                                except:
-                                    gt_class = wait_and_find(
-                                        '//table[@class="datadisplaytable"]//tr['
-                                        + str(row)
-                                        + "]//td[2]"
-                                    ).text
-                                    gt_title = wait_and_find(
-                                        '//table[@class="datadisplaytable"]//tr['
-                                        + str(row)
-                                        + "]//td[3]"
-                                    ).text
-                                    gt_ch = wait_and_find(
-                                        '//table[@class="datadisplaytable"]//tr['
-                                        + str(row)
-                                        + "]//td[4]"
-                                    ).text
-                                    df.loc[(len(df.index))] = [
-                                        transfer_state,
-                                        term,
-                                        transfer_school,
-                                        transfer_class,
-                                        transfer_title,
-                                        transfer_level,
-                                        transfer_mingrade,
-                                        gt_class,
-                                        gt_title,
-                                        gt_ch,
-                                    ]
-                            else:
-                                break
-
-                        # print last row of df
-                        print(df.tail(1), flush=True)
-                        time.sleep(1)
-
-                        wait_and_click(
-                            '//input[@value="Search Another Subject/Level/Term"]'
-                        )
+                        school.click()
+                        self._wait_and_click('//input[@value="Get School"]')
+                        self._wait_for_page_load()
                     except Exception as e:
-                        print(
-                            f"Error processing subject {count_subject}: {str(e)}",
-                            flush=True,
-                        )
+                        logging.error(f"Error clicking school {school_name}: {str(e)}")
                         continue
 
-                wait_and_click('//input[@value="Search Another School"]')
-            except Exception as e:
-                print(f"Error processing school {count_school}: {str(e)}", flush=True)
-                continue
+                    # Find the most recent term (first option in <select name='term_in'>)
+                    try:
+                        term_select = self._wait_and_find('//select[@name="term_in"]')
+                        term_options = term_select.find_elements(By.TAG_NAME, "option")
+                        if not term_options:
+                            logging.error(
+                                f"No term options found for {school_name}, skipping school."
+                            )
+                            self._wait_and_click(
+                                '//input[@value="Search Another School"]'
+                            )
+                            self._wait_for_page_load()
+                            continue
+                        most_recent_term = term_options[0]
+                        most_recent_term_value = most_recent_term.get_attribute("value")
+                        most_recent_term_text = most_recent_term.text
+                        logging.info(
+                            f"Using most recent term: {most_recent_term_text} ({most_recent_term_value})"
+                        )
+                    except Exception as e:
+                        logging.error(
+                            f"Error finding/selecting term for {school_name}: {str(e)}"
+                        )
+                        self._wait_and_click('//input[@value="Search Another School"]')
+                        self._wait_for_page_load()
+                        continue
 
-        wait_and_click('//input[@value="Search Another State"]')
+                    # Process subjects
+                    try:
+                        subjects = self.wait.until(
+                            EC.presence_of_all_elements_located(
+                                (By.XPATH, "//select[@name='sel_subj']//option")
+                            )
+                        )
+                        logging.info(
+                            f"Found {len(subjects)} subjects for {school_name}"
+                        )
+                    except Exception as e:
+                        logging.error(
+                            f"Error finding subjects for {school_name}: {str(e)}"
+                        )
+                        self._wait_and_click('//input[@value="Search Another School"]')
+                        self._wait_for_page_load()
+                        continue
 
-    df.insert(0, "id", range(0, 0 + len(df)))
-    df["id"] = df["id"].astype(str)
-    df["gt_ch"] = df["gt_ch"].astype(str)
+                    for subject_idx, subject in enumerate(subjects):
+                        try:
+                            # Refresh subject element
+                            subject = self._wait_and_find(
+                                f'//select[@name="sel_subj"]//option[{subject_idx + 1}]'
+                            )
+                            subject_name = subject.text
+                            logging.info(
+                                f"Processing subject {subject_idx + 1}/{len(subjects)}: {subject_name}"
+                            )
+                            try:
+                                subject.click()
+                                self._wait_and_click(
+                                    '//select[@name="levl_in"]//option[@value="US"]'
+                                )
+                            except Exception as e:
+                                logging.error(
+                                    f"Error clicking subject/level for {subject_name}: {str(e)}"
+                                )
+                                continue
 
-    df.to_json(
-        os.path.join(sys.path[0], f"output/all_data/{selected_state_number}.json"),
-        orient="records",
-    )
+                            # Select the most recent term
+                            try:
+                                term = self._wait_and_find(
+                                    f'//option[@value="{most_recent_term_value}"]'
+                                )
+                                term_text = term.text
+                                logging.info(f"Selected term: {term_text}")
+                                term.click()
+                                self._wait_and_click('//input[@value="Get Courses"]')
+                                self._wait_for_page_load()
+                            except Exception as e:
+                                logging.error(
+                                    f"Error selecting term for {subject_name}: {str(e)}"
+                                )
+                                continue
+
+                            # Process courses
+                            try:
+                                rows = self.wait.until(
+                                    EC.presence_of_all_elements_located(
+                                        (
+                                            By.XPATH,
+                                            '//table[@class="datadisplaytable"]//tr',
+                                        )
+                                    )
+                                )
+                                logging.info(f"Found {len(rows)} rows in course table")
+                            except Exception as e:
+                                logging.error(
+                                    f"Error finding course rows for {subject_name}: {str(e)}"
+                                )
+                                continue
+
+                            last_transfer_info = None
+                            for row in range(3, len(rows) + 1):
+                                try:
+                                    keep_going, last_transfer_info = (
+                                        self._process_course_row(
+                                            row,
+                                            state_name,
+                                            term_text,
+                                            school_name,
+                                            last_transfer_info,
+                                        )
+                                    )
+                                    if not keep_going:
+                                        break
+                                except Exception as e:
+                                    logging.error(
+                                        f"Error processing course row {row} for {subject_name}: {str(e)}"
+                                    )
+                                    continue
+
+                            logging.info(
+                                f"Total courses processed so far: {len(self.data)}"
+                            )
+                            time.sleep(1)
+                            try:
+                                self._wait_and_click(
+                                    '//input[@value="Search Another Subject/Level/Term"]'
+                                )
+                                self._wait_for_page_load()
+                            except Exception as e:
+                                logging.error(
+                                    f"Error returning to subject selection for {school_name}: {str(e)}"
+                                )
+                                break
+                        except Exception as e:
+                            logging.error(
+                                f"Error processing subject {subject_idx + 1} for {school_name}: {str(e)}"
+                            )
+                            continue
+
+                    try:
+                        self._wait_and_click('//input[@value="Search Another School"]')
+                        self._wait_for_page_load()
+                    except Exception as e:
+                        logging.error(
+                            f"Error returning to school selection after {school_name}: {str(e)}"
+                        )
+                        continue
+                except Exception as e:
+                    logging.error(f"Error processing school {school_idx + 1}: {str(e)}")
+                    continue
+
+            # Save results
+            logging.info("Saving results to JSON...")
+            df = pd.DataFrame(self.data)
+            df.insert(0, "id", range(len(df)))
+            df["id"] = df["id"].astype(str)
+            df["gt_ch"] = df["gt_ch"].astype(str)
+
+            output_dir = os.path.join(sys.path[0], "output/all_data")
+            os.makedirs(output_dir, exist_ok=True)
+            output_file = os.path.join(output_dir, f"{self.state_number}.json")
+            df.to_json(output_file, orient="records")
+            logging.info(f"Results saved to {output_file}")
+
+        finally:
+            logging.info("Cleaning up...")
+            self.driver.quit()
+            logging.info("Scrape process completed")
 
 
 if __name__ == "__main__":
-    scrape_transfer_table()
+    if len(sys.argv) != 2:
+        print("Usage: python transfer_table_scrape.py <state_number>")
+        sys.exit(1)
+
+    state_number = int(sys.argv[1])
+    scraper = TransferScraper(state_number)
+    scraper.scrape()
