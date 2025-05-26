@@ -38,3 +38,4 @@ runs:
         name: state-${{ inputs.state-number }}-data
         path: "public/data/output/all_data"
         if-no-files-found: error
+        overwrite: true
