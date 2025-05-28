@@ -1,10 +1,12 @@
 import json
 import os
 import sys
-import typesense
-from dotenv import load_dotenv
+
 import pandas as pd
 import requests
+from dotenv import load_dotenv
+
+import typesense
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.abspath(os.path.join(curr_dir, os.pardir)))
@@ -51,14 +53,12 @@ def searches(collection, test):
 
     if test:
         search_data = pd.read_json(
-            os.path.join(
-                sys.path[0], "output/all_data_test/all_data_test_search_fields.json"
-            ),
+            os.path.join(sys.path[0], "all_data_test_search_fields.json"),
             orient="records",
         )
     else:
         search_data = pd.read_json(
-            os.path.join(sys.path[0], "output/all_data/all_data_search_fields.json"),
+            os.path.join(sys.path[0], "all_data_search_fields.json"),
             orient="records",
         )
 
@@ -109,7 +109,12 @@ def transfers(collection, test):
                     "name": "transfer_school",
                     "type": "string",
                 },
-                {"index": True, "sort": True, "name": "transfer_state", "type": "string"},
+                {
+                    "index": True,
+                    "sort": True,
+                    "name": "transfer_state",
+                    "type": "string",
+                },
                 {
                     "facet": True,
                     "index": True,
@@ -125,14 +130,12 @@ def transfers(collection, test):
 
     if test:
         all_data_combined = pd.read_json(
-            os.path.join(
-                sys.path[0], "output/all_data_test/all_data_test_combined.json"
-            ),
+            os.path.join(sys.path[0], "all_data_test_combined.json"),
             orient="records",
         )
     else:
         all_data_combined = pd.read_json(
-            os.path.join(sys.path[0], "output/all_data/all_data_combined.json"),
+            os.path.join(sys.path[0], "all_data_combined.json"),
             orient="records",
         )
 
@@ -149,9 +152,7 @@ def transfers(collection, test):
     )
     # need to use REST API to import data because of the size of the data
     url = f"{TYPESENSE_PROTOCOL}://{TYPESENSE_HOST}:{TYPESENSE_PORT}/collections/transfers/documents/import?action=create"
-    headers = {
-        "X-TYPESENSE-API-KEY": "{0}".format(TYPESENSE_ADMIN_API_KEY)
-    }
+    headers = {"X-TYPESENSE-API-KEY": "{0}".format(TYPESENSE_ADMIN_API_KEY)}
     with open(os.path.join(sys.path[0], "all_data_combined.jsonl"), "r") as f:
         payload = f.read()
 
