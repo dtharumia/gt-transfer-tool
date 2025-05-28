@@ -38,6 +38,10 @@ def combine_json():
     # Concatenate all dataframes in the list
     df = pd.concat(dfs, ignore_index=True)
 
+    # Drop rows where transfer_class is empty or null
+    df = df.dropna(subset=["transfer_class"])
+    df = df[df["transfer_class"].str.strip() != ""]
+
     # sort by "transfer_state", "transfer_school", "transfer_class"
     df.sort_values(
         by=["transfer_state", "transfer_school", "transfer_class"], inplace=True
