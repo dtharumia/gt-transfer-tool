@@ -32,7 +32,12 @@ class TransferScraper:
     def _setup_driver(self):
         logging.info("Setting up Chrome driver...")
         options = Options()
-        for option in ["--headless", "--no-sandbox", "--disable-dev-shm-usage"]:
+        for option in [
+            "--headless",
+            "--no-sandbox",
+            "--disable-dev-shm-usage",
+            "--user-data-dir=/tmp/chrome-data",  # Specify custom user data directory
+        ]:
             options.add_argument(option)
         # Use system's Chrome/ChromeDriver
         return webdriver.Chrome(options=options)
