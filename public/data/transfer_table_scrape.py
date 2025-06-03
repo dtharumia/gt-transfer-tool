@@ -32,17 +32,8 @@ class TransferScraper:
     def _setup_driver(self):
         logging.info("Setting up Chrome driver...")
         options = Options()
-        for option in [
-            "--headless",
-            "--disable-gpu",
-            "--window-size=1920,1200",
-            "--ignore-certificate-errors",
-            "--disable-extensions",
-            "--no-sandbox",
-            "--disable-dev-shm-usage",
-        ]:
+        for option in ["--headless", "--no-sandbox", "--disable-dev-shm-usage"]:
             options.add_argument(option)
-        # Use the system's Chrome/Chromium binary
         return webdriver.Chrome(options=options)
 
     def _wait_and_click(self, xpath, max_retries=3):
