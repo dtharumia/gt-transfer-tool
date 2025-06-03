@@ -5,6 +5,7 @@ import time
 from datetime import datetime
 
 import pandas as pd
+from chromedriver_py import binary_path
 from selenium import webdriver
 from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.chrome.options import Options
@@ -34,7 +35,7 @@ class TransferScraper:
         options = Options()
         for option in ["--headless", "--no-sandbox", "--disable-dev-shm-usage"]:
             options.add_argument(option)
-        return webdriver.Chrome(options=options)
+        return webdriver.Chrome(service=Service(binary_path), options=options)
 
     def _wait_and_click(self, xpath, max_retries=3):
         for attempt in range(max_retries):
